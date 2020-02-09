@@ -1,4 +1,0 @@
-lineID,start,end,t1,t2
-a1,0,3093,ts1,ts2
-a2,3093,5624,ts2,ts3
-a3,5624,8033,ts3,ts4
