@@ -38,7 +38,7 @@ class AboutTexts:
         software on their computers. Project components (.eaf file, sound file, list of 
         abbreviations) can be uploaded through the web interface and configured; SLEXIL then builds a webpage which can 
         be previewed and downloaded to the user’s computer. This software is Open Source; source code for the 
-        project is available on request.''')
+        project is available on [GitHub](https://github.com/davidjamesbeck/slexil.git).''')
 
         basics = html.Div(className='aboutContents',children=[title,text])
         return basics
