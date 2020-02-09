@@ -112,7 +112,7 @@ bin/
 
 #test suites
 testTextPyData/
-tests/
+#tests/
 testData/
 testTextPy/
 
