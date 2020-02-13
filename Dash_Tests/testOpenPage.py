@@ -10,30 +10,36 @@ import webbrowser
 from threading import Timer
 
 app = dash.Dash(__name__)
-port = 5000 # or simply open on the default `8050` port
-#app = dash.Dash()
+port = 5000  # or simply open on the default `8050` port
+# app = dash.Dash()
 server = flask.Flask(__name__)
 # app = dash.Dash(__name__,server=server)
 app.layout = html.Div(children=[
-    html.H1(children='Test cases',className="banner"),
+    html.H1(children='Test cases', className="banner"),
     html.Iframe(id="storyIFrame",
-                #src='static/Inferno.html',
+                # src='static/Inferno.html',
                 className="webpageFrame"),
-    html.Button("press here",id="button")
-    ])
+    html.Button("press here", id="button"),
+    dcc.Textarea(id="textDiv")
+])
 
 
-@app.callback(Output("storyIFrame","src"),
-              [Input("button","n_clicks")]
-    )
+@app.callback([Output("storyIFrame", "src"),
+               Output('textDiv', 'value')],
+              [Input("button", "n_clicks")]
+              )
 def on_Button_Click(n_clicks):
     if n_clicks is None:
-        return('')
+        return '',''
     print('=== button clicked')
     # pdb.set_trace()
     webbrowser.open_new_tab("static/Inferno.html")
-    open("static/Inferno.html")
-    return('/static/Inferno.html')
+    # open("static/Inferno.html")
+    with open("static/Inferno.html", "r") as f:
+        print('reading')
+        text = f.read()
+    return 'static/Inferno.html', text
+
 
 @app.server.route('/static/<path:urlpath>')
 def serve_static(urlpath):
@@ -41,11 +47,13 @@ def serve_static(urlpath):
     print("serve static, path: %s" % urlpath)
     root_dir = os.getcwd()
     # return flask.send_file("static/Inferno.html")
-    #return flask.send_from_directory(os.path.join(root_dir, 'static'), path)
+    # return flask.send_from_directory(os.path.join(root_dir, 'static'), path)
     webbrowser.open_new("./static/Inferno.html")
 
+
 def open_browser():
-	webbrowser.open_new("http://localhost:{}".format(port))
+    webbrowser.open_new("http://localhost:{}".format(port))
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)

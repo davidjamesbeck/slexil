@@ -49,10 +49,10 @@ def downloadZip(filename):
                            mimetype='application/zip',
                            as_attachment=True)
 
-
 # ----------------------------------------------------------------------------------------------------
 @app.server.route('/PROJECTS/<path:urlpath>')
 def downloadProjectZipFile(urlpath):
+    print("=== URLpath is %s" %urlpath)
     fullPath = os.path.join("PROJECTS", urlpath)
     dirname = os.path.dirname(fullPath)
     filename = os.path.basename(fullPath)
@@ -595,6 +595,13 @@ def displayText(createWebPageStatus, projectDirectory, projectTitle):
     pathToHTML = os.path.join(projectDirectory, "%s.html" % projectTitle)
     print("=== storyIFrame display %s" % pathToHTML)
     return (pathToHTML)
+
+# ----------------------------------------------------------------------------------------------------
+# @app.callback(
+#     Output('downloadAssembledTextButton', 'disabled'),
+#     [Input('storyIFrame', 'src')])
+# def refeshIFrame(iFrameSource):
+#     return flask.send_from_directory(iFrameSource)
 
 
 # ----------------------------------------------------------------------------------------------------
