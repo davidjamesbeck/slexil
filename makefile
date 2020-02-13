@@ -1,2 +1,2 @@
 gunicorn:
-	gunicorn -w 4 webapp2:server
+	gunicorn -w 4 webapp3:server

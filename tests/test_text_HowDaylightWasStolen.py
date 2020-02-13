@@ -10,13 +10,13 @@ pd.set_option('display.width', 1000)
 #----------------------------------------------------------------------------------------------------
 
 def createText():
-	with open('../testData/harryMosesDaylight/startStopTimes.txt','r') as times:
+	with open('../testData/HMDLsafe/startStopTimes.txt','r') as times:
 		startStopTable = times.read()
-	text = Text("../testData/harryMosesDaylight/daylight_1_4.eaf",
-			"../testData/harryMosesDaylight/audioPhrases",
-				grammaticalTermsFile="../testData/harryMosesDaylight/grammaticalTerms.txt",
-				tierGuideFile="../testData/harryMosesDaylight/tierGuide.yaml",
-				projectDirectory='../testData/harryMosesDaylight')# ,
+	text = Text("../testData/HMDLsafe/HMDL.eaf",
+			"../testData/HMDLsafe/audio",
+				grammaticalTermsFile="../testData/HMDLsafe/grammaticalTerms.txt",
+				tierGuideFile="../testData/HMDLsafe/tierGuide.yaml",
+				projectDirectory='../testData/HMDLsafe')# ,
 # 				startStopTable=startStopTable)
 	return(text)
     
@@ -46,7 +46,7 @@ def test_toHTML(display=False):
     text.getLineAsTable(1)
 
     htmlText = text.toHTML()
-    filename = "daylight.html"
+    filename = "../testData/HMDLsafe/daylight.html"
     f = open(filename, "w")
     f.write(indent(htmlText))
     f.close()
