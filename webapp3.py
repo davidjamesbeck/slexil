@@ -542,7 +542,8 @@ def update_output(value):
 @app.callback(
     [Output('previewLink', 'href'),
      Output('downloadAssembledTextButton', 'disabled'),
-     Output('createPageErrorMessages_hiddenStorage', 'children')],
+     Output('createPageErrorMessages_hiddenStorage', 'children'),
+     Output('createWebPageStatus', 'className')],
     [Input('createAndDisplayWebPageButton', 'n_clicks')],
     [State('sound_filename_hiddenStorage', 'children'),
      State('eaf_filename_hiddenStorage', 'children'),
@@ -552,7 +553,7 @@ def update_output(value):
 def createWebPageCallback(n_clicks, soundFileName, eafFileName, projectDirectory,
                           grammaticalTermsFile, projectTitle):
     if n_clicks is None:
-        return ("", 1, "")
+        return ("", 1, "","previewoff")
     print("=== create web page callback")
     print("eaf: %s" % eafFileName)
     print("audio phrases in: %s/audio" % projectDirectory)
@@ -571,7 +572,6 @@ def createWebPageCallback(n_clicks, soundFileName, eafFileName, projectDirectory
     file.write(htmlDoc)
     file.close()
     errorLog = os.path.abspath(os.path.join(projectDirectory, "ERRORS.log"))
-    # open_preview(webpageAt)
     if os.path.isfile(errorLog):
         with open(errorLog) as elog:
             logContents = elog.read()
@@ -580,22 +580,18 @@ def createWebPageCallback(n_clicks, soundFileName, eafFileName, projectDirectory
 
     createZipFile(projectDirectory, projectTitle)
     newButtonState = 0
-    # currentDirectoryOnEntry = os.getcwd()
-    # filenameFullPath = os.path.join(currentDirectoryOnEntry, webpageAt)
-    # print("displaying page %s" %filenameFullPath)
-    # fileURL = 'file://%s' %filenameFullPath
-    # print("file URL: %s" %fileURL)
+    print("=== activating hyperLink to %s" % webpageAt)
     print("=== leaving web page callback")
-    return (webpageAt, newButtonState, "")
+    return (webpageAt, newButtonState, "","previewon")
 
 # ----------------------------------------------------------------------------------------------------
-@app.callback(Output('createWebPageStatus', 'className'),
-    [Input('previewLink', 'href')])
-def display_preview_link(newHref):
-    if len(newHref) == 0:
-        return("previewoff")
-    print("=== activating hyperLink to %s" %newHref)
-    return("previewon")
+# @app.callback(Output('createWebPageStatus', 'className'),
+#     [Input('previewLink', 'href')])
+# def display_preview_link(newHref):
+#     if len(newHref) == 0:
+#         return("previewoff")
+#     print("=== activating hyperLink to %s" %newHref)
+#     return("previewon")
 # ----------------------------------------------------------------------------------------------------
 # def open_preview(source):
 #     print("=== entering open preview")
@@ -931,10 +927,10 @@ def createZipFile(projectDir, projectTitle):
 
 # ----------------------------------------------------------------------------------------------------
 # enable these lines for running from bash and python
-if __name__ == "__main__":
-  app.run_server(host='0.0.0.0', port=60041)
+# if __name__ == "__main__":
+#   app.run_server(host='0.0.0.0', port=60041)
 
 # enable these lines if running with gunicorn
-# if __name__ == "__main__":
-#     server = app.server
-#     app.run()
+if __name__ == "__main__":
+    server = app.server
+    app.run()
