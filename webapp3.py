@@ -586,7 +586,7 @@ def createWebPageCallback(n_clicks, soundFileName, eafFileName, projectDirectory
     fileURL = 'file://%s' %filenameFullPath
     print("file URL: %s" %fileURL)
     print("=== leaving web page callback")
-    return (fileURL, newButtonState, "")
+    return (webpageAt, newButtonState, "")
 
 # ----------------------------------------------------------------------------------------------------
 # def open_preview(source):

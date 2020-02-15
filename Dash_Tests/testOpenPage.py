@@ -19,7 +19,7 @@ app.layout = html.Div(children=[
                 className="webpageFrame"),
     html.Button("press here", id="button"),
     dcc.Textarea(id="textDiv"),
-    html.Div(children=[html.A('display new page', href='file://static/Inferno.html', target='_blank')])
+    html.Div(children=[html.A('display new page', href='/static/Inferno.html', target='_blank')])
     ])
 
 
