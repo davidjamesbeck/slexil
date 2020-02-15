@@ -19,5 +19,4 @@ dash-dangerously-set-inner-html
 yattag
 bs4
 soundfile
-webbrowser
 
