@@ -156,7 +156,7 @@ def create_grammaticalTermsFileUploader():
 
 # ----------------------------------------------------------------------------------------------------
 def create_webPageCreationTab():
-    createAndDisplayButton = html.Button('Show page', id='createAndDisplayWebPageButton',
+    createAndDisplayButton = html.Button('Make page', id='createAndDisplayWebPageButton',
                                          className="button", disabled=1)
 
     downloadLinkAndButton = html.A(id="downloadURL",
@@ -167,18 +167,18 @@ def create_webPageCreationTab():
 
     # createWebpageStatus = html.Span(id="createWebPageStatus", children="cwpita", style={'display': 'none'})
     previewLink = html.A('open preview', id="previewLink", href='', target='_blank')
-    createWebpageStatus = html.Div(id="createWebPageStatus", children=[previewLink])#, style={'display': 'none'})
+    createWebpageStatus = html.Div(id="createWebPageStatus", children=[previewLink, " in a new tab"],className="previewoff")#, style={'display': 'none'})
 
-    webPageIframe = html.Iframe(id="storyIFrame", className="webpageFrame")
+    # webPageIframe = html.Iframe(id="storyIFrame", className="webpageFrame")
     errorMessages = html.Span(id="createPageErrorMessages", children="", className="warningOff")
 
-    buttonDiv = html.Div(children=[createAndDisplayButton, downloadLinkAndButton, errorMessages],
+    children = html.Div(children=[createAndDisplayButton, downloadLinkAndButton, createWebpageStatus, errorMessages],
                          className="webFrameButtonBox")
 
-    children = [buttonDiv,
-                createWebpageStatus,
-                html.Br(),
-                webPageIframe]
+    # children = [buttonDiv]#,
+    #             # createWebpageStatus,
+                # html.Br()]#,
+                # webPageIframe]
 
     div = html.Div(children=children, id='createWebPageDiv')
 
@@ -580,14 +580,22 @@ def createWebPageCallback(n_clicks, soundFileName, eafFileName, projectDirectory
 
     createZipFile(projectDirectory, projectTitle)
     newButtonState = 0
-    currentDirectoryOnEntry = os.getcwd()
-    filenameFullPath = os.path.join(currentDirectoryOnEntry, webpageAt)
-    print("displaying page %s" %filenameFullPath)
-    fileURL = 'file://%s' %filenameFullPath
-    print("file URL: %s" %fileURL)
+    # currentDirectoryOnEntry = os.getcwd()
+    # filenameFullPath = os.path.join(currentDirectoryOnEntry, webpageAt)
+    # print("displaying page %s" %filenameFullPath)
+    # fileURL = 'file://%s' %filenameFullPath
+    # print("file URL: %s" %fileURL)
     print("=== leaving web page callback")
     return (webpageAt, newButtonState, "")
 
+# ----------------------------------------------------------------------------------------------------
+@app.callback(Output('createWebPageStatus', 'className'),
+    [Input('previewLink', 'href')])
+def display_preview_link(newHref):
+    if len(newHref) == 0:
+        return("previewoff")
+    print("=== activating hyperLink to %s" %newHref)
+    return("previewon")
 # ----------------------------------------------------------------------------------------------------
 # def open_preview(source):
 #     print("=== entering open preview")

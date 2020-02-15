@@ -246,6 +246,7 @@
 	text-decoration:none;
 	text-shadow:0px 1px 0px #e1e2ed;
 }
+
 .demoButton:hover {
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #bab1ba), color-stop(1, #ededed));
 	background:-moz-linear-gradient(top, #bab1ba 5%, #ededed 100%);
@@ -294,10 +295,11 @@ summary:focus {
 }
 
 .webFrameButtonBox {
-	margin-left: 20px;
+	margin-left: 0px;
 	margin-top: 20px;
 	display: flex;
 	justify-content: right;
+	grid-column: 1;
 }
 
 .textarea {
@@ -435,3 +437,15 @@ summary:focus {
 .smallCaps {font-variant: small-caps}
 
 h3 {font-size: 14pt;}
+
+.previewoff {
+    display: none;
+}
+
+.previewon {
+    display: inline-block;
+    width: 575px;
+    font-size: large;
+    margin-top: 10px;
+    margin-left: 20px;
+}
