@@ -165,7 +165,9 @@ def create_webPageCreationTab():
                                                          className='button', disabled=1)],
                                    href='')
 
-    createWebpageStatus = html.Span(id="createWebPageStatus", children="cwpita", style={'display': 'none'})
+    # createWebpageStatus = html.Span(id="createWebPageStatus", children="cwpita", style={'display': 'none'})
+    previewLink = html.A('open preview', id="previewLink", href='', target='_blank')
+    createWebpageStatus = html.Div(id="createWebPageStatus", children=[previewLink])#, style={'display': 'none'})
 
     webPageIframe = html.Iframe(id="storyIFrame", className="webpageFrame")
     errorMessages = html.Span(id="createPageErrorMessages", children="", className="warningOff")
@@ -538,7 +540,7 @@ def update_output(value):
 
 # ----------------------------------------------------------------------------------------------------
 @app.callback(
-    [Output('createWebPageStatus', 'children'),
+    [Output('previewLink', 'href'),
      Output('downloadAssembledTextButton', 'disabled'),
      Output('createPageErrorMessages_hiddenStorage', 'children')],
     [Input('createAndDisplayWebPageButton', 'n_clicks')],
@@ -569,7 +571,7 @@ def createWebPageCallback(n_clicks, soundFileName, eafFileName, projectDirectory
     file.write(htmlDoc)
     file.close()
     errorLog = os.path.abspath(os.path.join(projectDirectory, "ERRORS.log"))
-    open_preview(webpageAt)
+    # open_preview(webpageAt)
     if os.path.isfile(errorLog):
         with open(errorLog) as elog:
             logContents = elog.read()
@@ -578,32 +580,42 @@ def createWebPageCallback(n_clicks, soundFileName, eafFileName, projectDirectory
 
     createZipFile(projectDirectory, projectTitle)
     newButtonState = 0
-    print("=== leaving web page callback")
-    return ("wrote file", newButtonState, "")
-
-# ----------------------------------------------------------------------------------------------------
-def open_preview(source):
-    print("=== entering open preview")
     currentDirectoryOnEntry = os.getcwd()
-    filenameFullPath = os.path.join(currentDirectoryOnEntry, source)
+    filenameFullPath = os.path.join(currentDirectoryOnEntry, webpageAt)
     print("displaying page %s" %filenameFullPath)
-    webbrowser.open_new_tab("file://%s" % filenameFullPath)
+    fileURL = 'file://%s' %filenameFullPath
+    print("file URL: %s" %fileURL)
+    print("=== leaving web page callback")
+    return (fileURL, newButtonState, "")
 
 # ----------------------------------------------------------------------------------------------------
-@app.callback(
-    Output('storyIFrame', 'src'),
-    [Input('createWebPageStatus', 'children')],
-    [State('projectDirectory_hiddenStorage', 'children'),
-     State('projectTitle_hiddenStorage', 'children')])
-def displayText(createWebPageStatus, projectDirectory, projectTitle):
-    print("=== displayText '%s'" % createWebPageStatus)
-    if createWebPageStatus == 'cwpita':
-        return ("")
-    if (len(createWebPageStatus) == 0):
-        return ("")
-    pathToHTML = os.path.join(projectDirectory, "%s.html" % projectTitle)
-    print("=== storyIFrame display %s" % pathToHTML)
-    return (pathToHTML)
+# def open_preview(source):
+#     print("=== entering open preview")
+#     currentDirectoryOnEntry = os.getcwd()
+#     filenameFullPath = os.path.join(currentDirectoryOnEntry, source)
+#     print("displaying page %s" %filenameFullPath)
+#     webbrowser.open_new_tab("file://%s" % filenameFullPath)
+
+# ----------------------------------------------------------------------------------------------------
+# @app.callback(
+#     [Output('storyIFrame', 'src'),
+#      Output('previewLink','href')],
+#     [Input('createWebPageStatus', 'display')],
+#     [State('projectDirectory_hiddenStorage', 'children'),
+#      State('projectTitle_hiddenStorage', 'children')])
+# def displayText(createWebPageStatus, projectDirectory, projectTitle):
+#     print("=== displayText '%s'" % createWebPageStatus)
+#     # if createWebPageStatus == 'cwpita':
+#     #     return ("","")
+#     # if (len(createWebPageStatus) == 0):
+#     #     return ("","")
+#     pathToHTML = os.path.join(projectDirectory, "%s.html" % projectTitle)
+#     print("=== storyIFrame display %s" % pathToHTML)
+#     currentDirectoryOnEntry = os.getcwd()
+#     filenameFullPath = os.path.join(currentDirectoryOnEntry, pathToHTML)
+#     print("displaying page %s" %filenameFullPath)
+#     fileURL = 'file://%s' %filenameFullPath
+#     return (pathToHTML,fileURL)
 
 # ----------------------------------------------------------------------------------------------------
 @app.callback(
@@ -911,10 +923,10 @@ def createZipFile(projectDir, projectTitle):
 
 # ----------------------------------------------------------------------------------------------------
 # enable these lines for running from bash and python
-# if __name__ == "__main__":
-#   app.run_server(host='0.0.0.0', port=60041)
+if __name__ == "__main__":
+  app.run_server(host='0.0.0.0', port=60041)
 
 # enable these lines if running with gunicorn
-if __name__ == "__main__":
-    server = app.server
-    app.run()
+# if __name__ == "__main__":
+#     server = app.server
+#     app.run()
