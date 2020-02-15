@@ -4,10 +4,8 @@ import os
 from dash.dependencies import Input, Output, State
 import dash_core_components as dcc
 import dash_html_components as html
-import pdb
 
 import webbrowser
-from threading import Timer
 
 app = dash.Dash(__name__)
 port = 5000  # or simply open on the default `8050` port
@@ -20,8 +18,9 @@ app.layout = html.Div(children=[
                 # src='static/Inferno.html',
                 className="webpageFrame"),
     html.Button("press here", id="button"),
-    dcc.Textarea(id="textDiv")
-])
+    dcc.Textarea(id="textDiv"),
+    html.Div(children=[html.A('display new page', href='file://static/Inferno.html', target='_blank')])
+    ])
 
 
 @app.callback([Output("storyIFrame", "src"),
@@ -33,13 +32,16 @@ def on_Button_Click(n_clicks):
         return '',''
     print('=== button clicked')
     # pdb.set_trace()
-    webbrowser.open_new_tab("static/Inferno.html")
-    # open("static/Inferno.html")
+    open_tab("file:///Users/David/OpenSource/github/slexil/Dash_Tests/static/Inferno.html")
+    webbrowser.open("static/Inferno.html")
     with open("static/Inferno.html", "r") as f:
         print('reading')
         text = f.read()
     return 'static/Inferno.html', text
 
+def open_tab(source):
+    print("=== open new tab")
+    webbrowser.open_new_tab(source)
 
 @app.server.route('/static/<path:urlpath>')
 def serve_static(urlpath):

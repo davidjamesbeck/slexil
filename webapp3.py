@@ -7,6 +7,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 import flask
 import xmlschema
+import webbrowser
 from dash.dependencies import Input, Output, State
 from shutil import copy
 from audioExtractor import *
@@ -568,6 +569,7 @@ def createWebPageCallback(n_clicks, soundFileName, eafFileName, projectDirectory
     file.write(htmlDoc)
     file.close()
     errorLog = os.path.abspath(os.path.join(projectDirectory, "ERRORS.log"))
+    open_preview(webpageAt)
     if os.path.isfile(errorLog):
         with open(errorLog) as elog:
             logContents = elog.read()
@@ -579,6 +581,13 @@ def createWebPageCallback(n_clicks, soundFileName, eafFileName, projectDirectory
     print("=== leaving web page callback")
     return ("wrote file", newButtonState, "")
 
+# ----------------------------------------------------------------------------------------------------
+def open_preview(source):
+    print("=== entering open preview")
+    currentDirectoryOnEntry = os.getcwd()
+    filenameFullPath = os.path.join(currentDirectoryOnEntry, source)
+    print("displaying page %s" %filenameFullPath)
+    webbrowser.open_new_tab("file://%s" % filenameFullPath)
 
 # ----------------------------------------------------------------------------------------------------
 @app.callback(
@@ -595,7 +604,6 @@ def displayText(createWebPageStatus, projectDirectory, projectTitle):
     pathToHTML = os.path.join(projectDirectory, "%s.html" % projectTitle)
     print("=== storyIFrame display %s" % pathToHTML)
     return (pathToHTML)
-
 
 # ----------------------------------------------------------------------------------------------------
 @app.callback(

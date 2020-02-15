@@ -12,6 +12,7 @@ from shutil import copy
 from audioExtractor import *
 from text import *
 from aboutTexts import AboutTexts
+import webbrowser
 
 # ----------------------------------------------------------------------------------------------------
 UPLOAD_DIRECTORY = "UPLOADS"
@@ -567,6 +568,7 @@ def createWebPageCallback(n_clicks, soundFileName, eafFileName, projectDirectory
     file = open(absolutePath, "w")
     file.write(htmlDoc)
     file.close()
+    open_preview(webpageAt)
     errorLog = os.path.abspath(os.path.join(projectDirectory, "ERRORS.log"))
     if os.path.isfile(errorLog):
         with open(errorLog) as elog:
@@ -579,6 +581,13 @@ def createWebPageCallback(n_clicks, soundFileName, eafFileName, projectDirectory
     print("=== leaving web page callback")
     return ("wrote file", newButtonState, "")
 
+# ----------------------------------------------------------------------------------------------------
+def open_preview(source):
+    print("=== entering open preview")
+    currentDirectoryOnEntry = os.getcwd()
+    filenameFullPath = os.path.join(currentDirectoryOnEntry, source)
+    print("displaying page %s" %filenameFullPath)
+    webbrowser.open_new_tab("file://%s" % filenameFullPath)
 
 # ----------------------------------------------------------------------------------------------------
 @app.callback(
