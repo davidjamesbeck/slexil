@@ -125,7 +125,10 @@
 	width: 320;
 	font-size: 12;
 }
-
+.divider {
+    margin-top: 0em;
+    margin-bottom: 0em;
+}
 .button {
 	width: 99px;
 	height: 33px;
@@ -295,7 +298,7 @@ summary:focus {
 }
 
 .webFrameButtonBox {
-	margin-left: 0px;
+	margin-left: 10px;
 	margin-top: 20px;
 	display: flex;
 	justify-content: right;
@@ -346,6 +349,13 @@ summary:focus {
     padding-top: 15px;
     padding-bottom: 10px;
     margin-bottom: 10px;
+    margin-left: 30px;
+}
+
+.stepTitle {
+    grid-column: 1;
+    font-size: large;
+    width: 175px;
 }
 
 .warningfootnote {
@@ -358,12 +368,14 @@ summary:focus {
 	display: none;
 	grid-column:2;
 }
+
 .information {
     display: inline-block;
     grid-column: 2;
     text-align: center;
     width: 575px;
 }
+
 .warningOn {
 	display: inline-block;
 	width: 450px;
@@ -378,8 +390,7 @@ summary:focus {
     grid-column: 2;
 	color: red;
 	text-align: center;
-	#padding-left: 30px;
-	#float: right;
+	width: 575px;
 }
 
 .anchor {
@@ -434,7 +445,9 @@ summary:focus {
     color: white;
 }
 
-.smallCaps {font-variant: small-caps}
+.smallCaps {
+    font-variant: small-caps
+}
 
 h3 {font-size: 14pt;}
 
