@@ -326,16 +326,20 @@ summary:focus {
 
 .selectionBox {
 	display: inline-grid;
-	grid-template-columns: 140px 500px;
+	grid-template-columns: 140px 575px;
 	grid-template-rows: auto auto;
 	align-content: center;
 	margin-top: 20px;
 }
 
+.stepTitle {
+    grid-column: 1;
+}
+
 .dragDropArea {
     grid-row 1;
     grid-column: 2;
-    width: 575px;
+    width: 500px;
     height: 30px;
     lineHeight: 60px;
     border-width: 1px;
@@ -449,3 +453,4 @@ h3 {font-size: 14pt;}
     margin-top: 10px;
     margin-left: 20px;
 }
+

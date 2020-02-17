@@ -102,6 +102,7 @@ def create_eafUploader():
 def create_eafUploaderTab():
     children = [html.Div("Add .eaf file", className="stepTitle"),
                 html.Div([create_eafUploader()], className="dragDropArea"),
+                # html.Div("*Required",className="requiredLabel"),
                 html.Div("This can take a minute or two for large texts.", id="eafuploadStatus",
                          className="timewarning")
                 ]
@@ -296,7 +297,7 @@ def create_introduction():
                         .eaf and .wav portions of ELAN projects and download an HTML file and accompanying CSS, JavaScript, 
                         and parsed audio files that can be embedded on a webpage or viewed in a browser on any computer. 
                         You can find a [video tutorial] (https://youtu.be/ijqnk57J9G8) on using SLEXIL on YouTube 
-                        or download a demo project to practice with by clicking on the button to the right.''')
+                        or download a demo project to practice with by clicking on the **Download Demo** button.''')
 
     button = html.Button('download demo', className='demoButton')
     contents = [html.A(button, href='demos/infernoDemo.zip', className="buttonCell"),
@@ -928,10 +929,10 @@ def createZipFile(projectDir, projectTitle):
 
 # ----------------------------------------------------------------------------------------------------
 # enable these lines for running from bash and python
-# if __name__ == "__main__":
-#     app.run_server(host='0.0.0.0', port=60041)
+if __name__ == "__main__":
+    app.run_server(host='0.0.0.0', port=60041)
 
 # enable these lines if running with gunicorn
-if __name__ == "__main__":
-    server = app.server
-    app.run()
+# if __name__ == "__main__":
+#     server = app.server
+#     app.run()
