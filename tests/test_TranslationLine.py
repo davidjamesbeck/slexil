@@ -18,12 +18,12 @@ def runTests():
 		- begins with a left curly single quote
 		- ends with a right curly single quote
 		- has no leading or trailing whitespace
-	  we use the intentionally flawed text "Chatino_FaultyAuthorExamples" to collect all
+	  we use the intentionally flawed text "praying_FaultyAuthorExamples" to collect all
 	  the improper translation lines we imagine, or encounter over time, to ensure
 	  that we can render them into our proper form
 	"""
 	from xml.etree import ElementTree as etree
-	filename = "../testData/Chatino_FaultyAuthorExamples/20150717_Prayer_community_one.eaf"
+	filename = "../testData/praying_FaultyAuthorExamples/praying.eaf"
 	doc = etree.parse(filename)
 	pattern = "TIER[@TIER_ID='English Translation-cp-cp']/ANNOTATION/REF_ANNOTATION/ANNOTATION_VALUE"
 	childElements = doc.findall(pattern)
@@ -40,7 +40,7 @@ def runTests():
 		test_straight_dquo(standardizedLine)
 		test_thin_spaces(standardizedLine)
 
-	test_lokono_line_3()
+	test_loco_line_3()
 
 #----------------------------------------------------------------------------------------------------
 def test_begins_and_ends_with_squo(standardizedLine):
@@ -95,7 +95,7 @@ def test_thin_spaces(standardizedLine):
 		raise Exception(standardizedLine) from e
 
 #----------------------------------------------------------------------------------------------------
-def test_lokono_line_3():
+def test_loco_line_3():
 
 	'''an illegal line: ‘[a] child, a woman as well.'’
 	   note curly quotes at beginning and end, and a straight single quote (an apostrophe)
@@ -103,11 +103,11 @@ def test_lokono_line_3():
 	   we here ensure that the TranslationLine class detects and repairs this error
 	'''
 
-	print("--- test_lokono_line_3")
+	print("--- test_loco_line_3")
 
-	filename = "../testData/lokono/LOKONO_IJAL_2.eaf"
+	filename = "../testData/loco/loco.eaf"
 	doc = etree.parse(filename)
-	tierGuideFile = "../testData/lokono/tierGuide.yaml"
+	tierGuideFile = "../testData/loco/tierGuide.yaml"
 	with open(tierGuideFile, 'r') as f:
 	   tierGuide = yaml.safe_load(f)
 
@@ -119,7 +119,7 @@ def test_lokono_line_3():
 		# is used throughout by IjalLine
 
 	try:
-		assert(x3.getTranslation() == "‘[a] child, a woman as well.’")
+		assert(x3.getTranslation() == "‘[@] ch@ld, @ w@m@n @s w@ll.’")
 	except AssertionError as e:
 		raise Exception(x3.getTranslation()) from e
 
@@ -130,8 +130,8 @@ def test_lokono_line_3():
 		# check that the stray straight single quote has bee eliminated
 		# try with both of python's standard string quotes, single and double straight quotes
 
-	assert(standardizedLine == '‘[a] child, a woman as well.’')
-	assert(standardizedLine == "‘[a] child, a woman as well.’")
+	assert(standardizedLine == '‘[@] ch@ld, @ w@m@n @s w@ll.’')
+	assert(standardizedLine == "‘[@] ch@ld, @ w@m@n @s w@ll.’")
 
 #----------------------------------------------------------------------------------------------------
 if __name__ == '__main__':

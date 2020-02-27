@@ -40,7 +40,7 @@ def runTests():
     test_Sub_and_Sup()
     test_Additional_Delimiters()
     test_toHTML_sampleLine_6()
-    test_Chatino_morpheme_glosses
+    test_praying_morpheme_glosses
 
 def test_constructor():
    
@@ -337,11 +337,11 @@ def test_toHTML_sampleLine_6(displayPage=False):
         f.close()
         os.system("open %s" % "morphemeGloss.html")
 
-def test_Chatino_morpheme_glosses(displayPage=False):
+def test_praying_morpheme_glosses(displayPage=False):
     """
       make sure MorphemeGloss handles the portmanteaus types in this text properly
     """
-    print("--- test_Chatino_morpheme_glosses")
+    print("--- test_praying_morpheme_glosses")
 
     mg = MorphemeGloss("PROG:be:2SG", ['PROG','2sg'])
     mg.parse()

@@ -17,17 +17,17 @@ def runTests():
 
 def createText():
 	audioFilename = "Chicahuaxtla Triqui - La serpiente emplumada 04-28-2016.wav"
-	elanXmlFilename="../testData/plumedSerpent/TRS_Plumed_Serpent_Legend_05-15-2017.eaf"
-	targetDirectory = "../testData/plumedSerpent/audioPhrases"
+	elanXmlFilename="../testData/featherSnake/featherSnake.eaf"
+	targetDirectory = "../testData/featherSnake/audioPhrases"
 	soundFile = os.path.join(targetDirectory,audioFilename)
 	ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
 	ae.determineStartAndEndTimes()
 	times = ae.startStopTable
 	text = Text(elanXmlFilename,
 				soundFile,
-				grammaticalTermsFile="../testData/plumedSerpent/grammaticalTerms.txt",
-				tierGuideFile="../testData/plumedSerpent/tierGuide.yaml",
-				projectDirectory="../testData/plumedSerpent",
+				grammaticalTermsFile="../testData/featherSnake/grammaticalTerms.txt",
+				tierGuideFile="../testData/featherSnake/tierGuide.yaml",
+				projectDirectory="../testData/featherSnake",
 				#startStopTable=times,
 				quiet=False)
 	return(text)
@@ -67,10 +67,10 @@ def test_toHTML(display):
 		raise Exception(tbl.shape)
 
 	htmlText = text.toHTML()
-	filename = "plumedSerpent.html"
-	f = open(filename, "w")
-	f.write(indent(htmlText))
-	f.close()
+	# filename = "../testData/featherSnake/featherSnake.html"
+	# f = open(filename, "w")
+	# f.write(indent(htmlText))
+	# f.close()
 
 	if(display):
 		os.system("open %s" % filename)

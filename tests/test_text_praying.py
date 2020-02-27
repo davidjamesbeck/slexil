@@ -11,25 +11,22 @@ pd.set_option('display.width', 1000)
 #----------------------------------------------------------------------------------------------------
 
 def createText():
-	audioFilename = "20150717_Prayer_community_one.wav"
-	elanXmlFilename="../testData/Chatino_6Line/20150717_Prayer_community_one.eaf"
-	targetDirectory = "../testData/Chatino_6Line/audio"
+	audioFilename = "SJQ-2009_Cruz.wav"
+	elanXmlFilename="../testData/praying/praying.eaf"
+	targetDirectory = "../testData/praying/audio"
 	soundFile = os.path.join(targetDirectory,audioFilename)
-	projectDirectory="../testData/Chatino_6Line"
-	tierGuideFile="../testData/Chatino_6Line/tierGuide.yaml"
-	grammaticalTermsFile="../testData/Chatino_6Line/grammaticalTerms.txt"
+	projectDirectory="../testData/praying"
 	ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
 	ae.determineStartAndEndTimes()
 	times = ae.startStopTable
 
 	text = Text(elanXmlFilename,
 				soundFile,
-				grammaticalTermsFile=grammaticalTermsFile,
-				tierGuideFile=tierGuideFile,
+				grammaticalTermsFile="../testData/praying/grammaticalTerms.txt",
+				tierGuideFile="../testData/praying/tierGuide.yaml",
 				#startStopTable=times,
 				projectDirectory=projectDirectory,
 				quiet=True)
-
 	return(text)
 
 def runTests(display=False):
@@ -44,11 +41,10 @@ def test_constructor():
 	text = createText()
 	assert(text.validInputs())
 	tbl = text.getTierSummary()
-	print(list(tbl['key']))
-	assert(tbl.shape == (6,3))
-	assert(list(tbl['key']) == ['speech', 'translation', 'morpheme', 'morphemeGloss','translation2','transcription2'])
-	assert(list(tbl['value']) == ['SZC-Chatino', 'English Translation', 'Tokenization-cp', 'POS-cp','second translation','phonetic transcription'])
-	assert(list(tbl['count']) == [9, 9, 111, 111, 9, 9])
+	assert(tbl.shape == (4,3))
+	assert(list(tbl['key']) == ['speech', 'translation', 'morpheme', 'morphemeGloss'])
+	assert(list(tbl['value']) == ['SZC-Chatino', 'English Translation-cp-cp', 'Tokenization-cp', 'POS-cp'])
+	assert(list(tbl['count']) == [9, 9, 111, 111])
 
 def test_toHTML(display):
 
@@ -58,10 +54,10 @@ def test_toHTML(display):
 	tbl = text.getLineAsTable(0)
 
 	htmlText = text.toHTML()
-	filename = "prayer6.html"
-	f = open(filename, "w")
-	f.write(indent(htmlText))
-	f.close()
+	filename = "../testData/praying/praying.html"
+	# f = open(filename, "w")
+	# f.write(indent(htmlText))
+	# f.close()
 
 	if(display):
 		os.system("open %s" % filename)

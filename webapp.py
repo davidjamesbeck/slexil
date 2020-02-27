@@ -84,7 +84,7 @@ def downloadZip(filename):
 # this route handles the download of zipped up assembled slexil projects
 # which, by convention, are  ./PROJECTS/<someName>/webpage.zip:
 #    PROJECTS/daylight/webpage.zip
-#    PROJECTS/lokono/webpage.zip
+#    PROJECTS/loco/webpage.zip
 # we do not actually do the assembly here in this demo exploratory app. instead an appropriate
 # file has been placed, ahead of time, in the appropriate directory.
 #----------------------------------------------------------------------------------------------------

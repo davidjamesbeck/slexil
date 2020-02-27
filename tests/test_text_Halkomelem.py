@@ -12,15 +12,15 @@ pd.set_option('display.width', 1000)
 
 def runTests(display=False):
 
-	test_AMRaven(display)
+	test_AMCuervo(display)
 
-def test_AMRaven(display):
-	audioFilename = "AM_RavenCopiesSiblingsNRAudition-wav.wav"
-	elanXmlFilename="newraven.eaf"
-	targetDirectory = "../testTextPyData/Raven/audio"
+def test_AMCuervo(display):
+	audioFilename = "Cuervo.wav"
+	elanXmlFilename="newcuervo.eaf"
+	targetDirectory = "../testTextPyData/Cuervo/audio"
 	soundFile = os.path.join(targetDirectory,audioFilename)
-	projectDirectory="../testTextPyData/Raven"
-	tierGuideFile="../testTextPyData/Raven/tierGuide.yaml"
+	projectDirectory="../testTextPyData/Cuervo"
+	tierGuideFile="../testTextPyData/Cuervo/tierGuide.yaml"
 	elanFile = os.path.join(projectDirectory,elanXmlFilename)
 	ae = AudioExtractor(soundFile, elanFile, targetDirectory)
 	ae.determineStartAndEndTimes()
@@ -37,7 +37,7 @@ def test_AMRaven(display):
 	text.getLineAsTable(0)
 
 	htmlText = text.toHTML()
-	filename = "../testTextPyData/Raven/RavenNew.html"
+	filename = "../testTextPyData/Cuervo/CuervoNew.html"
 	f = open(filename, "w")
 	f.write(indent(htmlText))
 	f.close()

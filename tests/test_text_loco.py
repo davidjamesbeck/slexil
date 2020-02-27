@@ -17,12 +17,12 @@ def runTests(display=False):
 
 def createText():
 	audioFilename = "SJQ-2009_Cruz.wav"
-	elanXmlFilename="../testData/lokono/LOKONO_IJAL_2.eaf"
-	targetDirectory = "../testData/lokono/audio"
+	elanXmlFilename="../testData/loco/loco.eaf"
+	targetDirectory = "../testData/loco/audio"
 	soundFile = os.path.join(targetDirectory,audioFilename)
-	projectDirectory="../testData/lokono"
-	tierGuideFile="../testData/lokono/tierGuide.yaml"
-	grammaticalTermsFile="../testData/lokono/grammaticalTerms.txt"
+	projectDirectory="../testData/loco"
+	tierGuideFile="../testData/loco/tierGuide.yaml"
+	grammaticalTermsFile="../testData/loco/grammaticalTerms.txt"
 	ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
 	ae.determineStartAndEndTimes()
 	times = ae.startStopTable	
@@ -66,10 +66,10 @@ def test_toHTML(display):
 	text.getLineAsTable(0)
 
 	htmlText = text.toHTML()
-	filename = "lokono.html"
-	f = open(filename, "w")
-	f.write(indent(htmlText))
-	f.close()
+	# filename = "../testData/loco/loco.html"
+	# f = open(filename, "w")
+	# f.write(indent(htmlText))
+	# f.close()
 
 	if(display):
 		os.system("open %s" % filename)

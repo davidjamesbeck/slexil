@@ -7,7 +7,12 @@
 # morpehemGloss:
 # morphemePacking: tabs|tiers
 #
-filename = "../testData/harryMosesDaylight/daylight_1_4.eaf"
+import sys
+sys.path.append("..")
+from xml.etree import ElementTree as etree
+from ijalLine import IjalLine as Line
+
+filename = "../testData/HMDLsafe/HMDL.eaf"
 xmlDoc = etree.parse(filename)
 x = Line(xmlDoc, lineNumber=0, tierGuide=None, grammaticalTerms=[])
 x.tblRaw["TIER_ID"].tolist()

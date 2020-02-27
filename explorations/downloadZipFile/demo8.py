@@ -14,7 +14,7 @@ app.layout = html.Div([
     html.A(html.Button('Download the Inferno Demo', style=buttonStyle), href='demos/infernoDemo.zip'),
     html.H4("choose a project to assemble: ", style={"margin-left": 30}),
     dcc.Dropdown(id='projectChooser',
-                 options=[{'label': 'Lokono', 'value': 'lokono'}, {'label': 'Daylight', 'value': 'daylight'}],
+                 options=[{'label': 'Lokono', 'value': 'loco'}, {'label': 'Daylight', 'value': 'daylight'}],
                  style={"width": 100, "margin-left": 30, "width": 200}),
 
     html.Br(),
@@ -32,7 +32,7 @@ app.layout = html.Div([
 # this route handles the download of zipped up assembled slexil projects
 # which, by convention, are  ./PROJECTS/<someName>/webpage.zip:
 #    PROJECTS/daylight/webpage.zip
-#    PROJECTS/lokono/webpage.zip
+#    PROJECTS/loco/webpage.zip
 # we do not actually do the assembly here in this demo exploratory app. instead an appropriate
 # file has been placed, ahead of time, in the appropriate directory.
 #----------------------------------------------------------------------------------------------------

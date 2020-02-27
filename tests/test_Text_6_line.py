@@ -12,14 +12,14 @@ pd.set_option('display.width', 1000)
 #----------------------------------------------------------------------------------------------------
 def runTests(display=False):
 	test_HowDaylightWasStolen(display)
-	test_Chatino_6_Line_from_webapp(display)
+	test_praying_6_Line_from_webapp(display)
 
 #----------------------------------------------------------------------------------------------------
-def test_Chatino_6_Line_from_webapp(display):
+def test_praying_6_Line_from_webapp(display):
 
-	print("--- test_Chatino_6_Line_from_webappn")
-	audioFilename = "20150717_Prayer_community_one.wav"
-	elanXmlFilename="../testData/s/20150717_Prayer_community_one.eaf"
+	print("--- test_praying_6_Line_from_webappn")
+	audioFilename = "praying.wav"
+	elanXmlFilename="../testData/s/praying.eaf"
 	targetDirectory = "../testData/s/audio"
 	soundFile = os.path.join(targetDirectory,audioFilename)
 	projectDirectory="../testData/s"
@@ -50,11 +50,11 @@ def test_HowDaylightWasStolen(display):
 
 	print("--- test_HowDaylightWasStolen")
 	
-	text = Text("../testData/harryMosesDaylight/daylight_1_4.eaf",
-				"../testData/harryMosesDaylight/audioPhrases",
+	text = Text("../testData/HMDLsafe/HMDL.eaf",
+				"../testData/HMDLsafe/audioPhrases",
 				grammaticalTermsFile=None,
-				tierGuideFile="../testData/harryMosesDaylight/tierGuide.yaml",
-				projectDirectory="../testData/harryMosesDaylight")
+				tierGuideFile="../testData/HMDLsafe/tierGuide.yaml",
+				projectDirectory="../testData/HMDLsafe")
 
 	htmlText = text.toHTML()
 	if(display):
@@ -69,15 +69,15 @@ def test_MonkeyAndThunder(display):
 
 	print("--- test_MonkeyAndThunder")
 
-	text = Text("../testData/monkeyAndThunder/AYA1_MonkeyandThunder.eaf",
-				"../testData/monkeyAndThunder/audioPhrases",
-				grammaticalTermsFile="../testData/monkeyAndThunder/grammaticalTerms.txt")
+	text = Text("../testData/AYAMT/AYAMT.eaf",
+				"../testData/AYAMT/audioPhrases",
+				grammaticalTermsFile="../testData/AYAMT/grammaticalTerms.txt")
 	 
 	text.getTable(1)
 
 	htmlText = text.toHTML()
 	if(display):
-	   filename = "monkeyAndThunder.html"
+	   filename = "AYAMT.html"
 	   f = open(filename, "w")
 	   f.write(indent(htmlText))
 	   f.close()
@@ -85,12 +85,12 @@ def test_MonkeyAndThunder(display):
 
 
 #----------------------------------------------------------------------------------------------------
-def test_prayer(display):
+def test_praying(display):
 
-	print("--- test_prayer")
+	print("--- test_praying")
 
-	text = Text("../testData/prayer/20150717_Prayer_community_one.eaf",
-				"../testData/prayer/audioPhrases",
+	text = Text("../testData/praying/praying.eaf",
+				"../testData/praying/audioPhrases",
 				grammaticalTermsFile=None,
 				quiet=False)
 
@@ -99,7 +99,7 @@ def test_prayer(display):
 	htmlText = text.toHTML(0)
 
 	if(display):
-	   filename = "prayer.html"
+	   filename = "praying.html"
 	   f = open(filename, "w")
 	   f.write(indent(htmlText))
 	   f.close()

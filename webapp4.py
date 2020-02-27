@@ -246,24 +246,7 @@ def create_webpageBuilderTab():
 # ----------------------------------------------------------------------------------------------------
 def createAppTab():
     intro = create_introduction()
-    # children = [intro,
-    #             html.Details([html.Summary('Set title', className="summary"), html.Div(create_setTitleTab())],
-    #                          className="allDivs", open="1"),
-    #             html.Details([html.Summary('Upload .eaf file', className="summary"), html.Div(create_eafUploaderTab())],
-    #                          className="allDivs"),
-    #             html.Details([html.Summary('Create tier guide', className="summary"), html.Div(create_tierMapGui())],
-    #                          className="allDivs"),
-    #             html.Details(
-    #                 [html.Summary('Upload audio file', className="summary"), html.Div(create_soundFileUploaderTab())],
-    #                 className="allDivs"),
-    #             html.Details(
-    #                 [html.Summary('Upload abbreviations', className="summary"),
-    #                  html.Div(create_grammaticalTermsUploaderTab())],
-    #                 className="allDivs"),
-    #             html.Details(
-    #                 [html.Summary('Create web page', className="summary"), html.Div(create_webPageCreationTab())],
-    #                 className="allDivs")
-    #             ]
+ 
     children = [intro,
                 html.Details([html.Summary('Set title', className="summary"), html.Div(create_setTitleTab())],
                              className="allDivs", open="1"),
@@ -320,7 +303,7 @@ def create_introduction():
                         in [ELAN](https://tla.mpi.nl/tools/tla-tools/elan/). Users can access this site to upload the 
                         .eaf and .wav portions of ELAN projects and download an HTML file and accompanying CSS, JavaScript, 
                         and parsed audio files that can be embedded on a webpage or viewed in a browser on any computer. 
-                        You can find a [video tutorial] (https://youtu.be/ijqnk57J9G8) on using SLEXIL on YouTube 
+                        You can find a [video tutorial] (https://youtu.be/7b99pkhQibs) on using SLEXIL on YouTube 
                         or download a demo project to practice with by clicking on the **Download Demo** button.''')
 
     button = html.Button('download demo', className='demoButton')

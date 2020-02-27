@@ -16,7 +16,7 @@ app.layout = html.Div([
     html.A(html.Button('Download the Inferno Demo', style=buttonStyle), href='infernoDemo.zip'),
     html.H4("choose a project to assemble: ", style={"margin-left": 30}),
     dcc.Dropdown(id='projectChooser',
-                 options=[{'label': 'Lokono', 'value': 'lokono'}, {'label': 'Daylight', 'value': 'daylight'}],
+                 options=[{'label': 'Lokono', 'value': 'loco'}, {'label': 'Daylight', 'value': 'daylight'}],
                  style={"width": 100, "margin-left": 30, "width": 200}),
 
     html.Br(),

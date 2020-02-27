@@ -16,18 +16,18 @@ def runTests(display=False):
     test_toHTML(display)
 
 def createText():
-    audioFilename = "AYA1_MonkeyandThunder-32bit.wav"
-    elanXmlFilename="../testData/monkeyAndThunder/AYA1_MonkeyandThunder.eaf"
-    targetDirectory = "../testData/monkeyAndThunder/audio"
+    audioFilename = "AYAMT-32bit.wav"
+    elanXmlFilename="../testData/AYAMT/AYAMT.eaf"
+    targetDirectory = "../testData/AYAMT/audio"
     soundFile = os.path.join(targetDirectory,audioFilename)
     ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
     ae.determineStartAndEndTimes()
     times = ae.startStopTable
     text = Text(elanXmlFilename,
                 soundFile,
-                grammaticalTermsFile="../testData/monkeyAndThunder/grammaticalTerms.txt",
-                tierGuideFile="../testData/monkeyAndThunder/tierGuide.yaml",
-                projectDirectory="../testData/monkeyAndThunder")# ,
+                grammaticalTermsFile="../testData/AYAMT/grammaticalTerms.txt",
+                tierGuideFile="../testData/AYAMT/tierGuide.yaml",
+                projectDirectory="../testData/AYAMT")# ,
 #                 startStopTable=times)
 
     return(text)
@@ -51,12 +51,12 @@ def test_toHTML(display):
     tbl = text.getLineAsTable(0)
     
     htmlText = text.toHTML()
-    filename = "monkeyAndThunder.html"
-    f = open(filename, "w")
-    f.write(indent(htmlText))
-    f.close()
-    if(display):
-        os.system("open %s" % filename)
+    # filename = "../testData/AYAMT/AYAMT.html"
+    # f = open(filename, "w")
+    # f.write(indent(htmlText))
+    # f.close()
+    # if(display):
+    #     os.system("open %s" % filename)
 
 if __name__ == '__main__':
     runTests()

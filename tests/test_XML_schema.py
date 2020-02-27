@@ -19,26 +19,26 @@ def createText():
     elanXmlFilename = "../infernoDemo/inferno-threeLines.eaf"
     validFile = validate_EAF(elanXmlFilename)
     print("--- testing file with broken HTML tags")
-    elanXmlFilename = "../testData/prayer/Prayer_broken-HTML_tags.eaf"
+    elanXmlFilename = "../testData/praying/Prayer_broken-HTML_tags.eaf"
     validFile = validate_EAF(elanXmlFilename)
     if not validFile:
         return False
     print("--- testing file with HTML tags")
-    elanXmlFilename = "../testData/prayer/Prayer_HTML_tags.eaf"
+    elanXmlFilename = "../testData/praying/Prayer_HTML_tags.eaf"
     validFile = validate_EAF(elanXmlFilename)
     if not validFile:
         print("=== failed to validate file with tags")
-    targetDirectory = "../testData/prayer/audio"
+    targetDirectory = "../testData/praying/audio"
     soundFile = os.path.join(targetDirectory, audioFilename)
-    projectDirectory = "../testData/prayer"
+    projectDirectory = "../testData/praying"
     ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
     ae.determineStartAndEndTimes()
     times = ae.startStopTable
 
     text = Text(elanXmlFilename,
                 soundFile,
-                grammaticalTermsFile="../testData/prayer/grammaticalTerms.txt",
-                tierGuideFile="../testData/prayer/tierGuide.yaml",
+                grammaticalTermsFile="../testData/praying/grammaticalTerms.txt",
+                tierGuideFile="../testData/praying/tierGuide.yaml",
                 # startStopTable=times,
                 projectDirectory=projectDirectory,
                 quiet=True)
@@ -89,7 +89,7 @@ def test_for_HTML_tags(display):
     assert (list(tbl['count']) == [9, 9, 111, 111])
 
     htmlText = text.toHTML()
-    filename = "prayer.html"
+    filename = "praying.html"
     f = open(filename, "w")
     f.write(indent(htmlText))
     f.close()
