@@ -4,13 +4,13 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-testTextPyData/Ocotepec_Riverwoman/
-explorations/generateEAF/pythonDemos/daylight1/audio/a*.wav
+#testTextPyData/Ocotepec_Riverwoman/
+#explorations/generateEAF/pythonDemos/daylight1/audio/a*.wav
 
 # C extensions
 *.so
 
-PROJECTS/*
+PROJECTS/*.*
 # Distribution / packaging
 .Python
 build/
@@ -111,15 +111,15 @@ venv.bak/
 bin/
 
 #test suites
-testTextPyData/
+#testTextPyData/GhostInWagon/
 #tests/
-testData/
-testTextPy/
+#testData/
+#testTextPy/
 
 #explorations
-explorations/downloadZipFile/PROJECTS/
+#explorations/downloadZipFile/PROJECTS/
 explorations/generateEAF/pythonDemos/daylight1/
-explorations/playAudioInSequence/
+#explorations/playAudioInSequence/
 #testTextPyData/GoldenEagle
 #testData/*/audio
 #testData/*/audioPhrases
