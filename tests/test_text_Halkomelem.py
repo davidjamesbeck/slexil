@@ -15,6 +15,11 @@ def runTests(display=False):
 	test_AMCuervo(display)
 
 def test_AMCuervo(display):
+	try:
+		assert (os.path.exists("../testTextPyData/Cuervo/audio"))
+	except AssertionError:
+		os.mkdir("../testTextPyData/Cuervo/audio")
+
 	audioFilename = "../testData/Cargos.ogg"
 	elanXmlFilename="newcuervo.eaf"
 	targetDirectory = "../testTextPyData/Cuervo/audio"
