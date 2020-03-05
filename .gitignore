@@ -121,5 +121,7 @@ bin/
 explorations/generateEAF/pythonDemos/daylight1/
 #explorations/playAudioInSequence/
 #testTextPyData/GoldenEagle
-#testData/*/audio
+testData/*/audio
+testTextPyData/*/audio/*.*
+testTextPyData/GhostInWagon/audio/*.*
 #testData/*/audioPhrases

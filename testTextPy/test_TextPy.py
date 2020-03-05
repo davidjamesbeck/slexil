@@ -37,10 +37,10 @@ def test_Cuervo_errors(display):
 
     print("--- test_Cuervo_with_errors")
 
-    audioFilename = "../testData/Cargos.wav"
+    audioFilename = "../testData/Cargos.ogg"
     elanXmlFilename = "../testTextPyData/Cuervo/newcuervo_all_errors.eaf"
     targetDirectory = "../testTextPyData/Cuervo/audio"
-    soundFile = os.path.join(targetDirectory, "Cargos.wav")
+    soundFile = os.path.join(targetDirectory, "Cargos.ogg")
     projectDirectory = "../testTextPyData/Cuervo"
     tierGuideFile = "../testTextPyData/Cuervo/tierGuide.yaml"
     ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
@@ -66,10 +66,10 @@ def test_Cuervo_errors(display):
 def test_Cuervo(display):
     print("--- test_Cuervo")
 
-    audioFilename = "../testData/Cargos.wav"
+    audioFilename = "../testData/Cargos.ogg"
     elanXmlFilename = "../testTextPyData/Cuervo/newcuervo.eaf"
     targetDirectory = "../testTextPyData/Cuervo/audio"
-    soundFile = os.path.join(targetDirectory, "Cargos.wav")
+    soundFile = os.path.join(targetDirectory, "Cargos.ogg")
     projectDirectory = "../testTextPyData/Cuervo"
     tierGuideFile = "../testTextPyData/Cuervo/tierGuide.yaml"
     ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
@@ -93,10 +93,10 @@ def test_Cuervo(display):
 def test_aym(display):
     print("--- test_aym")
 
-    audioFilename = "../testData/Cargos.wav"
+    audioFilename = "../testData/Cargos.ogg"
     elanXmlFilename = "../testTextPyData/aym/aym-final.eaf"
     targetDirectory = "../testTextPyData/aym/Audio"
-    soundFile = os.path.join(targetDirectory, "Cargos.wav")
+    soundFile = os.path.join(targetDirectory, "Cargos.ogg")
     projectDirectory = "../testTextPyData/aym"
     tierGuideFile = "../testTextPyData/aym/tierGuide.yaml"
     grammaticalTermsFile = "../testTextPyData/aym/List of abbreviations.txt"
@@ -165,10 +165,10 @@ def test_Inferno_numbering(display):
 def test_aym_numbering(display):
     print("--- test_aym_numbering")
 
-    audioFilename = "../testData/Cargos.wav"
+    audioFilename = "../testData/Cargos.ogg"
     elanXmlFilename = "../testTextPyData/aym/aym-final.eaf"
     targetDirectory = "../testTextPyData/aym/Audio"
-    soundFile = os.path.join(targetDirectory, "Cargos.wav")
+    soundFile = os.path.join(targetDirectory, "Cargos.ogg")
     projectDirectory = "../testTextPyData/aym"
     tierGuideFile = "../testTextPyData/aym/tierGuide.yaml"
     grammaticalTermsFile = "../testTextPyData/aym/List of abbreviations.txt"
@@ -203,14 +203,18 @@ def test_aym_numbering(display):
 # ----------------------------------------------------------------------------------------------------
 def test_Inferno(display):
     print("--- test_Inferno")
+    try:
+        assert(os.path.exists("../testTextPyData/Inferno/audio"))
+    except AssertionError:
+        os.mkdir("../testTextPyData/Inferno/audio")
 
     audioFilename = "inferno-threeLines.wav"
-    elanXmlFilename = "../explorations/playAudioInSequence/Inferno/inferno-threeLines.eaf"
-    targetDirectory = "../explorations/playAudioInSequence/Inferno/Audio"
+    elanXmlFilename = "../testTextPyData/Inferno/inferno-threeLines.eaf"
+    targetDirectory = "../testTextPyData/Inferno/audio"
     soundFile = os.path.join(targetDirectory, audioFilename)
-    projectDirectory = "../explorations/playAudioInSequence/Inferno"
-    tierGuideFile = "../explorations/playAudioInSequence/Inferno/tierGuide.yaml"
-    grammaticalTermsFile = "../explorations/playAudioInSequence/Inferno/abbreviations.txt"
+    projectDirectory = "../testTextPyData/Inferno"
+    tierGuideFile = "../testTextPyData/Inferno/tierGuide.yaml"
+    grammaticalTermsFile = "../testTextPyData/Inferno/abbreviations.txt"
     ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
     ae.determineStartAndEndTimes()
     times = ae.startStopTable
@@ -225,7 +229,7 @@ def test_Inferno(display):
 
     htmlText = text.toHTML()
     if (display):
-        filename = "../explorations/playAudioInSequence/Inferno/inferno-threeLines.html"
+        filename = "../testTextPyData/Inferno/inferno-threeLines.html"
         f = open(filename, "w")
         f.write(indent(htmlText))
         f.close()
@@ -234,10 +238,10 @@ def test_Inferno(display):
 # ----------------------------------------------------------------------------------------------------
 def test_AYAFW(display):
     print("--- test_AYAFW")
-    audioFilename = "../testData/Cargos.wav"
+    audioFilename = "../testData/Cargos.ogg"
     elanXmlFilename = "../testTextPyData/AYAFW/AYAFW.eaf"
     targetDirectory = "../testTextPyData/AYAFW/Audio"
-    soundFile = os.path.join(targetDirectory, "Cargos.wav")
+    soundFile = os.path.join(targetDirectory, "Cargos.ogg")
     projectDirectory = "../testTextPyData/AYAFW"
     tierGuideFile = "../testTextPyData/AYAFW/tierGuide.yaml"
     grammaticalTermsFile = "../testTextPyData/AYAFW/abbreviations.txt"
@@ -265,10 +269,10 @@ def test_AYAFW(display):
 # ----------------------------------------------------------------------------------------------------
 def test_Merchant(display):
     print("--- test_Merchant")
-    audioFilename = "../testData/Cargos.wav"
+    audioFilename = "../testData/Cargos.ogg"
     elanXmlFilename = "../testTextPyData/JITZ/JITZ.eaf"
     targetDirectory = "../testTextPyData/JITZ/audio"
-    soundFile = os.path.join(targetDirectory, "Cargos.wav")
+    soundFile = os.path.join(targetDirectory, "Cargos.ogg")
     projectDirectory = "../testTextPyData/JITZ"
     tierGuideFile = "../testTextPyData/JITZ/tierGuide.yaml"
     grammaticalTermsFile = "../testTextPyData/JITZ/grammaticalTerms.txt"
@@ -305,10 +309,10 @@ def test_Merchant(display):
 # ----------------------------------------------------------------------------------------------------
 def test_Jagpossum(display):
     print("--- test_Jagpossum")
-    audioFilename = "../testData/Cargos.wav"
+    audioFilename = "../testData/Cargos.ogg"
     elanXmlFilename = "../testTextPyData/Jagpossum/Jagpossum.eaf"
     targetDirectory = "../testTextPyData/Jagpossum/audio"
-    soundFile = os.path.join(targetDirectory, "Cargos.wav")
+    soundFile = os.path.join(targetDirectory, "Cargos.ogg")
     projectDirectory = "../testTextPyData/Jagpossum"
     tierGuideFile = "../testTextPyData/Jagpossum/tierGuide.yaml"
     grammaticalTermsFile = "../testTextPyData/Jagpossum/abbreviations.txt"
@@ -344,10 +348,10 @@ def test_Jagpossum(display):
 # ----------------------------------------------------------------------------------------------------
 def test_Sanchizo(display):
     print("--- test_Sanchizo")
-    audioFilename = "../testData/Cargos.wav"
+    audioFilename = "../testData/Cargos.ogg"
     elanXmlFilename = "../testTextPyData/Sanchizo/Sanchizo.eaf"
     targetDirectory = "../testTextPyData/Sanchizo/audio"
-    soundFile = os.path.join(targetDirectory, "Cargos.wav")
+    soundFile = os.path.join(targetDirectory, "Cargos.ogg")
     projectDirectory = "../testTextPyData/Sanchizo"
     tierGuideFile = "../testTextPyData/Sanchizo/tierGuide.yaml"
     grammaticalTermsFile = "../testTextPyData/Sanchizo/abbreviations.txt"
@@ -384,10 +388,10 @@ def test_Sanchizo(display):
 # ----------------------------------------------------------------------------------------------------
 def test_Caterpillar(display):
     print("--- test_Caterpillar")
-    audioFilename = "../testData/Cargos.wav"
+    audioFilename = "../testData/Cargos.ogg"
     elanXmlFilename = "../testTextPyData/Caterpillar/Caterpillar.eaf"
     targetDirectory = "../testTextPyData/Caterpillar/audio"
-    soundFile = os.path.join(targetDirectory, "Cargos.wav")
+    soundFile = os.path.join(targetDirectory, "Cargos.ogg")
     projectDirectory = "../testTextPyData/Caterpillar"
     tierGuideFile = "../testTextPyData/Caterpillar/tierGuide.yaml"
     grammaticalTermsFile = "../testTextPyData/Caterpillar/abbreviations.txt"
@@ -425,10 +429,10 @@ def test_Caterpillar(display):
 def test_Lazybones(display):
     print("--- test_Lazybones")
 
-    audioFilename = "../testData/Cargos.wav"
+    audioFilename = "../testData/Cargos.ogg"
     elanXmlFilename = "../testTextPyData/Lazybones/Lazybones.eaf"
     targetDirectory = "../testTextPyData/Lazybones/audio"
-    soundFile = os.path.join(targetDirectory, "Cargos.wav")
+    soundFile = os.path.join(targetDirectory, "Cargos.ogg")
     projectDirectory = "../testTextPyData/Lazybones"
     tierGuideFile = "../testTextPyData/Lazybones/tierGuide.yaml"
     grammaticalTermsFile = "../testTextPyData/Lazybones/abbreviations.txt"
@@ -465,10 +469,10 @@ def test_Lazybones(display):
 # ----------------------------------------------------------------------------------------------------
 def test_Zelf(display):
     print("--- test_Zelf")
-    audioFilename = "../testData/Cargos.wav"
+    audioFilename = "../testData/Cargos.ogg"
     elanXmlFilename = "../testTextPyData/Zelfmar/Zelfmar.eaf"
     targetDirectory = "../testTextPyData/Zelfmar/audio"
-    soundFile = os.path.join(targetDirectory, "Cargos.wav")
+    soundFile = os.path.join(targetDirectory, "Cargos.ogg")
     projectDirectory = "../testTextPyData/Zelfmar"
     tierGuideFile = "../testTextPyData/Zelfmar/tierGuide.yaml"
     grammaticalTermsFile = "../testTextPyData/Zelfmar/abbreviations.txt"
@@ -505,10 +509,10 @@ def test_Zelf(display):
 # ----------------------------------------------------------------------------------------------------
 def test_Prayer(display):
     print("--- test_Prayer")
-    audioFilename = "../testData/Cargos.wav"
+    audioFilename = "../testData/Cargos.ogg"
     elanXmlFilename = "../testTextPyData/Prayer_superscript/praying.eaf"
     targetDirectory = "../testTextPyData/Prayer_superscript/audio"
-    soundFile = os.path.join(targetDirectory, "Cargos.wav")
+    soundFile = os.path.join(targetDirectory, "Cargos.ogg")
     projectDirectory = "../testTextPyData/Prayer_superscript"
     tierGuideFile = "../testTextPyData/Prayer_superscript/tierGuide.yaml"
     grammaticalTermsFile = "../testTextPyData/Prayer_superscript/grammaticalTerms.txt"

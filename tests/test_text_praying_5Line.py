@@ -11,10 +11,10 @@ pd.set_option('display.width', 1000)
 #----------------------------------------------------------------------------------------------------
 
 def createText():
-	audioFilename = "praying.wav"
+	audioFilename = "../testData/Cargos.ogg"
 	elanXmlFilename="../testData/praying_5Line/praying.eaf"
 	targetDirectory = "../testData/praying_5Line/audio"
-	soundFile = os.path.join(targetDirectory,audioFilename)
+	soundFile = os.path.join(targetDirectory,"Cargos.ogg")
 	projectDirectory="../testData/praying_5Line"
 	tierGuideFile="../testData/praying_5Line/tierGuide.yaml"
 	grammaticalTermsFile="../testData/praying_5Line/grammaticalTerms.txt"

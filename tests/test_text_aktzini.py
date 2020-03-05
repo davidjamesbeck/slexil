@@ -48,10 +48,10 @@ def test_toHTML(display):
 # 	text.getTable(0)
 
 	htmlText = text.toHTML()
-	filename = "aktzini.html"
-	f = open(filename, "w")
-	f.write(indent(htmlText))
-	f.close()
+	# filename = "aktzini.html"
+	# f = open(filename, "w")
+	# f.write(indent(htmlText))
+	# f.close()
 
 	if(display):
 		os.system("open %s" % filename)

@@ -45,7 +45,10 @@ HTMLFILE = ""
 # ----------------------------------------------------------------------------------------------------
 # the webapp requires a PROJECTS_DIRECTORY in the current working directory
 #
-assert (os.path.exists(PROJECTS_DIRECTORY))
+try:
+    assert (os.path.exists(PROJECTS_DIRECTORY))
+except AssertionError:
+    os.mkdir(PROJECTS_DIRECTORY)
 
 # ----------------------------------------------------------------------------------------------------
 
@@ -662,6 +665,7 @@ def setTitle(n_clicks, newTitle):
     print("=== set project title")
     print("=== enable next button in sequence (upload .eaf file)")
     newTitle = newTitle.strip()
+    newTitle = newTitle.replace(" ","_")
     return newTitle, 0, 0
 
 

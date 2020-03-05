@@ -127,7 +127,10 @@ def test_extractAudio():
     directory = os.path.dirname(os.path.abspath(filename))
     fullPath = os.path.join(directory, soundFileURI)
     print("fullPath: %s" % fullPath)
-    assert(os.path.exists(fullPath))
+    try:
+        assert(os.path.exists(fullPath))
+    except AssertionError as e:
+        raise Exception(fullPath) from e
 
 #----------------------------------------------------------------------------------------------------
 def test_loco_toHTML(displayPage=False, sampleOfLinesOnly=True):

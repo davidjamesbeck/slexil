@@ -14,7 +14,7 @@ pd.set_option('display.width', 1000)
 # ----------------------------------------------------------------------------------------------------
 
 def createText():
-    audioFilename = "SJQ-2009_Cruz.wav"
+    audioFilename = "../testData/Cargos.ogg"
     print("--- testing normal file")
     elanXmlFilename = "../infernoDemo/inferno-threeLines.eaf"
     validFile = validate_EAF(elanXmlFilename)
@@ -29,7 +29,7 @@ def createText():
     if not validFile:
         print("=== failed to validate file with tags")
     targetDirectory = "../testData/praying/audio"
-    soundFile = os.path.join(targetDirectory, audioFilename)
+    soundFile = os.path.join(targetDirectory, "Cargos.ogg")
     projectDirectory = "../testData/praying"
     ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
     ae.determineStartAndEndTimes()
@@ -89,10 +89,10 @@ def test_for_HTML_tags(display):
     assert (list(tbl['count']) == [9, 9, 111, 111])
 
     htmlText = text.toHTML()
-    filename = "praying.html"
-    f = open(filename, "w")
-    f.write(indent(htmlText))
-    f.close()
+    # filename = "praying.html"
+    # f = open(filename, "w")
+    # f.write(indent(htmlText))
+    # f.close()
 
     if (display):
         os.system("open %s" % filename)

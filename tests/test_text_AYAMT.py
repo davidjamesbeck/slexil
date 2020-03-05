@@ -16,10 +16,10 @@ def runTests(display=False):
     test_toHTML(display)
 
 def createText():
-    audioFilename = "AYAMT-32bit.wav"
+    audioFilename = "../testData/Cargos.ogg"
     elanXmlFilename="../testData/AYAMT/AYAMT.eaf"
     targetDirectory = "../testData/AYAMT/audio"
-    soundFile = os.path.join(targetDirectory,audioFilename)
+    soundFile = os.path.join(targetDirectory,"Cargos.ogg")
     ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
     ae.determineStartAndEndTimes()
     times = ae.startStopTable

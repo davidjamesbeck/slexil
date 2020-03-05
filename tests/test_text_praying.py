@@ -11,10 +11,10 @@ pd.set_option('display.width', 1000)
 #----------------------------------------------------------------------------------------------------
 
 def createText():
-	audioFilename = "SJQ-2009_Cruz.wav"
+	audioFilename = "../testData/Cargos.ogg"
 	elanXmlFilename="../testData/praying/praying.eaf"
 	targetDirectory = "../testData/praying/audio"
-	soundFile = os.path.join(targetDirectory,audioFilename)
+	soundFile = os.path.join(targetDirectory,"Cargos.ogg")
 	projectDirectory="../testData/praying"
 	ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
 	ae.determineStartAndEndTimes()

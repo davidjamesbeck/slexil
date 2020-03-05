@@ -11,6 +11,10 @@ def runTests():
     test_makestartStopTable()
 
 def test_makestartStopTable():
+    try:
+        assert(os.path.exists("../testData/inferno-threeLines/audio"))
+    except AssertionError:
+        os.mkdir("../testData/inferno-threeLines/audio")
 
     print("--- test_makestartStopTable")
     ea = AudioExtractor("../testData/inferno-threeLines/inferno-threeLines.wav",

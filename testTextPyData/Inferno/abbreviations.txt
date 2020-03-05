@@ -1,0 +1,10 @@
+def
+masc
+sg
+fem
+dat
+ind
+rem.past 
+indef
+impf
+partic

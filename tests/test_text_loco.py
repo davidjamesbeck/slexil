@@ -16,10 +16,10 @@ def runTests(display=False):
 	test_toHTML(display)
 
 def createText():
-	audioFilename = "SJQ-2009_Cruz.wav"
+	audioFilename = "../testData/Cargos.ogg"
 	elanXmlFilename="../testData/loco/loco.eaf"
 	targetDirectory = "../testData/loco/audio"
-	soundFile = os.path.join(targetDirectory,audioFilename)
+	soundFile = os.path.join(targetDirectory,"Cargos.ogg")
 	projectDirectory="../testData/loco"
 	tierGuideFile="../testData/loco/tierGuide.yaml"
 	grammaticalTermsFile="../testData/loco/grammaticalTerms.txt"

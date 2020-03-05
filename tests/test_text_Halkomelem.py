@@ -15,14 +15,14 @@ def runTests(display=False):
 	test_AMCuervo(display)
 
 def test_AMCuervo(display):
-	audioFilename = "Cuervo.wav"
+	audioFilename = "../testData/Cargos.ogg"
 	elanXmlFilename="newcuervo.eaf"
 	targetDirectory = "../testTextPyData/Cuervo/audio"
-	soundFile = os.path.join(targetDirectory,audioFilename)
+	soundFile = os.path.join(targetDirectory,"Cargos.ogg")
 	projectDirectory="../testTextPyData/Cuervo"
 	tierGuideFile="../testTextPyData/Cuervo/tierGuide.yaml"
 	elanFile = os.path.join(projectDirectory,elanXmlFilename)
-	ae = AudioExtractor(soundFile, elanFile, targetDirectory)
+	ae = AudioExtractor(audioFilename, elanFile, targetDirectory)
 	ae.determineStartAndEndTimes()
 	ae.extract()
 	times = ae.startStopTable
@@ -37,10 +37,10 @@ def test_AMCuervo(display):
 	text.getLineAsTable(0)
 
 	htmlText = text.toHTML()
-	filename = "../testTextPyData/Cuervo/CuervoNew.html"
-	f = open(filename, "w")
-	f.write(indent(htmlText))
-	f.close()
+	# filename = "../testTextPyData/Cuervo/CuervoNew.html"
+	# f = open(filename, "w")
+	# f.write(indent(htmlText))
+	# f.close()
 
 	if(display):
 		os.system("open %s" % filename)

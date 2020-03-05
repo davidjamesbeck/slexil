@@ -16,10 +16,10 @@ def runTests():
 	test_toHTML(display=False)
 
 def createText():
-	audioFilename = "Chicahuaxtla Triqui - La serpiente emplumada 04-28-2016.wav"
+	audioFilename = "../testData/Cargos.ogg"
 	elanXmlFilename="../testData/featherSnake/featherSnake.eaf"
 	targetDirectory = "../testData/featherSnake/audioPhrases"
-	soundFile = os.path.join(targetDirectory,audioFilename)
+	soundFile = os.path.join(targetDirectory,"Cargos.ogg")
 	ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
 	ae.determineStartAndEndTimes()
 	times = ae.startStopTable

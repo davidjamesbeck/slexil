@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ANNOTATION_DOCUMENT AUTHOR="" DATE="2020-02-22T15:07:34-07:00" FORMAT="3.0" VERSION="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.mpi.nl/tools/elan/EAFv3.0.xsd">
     <HEADER MEDIA_FILE="" TIME_UNITS="milliseconds">
-        <MEDIA_DESCRIPTOR MEDIA_URL="file:///Users/David/OpenSource/github/slexil/testData/AYAMT/AYAMT.wav" MIME_TYPE="audio/x-wav" RELATIVE_MEDIA_URL="./AYAMT.wav"/>
+        <MEDIA_DESCRIPTOR MEDIA_URL="file:///Users/David/OpenSource/github/slexil/testData/AYAMT/AYAMT.ogg" MIME_TYPE="audio/x-wav" RELATIVE_MEDIA_URL="./AYAMT.ogg"/>
         <PROPERTY NAME="URN">urn:nl-mpi-tools-elan-eaf:20138f23-2a8c-4790-9788-690d7a1cfdb8</PROPERTY>
         <PROPERTY NAME="lastUsedAnnotationId">196</PROPERTY>
     </HEADER>
