@@ -37,19 +37,19 @@
     <TIER LINGUISTIC_TYPE_REF="phonemic" PARENT_REF="italianSpeech" TIER_ID="morphemes">
         <ANNOTATION>
             <REF_ANNOTATION ANNOTATION_ID="a5" ANNOTATION_REF="a1">
-                <ANNOTATION_VALUE>en=il	mezzo	de=il	cammin	di	nostr-a	vita</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>en=il	mezz–o	de=il	cammin–Ø	di	nostr–a	vit–a</ANNOTATION_VALUE>
              </REF_ANNOTATION>
          </ANNOTATION>
 
         <ANNOTATION>
             <REF_ANNOTATION ANNOTATION_ID="a6" ANNOTATION_REF="a2">
-                <ANNOTATION_VALUE>mi	ritrov–ai	per	una	selva	oscur–a</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>mi	ritrov–ai	per	una	selv–a	oscur–a</ANNOTATION_VALUE>
              </REF_ANNOTATION>
          </ANNOTATION>
 
         <ANNOTATION>
             <REF_ANNOTATION ANNOTATION_ID="a7" ANNOTATION_REF="a3">
-                <ANNOTATION_VALUE>ché	la	diritt–a	via	era	smarr–it–a.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>ché	la	diritt–a	vi–a	era	smarr–it–a</ANNOTATION_VALUE>
              </REF_ANNOTATION>
          </ANNOTATION>
 
@@ -58,22 +58,22 @@
     <TIER DEFAULT_LOCALE="tr" LINGUISTIC_TYPE_REF="translation" PARENT_REF="italianSpeech" TIER_ID="morphemeGloss">
         <ANNOTATION>
             <REF_ANNOTATION ANNOTATION_ID="a9" ANNOTATION_REF="a5">
-                <ANNOTATION_VALUE>in=DEF:MASC:SG	middle-MASC	of=DEF:MASC:SG	journey-MASC	of	our-FEM:SG	life-FEM</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>in=DEF:MASC:SG	middle-MASC:SG	of=DEF:MASC:SG	journey–MASC:SG	of	our-FEM:SG	life-FEM</ANNOTATION_VALUE>
             </REF_ANNOTATION>
         </ANNOTATION>
 
         <ANNOTATION>
             <REF_ANNOTATION ANNOTATION_ID="a10" ANNOTATION_REF="a6">
-              <ANNOTATION_VALUE>I:DAT	found–1SG:INDEF:REM.PAST	for	INDEF:FEM:SG	forest-FEM	dark–FEM:SG</ANNOTATION_VALUE>
+              <ANNOTATION_VALUE>I:DAT	found–1SG:INDEF:REM:PAST	for	INDEF:FEM:SG	forest-FEM	dark–FEM:SG</ANNOTATION_VALUE>
             </REF_ANNOTATION>
         </ANNOTATION>
 
         <ANNOTATION>
             <REF_ANNOTATION ANNOTATION_ID="a11" ANNOTATION_REF="a7">
-              <ANNOTATION_VALUE>that	DEF:FEM:SG	straight–FEM:SG	path-FEM	be:3SG:IMPF	lose–PARTIC–FEM:SG</ANNOTATION_VALUE>
+              <ANNOTATION_VALUE>that	def:FEM:SG	straight-FEM:SG	path-FEM	be:3SG:IMPF	lose–PARTIC–FEM:SG</ANNOTATION_VALUE>
             </REF_ANNOTATION>
         </ANNOTATION>
- 
+
      </TIER>
 
 
@@ -93,12 +93,6 @@
         <ANNOTATION>
             <REF_ANNOTATION ANNOTATION_ID="a15" ANNOTATION_REF="a3">
                 <ANNOTATION_VALUE>For the straightforward pathway had been lost.</ANNOTATION_VALUE>
-            </REF_ANNOTATION>
-        </ANNOTATION>
-
-        <ANNOTATION>
-            <REF_ANNOTATION ANNOTATION_ID="a16" ANNOTATION_REF="a4">
-                <ANNOTATION_VALUE>Daylight is up there in the upriver country but how can we manage to get it?</ANNOTATION_VALUE>
             </REF_ANNOTATION>
         </ANNOTATION>
 

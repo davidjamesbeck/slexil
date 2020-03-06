@@ -81,6 +81,7 @@ def downloadZip(filename):
 # ----------------------------------------------------------------------------------------------------
 @app.server.route('/PROJECTS/<path:urlpath>')
 def downloadProjectZipFile(urlpath):
+    print("=== entering download AIP file app.server.route")
     fullPath = os.path.join("PROJECTS", urlpath)
     dirname = os.path.dirname(fullPath)
     filename = os.path.basename(fullPath)
@@ -894,6 +895,7 @@ def createWebPage(eafFileName, projectDirectory, grammaticalTermsFileName, tierG
 
 # ----------------------------------------------------------------------------------------------------
 def createZipFile(projectDir, projectTitle):
+    print("=== entering createZipFile")
     currentDirectoryOnEntry = os.getcwd()
     os.chdir(projectDir)
     print(projectDir)
