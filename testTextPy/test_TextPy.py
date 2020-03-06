@@ -32,6 +32,37 @@ def runTests(display=False):
     test_Cuervo_errors(display)
 
 # ----------------------------------------------------------------------------------------------------
+def test_GhostWagon(display):
+    '''tests .eaf file with empty and missing line or translation annotations'''
+
+    print("--- test_GhostWagon")
+
+    audioFilename = "../testTextPyData/GhostInWagon/GhostInWagon.ogg"
+    elanXmlFilename = "../testTextPyData/GhostInWagon/GhostInWagon.eaf"
+    targetDirectory = "../testTextPyData/GhostInWagon/audio"
+    soundFile = os.path.join(targetDirectory, "GhostInWagon.ogg")
+    projectDirectory = "../testTextPyData/GhostInWagon"
+    tierGuideFile = "../testTextPyData/Cuervo/tierGuide.yaml"
+    ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
+    ae.determineStartAndEndTimes()
+    times = ae.startStopTable
+
+    text = Text(elanXmlFilename,
+                soundFile,
+                grammaticalTermsFile=None,
+                tierGuideFile=tierGuideFile,
+                projectDirectory=projectDirectory)
+
+    htmlText = text.toHTML()
+    if (display):
+        filename = "../testTextPyData/GhostInWagon/GhostInWagon.html"
+        f = open(filename, "w")
+        f.write(indent(htmlText))
+        f.close()
+        os.system("open %s" % filename)
+
+
+# ----------------------------------------------------------------------------------------------------
 def test_Cuervo_errors(display):
     '''tests .eaf file with empty and missing line or translation annotations'''
 

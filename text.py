@@ -57,6 +57,7 @@ class Text:
 		self.xmlFilename = xmlFilename
 		self.soundFileName = soundFileName
 		self.audioPath = "audio"
+		self.audioFileType = self.soundFileName[-3:]
 		self.grammaticalTermsFile = grammaticalTermsFile
 		self.tierGuideFile = tierGuideFile
 		self.projectDirectory = projectDirectory
@@ -220,7 +221,7 @@ class Text:
 						#lineID = tbl.ix[0]['ANNOTATION_ID']
 						lineID = tbl.iloc[0][tbl.columns.values.tolist().index('ANNOTATION_ID')]
 						with htmlDoc.tag("div", klass="line-sidebar"):
-							line.htmlLeadIn(htmlDoc, self.audioPath, )
+							line.htmlLeadIn(htmlDoc, self.audioPath, self.audioFileType)
 						line.toHTML(htmlDoc)
 				with htmlDoc.tag("div", klass="spacer"):
 					htmlDoc.asis('')

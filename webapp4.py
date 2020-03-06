@@ -88,7 +88,10 @@ def downloadProjectZipFile(urlpath):
         print("=== populate textArea from %s" % urlpath)
         return flask.send_file(os.path.join(fullPath))
     elif urlpath[-3:] == "wav":
-        print("=== call audio file from %s" % urlpath)
+        print("=== call wav file from %s" % urlpath)
+        return flask.send_file(os.path.join(fullPath))
+    elif urlpath[-3:] == "ogg":
+        print("=== call ogg file from %s" % urlpath)
         return flask.send_file(os.path.join(fullPath))
     elif urlpath[-2:] == "js":
         print("=== call javascript file from %s" % urlpath)
@@ -905,7 +908,7 @@ def createZipFile(projectDir, projectTitle):
     print(projectDir)
 
     audioDir = "audio"
-    filesToSave = [os.path.join("audio", f) for f in os.listdir(audioDir) if f.endswith('.wav')]
+    filesToSave = [os.path.join("audio", f) for f in os.listdir(audioDir)] #if f.endswith('.wav')]
     filesToSave.insert(0, "%s.html" % projectTitle)
 
     # zipfile is named for project

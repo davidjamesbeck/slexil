@@ -275,13 +275,13 @@ class IjalLine:
         return (self.morphemeSpacing)
 
     # ----------------------------------------------------------------------------------------------------
-    def htmlLeadIn(self, htmlDoc, audioDirectory):
+    def htmlLeadIn(self, htmlDoc, audioDirectory, audioFileType):
 
         text = "%d)" % (self.lineNumber + 1)
         htmlDoc.text(text)
         lineID = self.rootID
-        audioTag = '<audio id="%s"><source src="%s/%s.wav"/></audio>' % (
-            self.getAnnotationID(), audioDirectory, self.getAnnotationID())
+        audioTag = '<audio id="%s"><source src="%s/%s.%s"/></audio>' % (
+            self.getAnnotationID(), audioDirectory, self.getAnnotationID(),audioFileType)
         htmlDoc.asis(audioTag)
         #         imageURL = "https://www.americanlinguistics.org/wp-content/uploads/speaker.png"
         onError = "this.style.display=\'none\'"
