@@ -618,7 +618,7 @@ def createWebPageCallback(n_clicks, soundFileName, eafFileName, projectDirectory
         with open(errorLog) as elog:
             logContents = elog.read()
             if "WARNING" in logContents:
-                return (webPageAt, 0, "Wrote file. Check error log for formatting issues.","previewon")
+                return (webpageAt, 0, "Wrote file. Check error log for formatting issues.","previewon")
 
     createZipFile(projectDirectory, projectTitle)
     # newButtonState = 0
