@@ -610,9 +610,9 @@ def createWebPageCallback(n_clicks, soundFileName, eafFileName, projectDirectory
     webpageAt = os.path.join(projectDirectory, "%s.html" % projectTitle)
     absolutePath = os.path.abspath(webpageAt)
     print("webpage: %s" % webpageAt)
-    file = open(absolutePath, "w")
-    file.write(htmlDoc)
-    file.close()
+    with open(absolutePath, "w") as file:
+        file.write(htmlDoc)
+    # file.close()
     errorLog = os.path.abspath(os.path.join(projectDirectory, "ERRORS.log"))
     if os.path.isfile(errorLog):
         with open(errorLog) as elog:
