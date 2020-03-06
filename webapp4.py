@@ -451,6 +451,7 @@ def on_eafUpload(contents, name, projectDirectory):
         schema = xmlschema.XMLSchema('http://www.mpi.nl/tools/elan/EAFv3.0.xsd')
         validXML = schema.is_valid(filename)
         eaf_validationMessage = "👍︎ File %s (%d bytes) is valid." % (name, fileSize)
+        print("=== enabling next sequence (Upload audio)")
         if (not validXML):
             try:
                 schema.validate(filename)
@@ -617,22 +618,13 @@ def createWebPageCallback(n_clicks, soundFileName, eafFileName, projectDirectory
         with open(errorLog) as elog:
             logContents = elog.read()
             if "WARNING" in logContents:
-                return ("wrote file", 1, "Wrote file. Check error log for formatting issues.")
+                return ("wrote file", 1, "Wrote file. Check error log for formatting issues.","previewoff")
 
     createZipFile(projectDirectory, projectTitle)
     # newButtonState = 0
     print("=== activating hyperLink to %s" % webpageAt)
     print("=== leaving web page callback")
     return (webpageAt, 0, "", "previewon")
-
-
-# ----------------------------------------------------------------------------------------------------
-# def open_preview(source):
-#     print("=== entering open preview")
-#     currentDirectoryOnEntry = os.getcwd()
-#     filenameFullPath = os.path.join(currentDirectoryOnEntry, source)
-#     print("displaying page %s" %filenameFullPath)
-#     webbrowser.open_new_tab("file://%s" % filenameFullPath)
 
 # ----------------------------------------------------------------------------------------------------
 @app.callback(
@@ -813,7 +805,6 @@ def saveTierMappingSelection(n_clicks, speechTier, transcription2Tier, morphemeT
     print("   translation2Tier: %s" % translation2Tier)
     saveTierGuide(projectDirectory, speechTier, transcription2Tier, morphemeTier, morphemeGlossTier, translationTier,
                   translation2Tier)
-    print("=== enabling next sequence (Upload audio)")
     return ("👍 Your selections have been saved.", "tierGuide.yaml", 0)
 
 
