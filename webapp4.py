@@ -81,7 +81,7 @@ def downloadZip(filename):
 # ----------------------------------------------------------------------------------------------------
 @app.server.route('/PROJECTS/<path:urlpath>')
 def downloadProjectZipFile(urlpath):
-    print("=== entering download AIP file app.server.route")
+    print("=== entering download ZIP file app.server.route")
     fullPath = os.path.join("PROJECTS", urlpath)
     dirname = os.path.dirname(fullPath)
     filename = os.path.basename(fullPath)
@@ -615,17 +615,18 @@ def createWebPageCallback(n_clicks, soundFileName, eafFileName, projectDirectory
         file.write(htmlDoc)
     # file.close()
     errorLog = os.path.abspath(os.path.join(projectDirectory, "ERRORS.log"))
+    errorMessage = ''
     if os.path.isfile(errorLog):
         with open(errorLog) as elog:
             logContents = elog.read()
             if "WARNING" in logContents:
-                return (webpageAt, 0, "Wrote file. Check error log for formatting issues.","previewon")
+                errorMessage = "Wrote file. Check error log for formatting issues."
 
     createZipFile(projectDirectory, projectTitle)
     # newButtonState = 0
     print("=== activating hyperLink to %s" % webpageAt)
     print("=== leaving web page callback")
-    return (webpageAt, 0, "", "previewon")
+    return (webpageAt, 0, errorMessage, "previewon")
 
 # ----------------------------------------------------------------------------------------------------
 @app.callback(
