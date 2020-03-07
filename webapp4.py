@@ -133,7 +133,7 @@ def create_eafUploaderTab():
     children = [html.Div("Add .eaf file", className="stepTitle"),
                 html.Div([create_eafUploader()], className="dragDropArea"),
                 # html.Div("*Required",className="requiredLabel"),
-                html.Div("This can take a minute or two for large texts.", id="eafuploadStatus",
+                dcc.Loading("This can take a minute or two for large texts.", id="eafuploadStatus",
                          className="timewarning")
                 ]
 
@@ -154,8 +154,8 @@ def create_soundFileUploader():
 def create_soundFileUploaderTab():
     children = [html.Div("Add sound file", className="stepTitle"),
                 html.Div([create_soundFileUploader()], className="dragDropArea"),
-                html.Div(children="This can take a minute or two for large files.", id="soundUploadStatus",
-                         className="timewarning")  # ,
+                dcc.Loading(children="This can take a minute or two for large files.", id="soundUploadStatus",
+                         className="timewarning")
                 ]
 
     div = html.Div(children=children, id='soundFileUploaderDiv', className="selectionBox")
@@ -479,8 +479,6 @@ def extractSoundPhrases(soundFileName, eafFileName, projectDirectory):
 @app.callback([Output('soundUploadStatus', 'children'),
                Output('soundUploadStatus', 'className'),
                Output('sound_filename_hiddenStorage', 'children')],
-              # Output('upload-grammaticalTerms-file', 'disabled'),
-              # Output('createAndDisplayWebPageButton', 'disabled')],
               [Input('upload-sound-file', 'contents')],
               [State('upload-sound-file', 'filename'),
                State('eaf_filename_hiddenStorage', 'children'),
@@ -491,9 +489,6 @@ def on_soundUpload(contents, name, eafilename, projectDirectory):
     print("=== on_soundUpload")
     data = contents.encode("utf8").split(b";base64,")[1]
     filename = os.path.join(projectDirectory, name)
-    # if not filename[-4:] == ".wav" and not filename[-4:] == ".WAV":
-    #     sound_validationMessage = "Please select a WAVE (.wav) file."
-    #     return sound_validationMessage,"timewarning", "", 1, 1
     print("=== opening file")
     with open(filename, "wb") as fp:
         fp.write(base64.decodebytes(data))
