@@ -31,7 +31,6 @@ import dash_core_components as dcc
 import dash_html_components as html
 import flask
 import xmlschema
-import webbrowser
 from dash.dependencies import Input, Output, State
 from shutil import copy
 from audioExtractor import *
@@ -198,7 +197,7 @@ def create_webPageCreationTab():
 
     previewLink = html.A('open preview', id="previewLink", href='', target='_blank')
     createWebpageStatus = html.Div(id="createWebPageStatus", children=[previewLink, "  in a new tab"],
-                                   className="previewoff")  # , style={'display': 'none'})
+                                   className="previewoff")
 
     errorMessages = html.Span(id="createPageErrorMessages", children="", className="warningOff")
 
@@ -638,7 +637,7 @@ def setCreatePageErrorMessages(errorMessage):
     if len(errorMessage) == 0:
         className = 'warningOff'
     else:
-        className = 'warningOn'
+        className = 'formatWarningOn'
     return (errorMessage, className)
 
 
@@ -937,10 +936,10 @@ def createZipFile(projectDir, projectTitle):
 
 # ----------------------------------------------------------------------------------------------------
 # enable these lines for running from bash and python
-# if __name__ == "__main__":
-#     app.run_server(host='0.0.0.0', port=60041)
+if __name__ == "__main__":
+    app.run_server(host='0.0.0.0', port=60041)
 
 # enable these lines if running with gunicorn
-if __name__ == "__main__":
-    server = app.server
-    app.run()
+# if __name__ == "__main__":
+#     server = app.server
+#     app.run()
