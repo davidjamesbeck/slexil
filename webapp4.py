@@ -357,7 +357,7 @@ def createTierMappingMenus(eafFilename):
                      html.Td(createPulldownMenu("transcription2", tierChoices))]),
             html.Tr([html.Td("morphological analysis"), html.Td("taŋʔeː–š’a̰ʔáː–maːɬ=tsá̰"),
                      html.Td(createPulldownMenu("morpheme", tierChoices))]),
-            html.Tr([html.Td("morpheme glosses"),
+            html.Tr([html.Td("morphemic glosses"),
                      html.Td(children=[
                          html.Div("basin–", style={'display': 'inline-block'}),
                          html.Div("shine", style={'display': 'inline-block'}),

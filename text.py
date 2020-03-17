@@ -107,20 +107,9 @@ class Text:
 		return(tbl)
 
 	def makeStartStopTable(self, annotations):
-		# 		ae = AudioExtractor(self.soundFileName, self.xmlFilename, self.projectDirectory)
-		# 		ae.determineStartAndEndTimes()
-		# 		times = ae.startStopTable
-		# 		annotations = times.split('\n')
 		self.audioTable = []
 		startStopTimes = "window.annotations=["
 		for i,annotation in enumerate(annotations):
-			# 			 if i == 0:
-			# 					continue
-			# 			 elif len(annotation) == 0:
-			# 					continue
-			# 			 values = annotation.split(',')
-			# 			 id = values[0]
-			#start = int(values[1])/1000
 			start = annotation[0]
 			end = annotation[1]
 			entry = "{ 'id' : '%s', 'start' : '%s', 'end' : '%s'}," %(str(i+1),start,end)
@@ -208,8 +197,6 @@ class Text:
 				for i in lineNumbers:
 					if(not self.quiet):
 						print("line %d/%d" % (i, self.lineCount))
-					#line = IjalLine(self.xmlDoc, i, self.tierGuide,self.audioTable[i], self.grammaticalTerms)
-					#line = IjalLine(self.xmlDoc, i, self.tierGuide, str(i+1), self.grammaticalTerms)
 					line = IjalLine(self.xmlDoc, i, self.tierGuide, self.grammaticalTerms)
 					line.parse()
 					start = line.getStartTime()

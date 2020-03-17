@@ -5,6 +5,7 @@ import soundfile as soundfile
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
+# import dash_bootstrap_components as dbc
 import flask
 import xmlschema
 from dash.dependencies import Input, Output, State
@@ -85,17 +86,6 @@ def create_componentsUploaderTab():
 
 # ----------------------------------------------------------------------------------------------------
 app.layout = html.Div(create_componentsUploaderTab())
-
-# ----------------------------------------------------------------------------------------------------
-@app.callback(Output('soundUploadStatus_hiddenStorage', 'contents'),
-              [Input('upload-sound-file', 'loading_state')])
-def checkLoadingState(upLoadState):
-    print("@@@@ checking loading state")
-    if upLoadState == True:
-        print("@@@@ uploading")
-        return False
-    else:
-        return True
 
 # ----------------------------------------------------------------------------------------------------
 @app.callback([Output('eafuploadStatus', 'children'),
