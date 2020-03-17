@@ -25,17 +25,12 @@ The Python packages are listed in the file requirement.tx and can be batch insta
 
 In order to be run on an user's computer, the main Python file, webapp4.py, must be edited. Specifically, the lines at the end of the file (currently lines 932–941) need to be altered so that the correct __main__ method is run. This is dont by commenting out the lines following "enable these lines if running with gunicorn" and uncommenting the lines following "enable these lines for running from bash and python" so that the code looks like this:
 
-\# enable these lines for running from bash and python
+        \# enable these lines for running from bash and python
+        if __name__ == "__main__":
+                app.run_server(host='0.0.0.0', port=60041)
 
-if __name__ == "__main__":
-
-        app.run_server(host='0.0.0.0', port=60041)
-
-\# enable these lines if running with gunicorn
-
-\# if __name__ == "__main__":
-
-\#     server = app.server
-
-\#     app.run()
+        \# enable these lines if running with gunicorn
+        \# if __name__ == "__main__":
+        \#     server = app.server
+        \#     app.run()
 
