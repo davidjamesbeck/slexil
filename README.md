@@ -1,7 +1,7 @@
 # slexil
-Software  Linking Elan Xml to Illuminated Language
+Software Linking Elan Xml to Illuminated Language (SLEXIL)
 
-This software is a webapp designed to convert ELAN time-aligned transcription files to animated HTML that allows for continuous highlighted or line by line playback of texts. Texts can be prepared in 2 line (text-translation) or 4 line (text, interlinearization, translation) format, and supports the addition of an additional transcription line and a translation into a second language. The software runs on a remote server and is accessed by users via a web-browser and ordinary internet connection. An instance of SLEXIl is currently running at slexil.artsrn.ualberta.ca
+This software is a webapp designed to convert ELAN time-aligned transcription files to animated HTML that allows for continuous highlighted or line by line playback of texts. Texts can be prepared in 2 line (text-translation) or 4 line (text, interlinearization, translation) format, and supports the addition of an additional transcription line and a translation into a second language. The software runs on a remote server and is accessed by users via a web-browser and ordinary internet connection. An instance of SLEXIL is currently running at slexil.artsrn.ualberta.ca
 
 Running SLEXIL offline
 
@@ -23,7 +23,7 @@ SLEXIL is designed to be run as a webapp but can also be downloaded and run on a
 
 The Python packages are listed in the file requirement.tx and can be batch installed using pip (“pip install -r requirements.txt”).
 
-In order to be run on an user's computer, the main Python file, webapp4.py, must be edited. Specifically, the lines at the end of the file (currently lines 932–941) need to be altered so that the correct __main__ method is run. This is dont by commenting out the lines following "enable these lines if running with gunicorn" and uncommenting the lines following "enable these lines for running from bash and python" so that the code looks like this:
+In order to be run on an user's computer, the main Python file, webapp4.py, must be edited. Specifically, the lines at the end of the file (currently lines 932–941) need to be altered so that the correct __main__ method is run. This is done by commenting out the lines following "enable these lines if running with gunicorn" and uncommenting the lines following "enable these lines for running from bash and python" so that the code looks like this:
 
         \# enable these lines for running from bash and python
         if __name__ == "__main__":
