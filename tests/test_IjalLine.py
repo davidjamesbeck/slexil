@@ -28,6 +28,24 @@ def runTests():
     test_inferno_TimeCodes()
     test_Ghost_TimeCodes()
     test_aktzini_TimeCodes()
+    test_HMDL_TimeCodes()
+
+# ----------------------------------------------------------------------------------------------------
+def test_HMDL_TimeCodes():
+    print("--- test_HMDL_TimeCodes")
+
+    filename = "../testData/HMDLsafe/HMDL.eaf"
+    doc = etree.parse(filename)
+    tierGuideFile = "../testData/HMDLsafe/tierGuide.yaml"
+    with open(tierGuideFile, 'r') as f:
+        tierGuide = yaml.safe_load(f)
+
+    x3 = IjalLine(doc, 1, tierGuide)
+    x3.parse()
+    tbl = x3.getTable()
+    startTime = x3.getStartTime()
+    endTime = x3.getEndTime()
+    print(startTime,endTime)
 
 # ----------------------------------------------------------------------------------------------------
 def test_aktzini_TimeCodes():

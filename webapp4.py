@@ -938,7 +938,7 @@ def createZipFile(projectDir, projectTitle):
 # ----------------------------------------------------------------------------------------------------
 # enable these lines for running from bash and python
 # if __name__ == "__main__":
-#     app.run_server(host='0.0.0.0', port=60041)
+    app.run_server(host='0.0.0.0', port=60041)
 
 # enable these lines if running with gunicorn
 if __name__ == "__main__":
