@@ -33,13 +33,11 @@ def createText():
     projectDirectory = "../testData/praying"
     ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
     ae.determineStartAndEndTimes()
-    times = ae.startStopTable
 
     text = Text(elanXmlFilename,
-                soundFile,
+                audioFilename,
                 grammaticalTermsFile="../testData/praying/grammaticalTerms.txt",
                 tierGuideFile="../testData/praying/tierGuide.yaml",
-                # startStopTable=times,
                 projectDirectory=projectDirectory,
                 quiet=True)
     return (text)

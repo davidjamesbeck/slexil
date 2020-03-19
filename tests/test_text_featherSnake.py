@@ -18,13 +18,13 @@ def runTests():
 def createText():
 	audioFilename = "../testData/Cargos.ogg"
 	elanXmlFilename="../testData/featherSnake/featherSnake.eaf"
-	targetDirectory = "../testData/featherSnake/audioPhrases"
+	targetDirectory = "../testData/featherSnake/audio"
 	soundFile = os.path.join(targetDirectory,"Cargos.ogg")
 	ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
 	ae.determineStartAndEndTimes()
 	times = ae.startStopTable
 	text = Text(elanXmlFilename,
-				soundFile,
+				audioFilename,
 				grammaticalTermsFile="../testData/featherSnake/grammaticalTerms.txt",
 				tierGuideFile="../testData/featherSnake/tierGuide.yaml",
 				projectDirectory="../testData/featherSnake",

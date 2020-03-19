@@ -28,7 +28,7 @@ def createText():
 	ae.determineStartAndEndTimes()
 
 	text = Text(elanXmlFilename,
-				soundFile,
+				audioFilename,
 				grammaticalTermsFile=grammaticalTermsFile,
 				tierGuideFile=tierGuideFile,
 				projectDirectory=projectDirectory,

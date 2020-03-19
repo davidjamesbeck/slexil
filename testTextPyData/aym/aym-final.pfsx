@@ -36,7 +36,7 @@
             <String>http://lux17.mpi.nl/aamlr/</String>
         </pref>
         <pref key="source_audio">
-            <String>///Users/David/OpenSource/github/slexil/testTextPyData/aym/Final-Edwin-historia-del-oso_no_anotado__ch1.wav</String>
+            <String>///Users/David/OpenSource/github/OldSlexilTestData/Final-Edwin-historia-del-oso_no_anotado__ch1.wav</String>
         </pref>
     </prefGroup>
     <pref key="MultiTierViewer.ActiveTierName">

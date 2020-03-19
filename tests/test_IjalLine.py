@@ -16,17 +16,89 @@ def runTests():
 
     test_buildTable()
     test_getStartStopTimes()
-    #
     test_loco_line_3()    # each morpheme and gloss are separate xml tier elements
     test_extractAudio()   # only works when LARGE AYAMT files is present
     test_loco_toHTML(False, sampleOfLinesOnly=True)
-    #
-    test_AYAMT_line_6() # morphemes and glosses are each packed into in
-    #                                # a single tab-delimited tier element
+    test_AYAMT_line_6() # morphemes and glosses are each packed into in a single tab-delimited tier element
     test_AYAMT_toHTML(False)
     test_featherSnake_toHTML(False)
     test_aktzini_toHTML()
     test_praying_toHTML(displayPage=False)
+    test_Jagpossum_TimeCodes()
+    test_inferno_TimeCodes()
+    test_Ghost_TimeCodes()
+    test_aktzini_TimeCodes()
+
+# ----------------------------------------------------------------------------------------------------
+def test_aktzini_TimeCodes():
+    print("--- test_aktzini_TimeCodes")
+
+    filename = "../testData/aktzini/18-06-03Aktzini-GA.eaf"
+    doc = etree.parse(filename)
+    tierGuideFile = "../testData/aktzini/tierGuide.yaml"
+    with open(tierGuideFile, 'r') as f:
+        tierGuide = yaml.safe_load(f)
+
+    x3 = IjalLine(doc, 1, tierGuide)
+    x3.parse()
+    tbl = x3.getTable()
+    startTime = x3.getStartTime()
+    endTime = x3.getEndTime()
+    print(startTime,endTime)
+
+# ----------------------------------------------------------------------------------------------------
+def test_Ghost_TimeCodes():
+    print("--- test_Ghost_TimeCodes")
+
+    filename = "../testTextPyData/GhostInWagon/GhostInWagon.eaf"
+    doc = etree.parse(filename)
+    tierGuideFile = "../testTextPyData/GhostInWagon/tierGuide.yaml"
+    with open(tierGuideFile, 'r') as f:
+        tierGuide = yaml.safe_load(f)
+
+    x3 = IjalLine(doc, 1, tierGuide)
+    x3.parse()
+    tbl = x3.getTable()
+    startTime = x3.getStartTime()
+    endTime = x3.getEndTime()
+    print(startTime,endTime)
+
+# ----------------------------------------------------------------------------------------------------
+def test_inferno_TimeCodes():
+    print("--- test_inferno_TimeCodes")
+
+    filename = "../testTextPyData/inferno/inferno-threeLines.eaf"
+    doc = etree.parse(filename)
+    tierGuideFile = "../testTextPyData/inferno/tierGuide.yaml"
+    with open(tierGuideFile, 'r') as f:
+        tierGuide = yaml.safe_load(f)
+
+    x3 = IjalLine(doc, 1, tierGuide)
+    x3.parse()
+    tbl = x3.getTable()
+    startTime = x3.getStartTime()
+    endTime = x3.getEndTime()
+    print(startTime,endTime)
+
+# ----------------------------------------------------------------------------------------------------
+def test_Jagpossum_TimeCodes():
+    print("--- test_Jagpossum_TimeCodes")
+
+    filename = "../testTextPyData/Jagpossum/Jagpossum.eaf"
+    doc = etree.parse(filename)
+    tierGuideFile = "../testTextPyData/Jagpossum/tierGuide.yaml"
+    with open(tierGuideFile, 'r') as f:
+        tierGuide = yaml.safe_load(f)
+
+    x3 = IjalLine(doc, 1, tierGuide)
+    x3.parse()
+    tbl = x3.getTable()
+    startTime = x3.getStartTime()
+    endTime = x3.getEndTime()
+    print(startTime,endTime)
+    # assert (startTime == 8850.0)
+    # assert (endTime == 10570.0)
+
 
 #----------------------------------------------------------------------------------------------------
 def test_buildTable():

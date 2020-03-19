@@ -40,6 +40,8 @@ class AudioExtractor:
         self.targetDirectory = targetDirectory
         filename, file_extension = os.path.splitext(audioFilename)
         self.fileType = file_extension
+        self.mtx, self.rate = read(self.audioFilename)
+        self.tbl = self.determineStartAndEndTimes()
 
     def validInputs(self):
         try:
@@ -76,24 +78,49 @@ class AudioExtractor:
         return (tbl)
 
     def extract(self, quiet=True):
-        tbl = self.determineStartAndEndTimes()
-        mtx, rate = read(self.audioFilename)
-        mtx.shape
-        mtx.shape[0] / rate  # 5812410, 2
-        samples = mtx.shape[0]
-        duration = mtx.shape[0] / rate
-        phraseCount = tbl.shape[0]
+        # tbl = self.determineStartAndEndTimes()
+        # mtx, rate = read(self.audioFilename)
+        self.mtx.shape
+        self.mtx.shape[0] / self.rate  # 5812410, 2
+        samples = self.mtx.shape[0]
+        duration = self.mtx.shape[0] / self.rate
+        phraseCount = self.tbl.shape[0]
         for i in range(phraseCount):
-            phraseID, start, end = tbl.iloc[i].tolist()[0:3]
+            # self.makePhrase(i,quiet)
+            phraseID, start, end = self.tbl.iloc[i].tolist()[0:3]
             startSeconds = start / 1000
             endSeconds = end / 1000
-            startIndex = int(round(startSeconds * rate))
-            endIndex = int(round(endSeconds * rate))
-            phrase = mtx[startIndex:endIndex, ]
+            startIndex = int(round(startSeconds * self.rate))
+            endIndex = int(round(endSeconds * self.rate))
+            phrase = self.mtx[startIndex:endIndex, ]
             sampleFilename = "%s/%s%s" % (self.targetDirectory, phraseID, self.fileType)
             if (not quiet):
                 print("--- %d) writing %d samples to %s" % (i, phrase.shape[0], sampleFilename))
-            write(sampleFilename, phrase, rate)
+            write(sampleFilename, phrase, self.rate)
+
+    # def makePhrase(self, lineno, quiet=True):
+    #     phraseID, start, end = self.tbl.iloc[lineno].tolist()[0:3]
+    #     startSeconds = start / 1000
+    #     endSeconds = end / 1000
+    #     startIndex = int(round(startSeconds * self.rate))
+    #     endIndex = int(round(endSeconds * self.rate))
+    #     phrase = self.mtx[startIndex:endIndex, ]
+    #     sampleFilename = "%s/%s%s" % (self.targetDirectory, phraseID, self.fileType)
+    #     if (not quiet):
+    #         print("--- %d) writing %d samples to %s" % (lineno+1, phrase.shape[0], sampleFilename))
+    #     write(sampleFilename, phrase, self.rate)
+
+    def makeLineAudio(self, phraseID, start, end, quiet=True):
+        print(phraseID, start, end)
+        startSeconds = start / 1000
+        endSeconds = end / 1000
+        startIndex = int(round(startSeconds * self.rate))
+        endIndex = int(round(endSeconds * self.rate))
+        phrase = self.mtx[startIndex:endIndex, ]
+        sampleFilename = "%s/%s%s" % (self.targetDirectory, phraseID, self.fileType)
+        if (not quiet):
+            print("--- %d) writing %d samples to %s" % (lineno+1, phrase.shape[0], sampleFilename))
+        write(sampleFilename, phrase, self.rate)
 
     def makeStartStopTable(self, tbl):
         CSV = tbl.to_csv(index=False)

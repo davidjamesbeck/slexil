@@ -60,19 +60,15 @@ def test_mp3(display):
     print(soundFile)
     tierGuideFile = "../testData/inferno-threeLines/tierGuide.yaml"
     grammaticalTermsFile = "../testData/inferno-threeLines/grammaticalTerms.txt"
-    ae = AudioExtractor(soundFile, elanXmlFilename, targetDirectory)
-    ae.validInputs()
     try:
-        ae.extract(False)
+        text = Text(elanXmlFilename,
+                    soundFile,
+                    grammaticalTermsFile=grammaticalTermsFile,
+                    tierGuideFile=tierGuideFile,
+                    projectDirectory=projectDirectory)
     except RuntimeError:
         print('mp3 file format not supported')
-        pass
-    times = ae.startStopTable
-    text = Text(elanXmlFilename,
-                soundFile,
-                grammaticalTermsFile=grammaticalTermsFile,
-                tierGuideFile=tierGuideFile,
-                projectDirectory=projectDirectory)
+        return
 
     htmlText = text.toHTML()
     if (display):

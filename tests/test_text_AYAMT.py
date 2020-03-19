@@ -24,7 +24,7 @@ def createText():
     ae.determineStartAndEndTimes()
     times = ae.startStopTable
     text = Text(elanXmlFilename,
-                soundFile,
+                audioFilename,
                 grammaticalTermsFile="../testData/AYAMT/grammaticalTerms.txt",
                 tierGuideFile="../testData/AYAMT/tierGuide.yaml",
                 projectDirectory="../testData/AYAMT")# ,

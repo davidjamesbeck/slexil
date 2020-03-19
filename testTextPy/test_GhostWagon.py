@@ -3,14 +3,10 @@ import sys
 
 sys.path.append("..")
 from text import *
-import importlib
 import os
 import pdb
 from ijalLine import *
-from errors import *
-import logging
 from audioExtractor import AudioExtractor
-from bs4 import BeautifulSoup
 from xml.etree import ElementTree as etree
 from ijalLine import IjalLine as Line
 
@@ -20,15 +16,15 @@ pd.set_option('display.width', 1000)
 
 # ----------------------------------------------------------------------------------------------------
 def runTests(display=False):
-    # learn_TierStructure()
-    test_GhostWagon_build(True)
+    learn_TierStructure()
+    test_GhostWagon_build(display)
 
 # ----------------------------------------------------------------------------------------------------
 def learn_TierStructure():
     filename = "../testTextPyData/GhostInWagon/GhostInWagon.eaf"
     xmlDoc = etree.parse(filename)
     x = Line(xmlDoc, lineNumber=0, tierGuide=None, grammaticalTerms=[])
-    x.tblRaw["TIER_ID"].tolist()
+    print(x.tblRaw["TIER_ID"].tolist())
 
 
 # ----------------------------------------------------------------------------------------------------
@@ -49,7 +45,7 @@ def test_GhostWagon_build(display):
     times = ae.startStopTable
 
     text = Text(elanXmlFilename,
-                soundFile,
+                audioFilename,
                 grammaticalTermsFile=None,
                 tierGuideFile=tierGuideFile,
                 projectDirectory=projectDirectory)

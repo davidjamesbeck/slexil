@@ -17,11 +17,10 @@ def createText():
     with open('../testData/HMDLsafe/startStopTimes.txt', 'r') as times:
         startStopTable = times.read()
     text = Text("../testData/HMDLsafe/HMDL.eaf",
-                "../testData/HMDLsafe/audio",
+                "../testData/Cargos.ogg",
                 grammaticalTermsFile="../testData/HMDLsafe/grammaticalTerms.txt",
                 tierGuideFile="../testData/HMDLsafe/tierGuide.yaml",
-                projectDirectory='../testData/HMDLsafe')  # ,
-    # 				startStopTable=startStopTable)
+                projectDirectory='../testData/HMDLsafe')
     return (text)
 
 

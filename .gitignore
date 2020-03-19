@@ -125,3 +125,4 @@ testData/*/audio
 testTextPyData/*/audio/*.*
 testTextPyData/GhostInWagon/audio/*.*
 #testData/*/audioPhrases
+testTextPyData/Cargos.wav

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ANNOTATION_DOCUMENT AUTHOR="" DATE="2009-12-16T09:11:20-07:00" FORMAT="2.6" VERSION="2.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.mpi.nl/tools/elan/EAFv2.6.xsd">
+<ANNOTATION_DOCUMENT AUTHOR="" DATE="2020-03-17T12:35:48-07:00" FORMAT="3.0" VERSION="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.mpi.nl/tools/elan/EAFv3.0.xsd">
     <HEADER MEDIA_FILE="" TIME_UNITS="milliseconds">
-        <MEDIA_DESCRIPTOR MEDIA_URL="file:///Users/Kevin/U of A/RA stuff/Texts-processed/18-06-03Aktzini-GA.wav" MIME_TYPE="audio/x-wav" RELATIVE_MEDIA_URL="file:/./18-06-03Aktzini-GA.wav"/>
-        <PROPERTY NAME="lastUsedAnnotationId">47</PROPERTY>
+        <MEDIA_DESCRIPTOR MEDIA_URL="file:///Users/David/OpenSource/github/slexil/testData/aktzini/18-06-03Aktzini-GA.wav" MIME_TYPE="audio/x-wav" RELATIVE_MEDIA_URL="./18-06-03Aktzini-GA.wav"/>
+        <PROPERTY NAME="URN">urn:nl-mpi-tools-elan-eaf:ca475935-6b94-4bc8-926a-8417a2b72938</PROPERTY>
+        <PROPERTY NAME="lastUsedAnnotationId">48</PROPERTY>
     </HEADER>
     <TIME_ORDER>
         <TIME_SLOT TIME_SLOT_ID="ts1" TIME_VALUE="250"/>
@@ -56,7 +57,7 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a4" TIME_SLOT_REF1="ts7" TIME_SLOT_REF2="ts8">
-                <ANNOTATION_VALUE>he: xcha:ní stanha'hapún pús xtayuja:chi animálhna' xalahálha' laklijikwa:ní xkáwa kristianu [00.15]</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE></ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
@@ -134,6 +135,11 @@
         <ANNOTATION>
             <REF_ANNOTATION ANNOTATION_ID="a9" ANNOTATION_REF="a3">
                 <ANNOTATION_VALUE>tzama: sipéj tu: muchukúku wanikán chu:wá wanikán koli:jke [00.10]</ANNOTATION_VALUE>
+            </REF_ANNOTATION>
+        </ANNOTATION>
+        <ANNOTATION>
+            <REF_ANNOTATION ANNOTATION_ID="a48" ANNOTATION_REF="a4">
+                <ANNOTATION_VALUE>he: xcha:ní stanha'hapún pús xtayuja:chi animálhna' xalahálha' laklijikwa:ní xkáwa kristianu [00.15]</ANNOTATION_VALUE>
             </REF_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>

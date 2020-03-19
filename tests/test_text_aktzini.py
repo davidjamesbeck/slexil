@@ -16,7 +16,7 @@ def runTests(display=False):
 	test_toHTML(display)
 
 def createText():
-	audioFilename = "18-06-03Aktzini-GA.wav"
+	audioFilename = "../testData/aktzini/18-06-03Aktzini-GA.wav"
 	elanXmlFilename="../testData/aktzini/18-06-03Aktzini-GA.eaf"
 	targetDirectory = "../testData/aktzini/audio"
 	soundFile = os.path.join(targetDirectory,audioFilename)
@@ -24,10 +24,11 @@ def createText():
 	tierGuideFile="../testData/aktzini/tierGuide.yaml"
 	grammaticalTermsFile="../testData/aktzini/grammaticalTerms.txt"
 	ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
+	ae.extract()
 	ae.determineStartAndEndTimes()
 	times = ae.startStopTable	
 	text = Text(elanXmlFilename,
-				soundFile,
+				audioFilename,
 				grammaticalTermsFile=grammaticalTermsFile,
 				tierGuideFile=tierGuideFile,
 				projectDirectory=projectDirectory,
@@ -48,10 +49,10 @@ def test_toHTML(display):
 # 	text.getTable(0)
 
 	htmlText = text.toHTML()
-	# filename = "aktzini.html"
-	# f = open(filename, "w")
-	# f.write(indent(htmlText))
-	# f.close()
+	filename = "../testData/aktzini/aktzini.html"
+	f = open(filename, "w")
+	f.write(indent(htmlText))
+	f.close()
 
 	if(display):
 		os.system("open %s" % filename)

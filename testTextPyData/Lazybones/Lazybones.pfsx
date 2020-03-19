@@ -36,7 +36,7 @@
             <String>http://lux17.mpi.nl/aamlr/</String>
         </pref>
         <pref key="source_audio">
-            <String>///Users/David/OpenSource/github/slexil/testTextPyData/Lazybones/4_TEX_TheLazyWoman.wav</String>
+            <String>///Users/David/OpenSource/github/OldSlexilTestData/TEX_Lazy/4_TEX_TheLazyWoman.wav</String>
         </pref>
     </prefGroup>
     <pref key="MultiTierViewer.ActiveTierName">

@@ -10,9 +10,9 @@ from audioExtractor import AudioExtractor
 pd.set_option('display.width', 1000)
 #----------------------------------------------------------------------------------------------------
 def runTests(display=False):
-    test_HowDaylightWasStolen(display)
-    test_MonkeyAndThunder(display)
-    test_praying(display)
+    # test_HowDaylightWasStolen(display)
+    # test_MonkeyAndThunder(display)
+    # test_praying(display)
     test_aktzini(display)
 
 #----------------------------------------------------------------------------------------------------
@@ -30,17 +30,16 @@ def test_HowDaylightWasStolen(display):
     ae.determineStartAndEndTimes()
     times = ae.startStopTable
     text = Text(elanXmlFilename,
-                soundFile,
+                audioFilename,
                 grammaticalTermsFile=grammaticalTermsFile,
                 tierGuideFile=tierGuideFile,
-                projectDirectory=projectDirectory)#,
-# 				startStopTable=times)
+                projectDirectory=projectDirectory)
 
 # 	text.getTable(1)
 
     htmlText = text.toHTML()
     if(display):
-       filename = "daylight.html"
+       filename = "../testData/HMDLsafe/daylight.html"
        f = open(filename, "w")
        f.write(indent(htmlText))
        f.close()
@@ -61,17 +60,16 @@ def test_MonkeyAndThunder(display):
     ae.determineStartAndEndTimes()
     times = ae.startStopTable
     text = Text(elanXmlFilename,
-                soundFile,
+                audioFilename,
                 grammaticalTermsFile=grammaticalTermsFile,
                 tierGuideFile=tierGuideFile,
-                projectDirectory=projectDirectory)# ,
-# 				startStopTable=times)
+                projectDirectory=projectDirectory)
 
 # 	text.getTable(1)
 
     htmlText = text.toHTML()
     if(display):
-       filename = "AYAMT.html"
+       filename = "../testData/AYAMT/AYAMT.html"
        f = open(filename, "w")
        f.write(indent(htmlText))
        f.close()
@@ -93,18 +91,17 @@ def test_praying(display):
     ae.determineStartAndEndTimes()
     times = ae.startStopTable
     text = Text(elanXmlFilename,
-                soundFile,
+                audioFilename,
                 grammaticalTermsFile=grammaticalTermsFile,
                 tierGuideFile=tierGuideFile,
-                projectDirectory=projectDirectory)# ,
-# 				startStopTable=times)
+                projectDirectory=projectDirectory)
 
 # 	text.getTable(0)
 
     htmlText = text.toHTML(0)
 
     if(display):
-       filename = "praying.html"
+       filename = "../testData/praying/praying.html"
        f = open(filename, "w")
        f.write(indent(htmlText))
        f.close()
@@ -117,7 +114,7 @@ def test_aktzini(display):
     print("--- test_aktzini")
 
     text = Text("../testData/aktzini/18-06-03Aktzini-GA.eaf",
-                "../testData/aktzini/audio",
+                "../testData/aktzini/18-06-03Aktzini-GA.wav",
 				tierGuideFile='../testData/aktzini/tierGuide.yaml',
                 projectDirectory='../testData/aktzini',
                 grammaticalTermsFile=None,
@@ -127,7 +124,7 @@ def test_aktzini(display):
 
     htmlText = text.toHTML()
     if(display):
-       filename = "aktzini.html"
+       filename = "../testData/aktzini/aktzini.html"
        f = open(filename, "w")
        f.write(indent(htmlText))
        f.close()

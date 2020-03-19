@@ -463,14 +463,14 @@ def on_eafUpload(contents, name, projectDirectory):
 
 
 # ----------------------------------------------------------------------------------------------------
-def extractSoundPhrases(soundFileName, eafFileName, projectDirectory):
+def extractSoundPhrases(soundFileName, eafFileName, projectDirectory, tierGuide):
     print("=== extractSoundPhrases")
     soundFile = os.path.basename(soundFileName)
     eafFile = os.path.basename(eafFileName)
     print("soundFileName: %s" % soundFileName)
     print("eafFileName: %s" % eafFile)
     soundFileFullPath = os.path.join(projectDirectory, soundFile)
-    phraseFileCount = extractPhrases(soundFileFullPath, eafFileName, projectDirectory)
+    phraseFileCount = extractPhrases(soundFileFullPath, eafFileName, projectDirectory, tierGuide)
     print("=== enable next button in sequence (upload abbreviations)")
     return "parsed into %d lines." % (phraseFileCount)
 
@@ -481,11 +481,11 @@ def extractSoundPhrases(soundFileName, eafFileName, projectDirectory):
                Output('sound_filename_hiddenStorage', 'children')],
               [Input('upload-sound-file', 'contents')],
               [State('upload-sound-file', 'filename'),
-               State('eaf_filename_hiddenStorage', 'children'),
+               # State('eaf_filename_hiddenStorage', 'children'),
                State('projectDirectory_hiddenStorage', 'children')])
-def on_soundUpload(contents, name, eafilename, projectDirectory):
+def on_soundUpload(contents, name, projectDirectory): #removed eafilename argument
     if name is None:
-        return "This can take a minute or two for large files.", "timewarning", ""  # , 1, 1
+        return "This can take a minute or two for large files.", "timewarning", ""
     print("=== on_soundUpload")
     data = contents.encode("utf8").split(b";base64,")[1]
     filename = os.path.join(projectDirectory, name)
@@ -505,9 +505,9 @@ def on_soundUpload(contents, name, eafilename, projectDirectory):
         print("sound file size: %d, rate: %d" % (fileSize, rate))
         if validSound:
             sound_validationMessage = "👍︎ Sound file: %s (%d bytes), " % (name, fileSize)
-            extractionMessage = extractSoundPhrases(name, eafilename, projectDirectory)
-            sound_validationMessage += extractionMessage
-            return sound_validationMessage, "information", filename  # , 0, 0
+            # extractionMessage = extractSoundPhrases(name, eafilename, projectDirectory)
+            # sound_validationMessage += extractionMessage
+            return sound_validationMessage, "information", filename
         else:
             if "Unsupported bit depth: the wav file has 24-bit data" in errorMessage:
                 sound_validationMessage = "☠️ File %s (%d byes) has 24-bit data, must be minimum 32-bit." % (
@@ -517,7 +517,7 @@ def on_soundUpload(contents, name, eafilename, projectDirectory):
                     name)
             else:
                 sound_validationMessage = "☠️ Bad sound file: %s [File: %s (%d bytes)]" % (errorMessage, name, fileSize)
-            return sound_validationMessage, "timewarning", filename  # , 1, 1
+            return sound_validationMessage, "timewarning", filename
 
 
 # ----------------------------------------------------------------------------------------------------
@@ -593,14 +593,20 @@ def createWebPageCallback(n_clicks, soundFileName, eafFileName, projectDirectory
         return ("", 1, "", "previewoff")
     print("=== create web page callback")
     print("eaf: %s" % eafFileName)
-    print("audio phrases in: %s/audio" % projectDirectory)
+    tierGuide = os.path.join(projectDirectory, "tierGuide.yaml")
+    # amendment
+    print("=== extracting audio")
+    extractionMessage = extractSoundPhrases(soundFileName, eafFileName, projectDirectory, tierGuide)
+    print("%s audio phrases in: %s/audio" %(extractionMessage, projectDirectory))
+    # print("audio phrases in: %s/audio" % projectDirectory)
+    # end amendment
     if (grammaticalTermsFile == ""):
         grammaticalTermsFile = None
     else:
         print("grammaticalTermsFile: %s" % grammaticalTermsFile)
 
     htmlDoc = createWebPage(eafFileName, projectDirectory, grammaticalTermsFile,
-                            os.path.join(projectDirectory, "tierGuide.yaml"), soundFileName)
+                            tierGuide, soundFileName)
 
     webpageAt = os.path.join(projectDirectory, "%s.html" % projectTitle)
     absolutePath = os.path.abspath(webpageAt)
@@ -852,7 +858,7 @@ def saveTierGuide(projectDirectory, speechTier, transcription2Tier, morphemeTier
 
 
 # ----------------------------------------------------------------------------------------------------
-def extractPhrases(soundFileFullPath, eafFileFullPath, projectDirectory):
+def extractPhrases(soundFileFullPath, eafFileFullPath, projectDirectory, tierGuide):
     print("=== entering extractPhrases")
     print("soundFileFullPath: %s" % soundFileFullPath)
     print("projectDirectory: %s" % projectDirectory)

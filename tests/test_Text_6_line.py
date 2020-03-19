@@ -32,11 +32,10 @@ def test_praying_6_Line_from_webapp(display):
     ae.determineStartAndEndTimes()
     times = ae.startStopTable
     text = Text(elanXmlFilename,
-                soundFile,
+                audioFilename,
                 grammaticalTermsFile=grammaticalTermsFile,
                 tierGuideFile=tierGuideFile,
-                projectDirectory=projectDirectory)  # ,
-    # 				startStopTable=times)
+                projectDirectory=projectDirectory)
 
     # text.getTable(1)
     display = False
@@ -54,7 +53,7 @@ def test_HowDaylightWasStolen(display):
     print("--- test_HowDaylightWasStolen")
 
     text = Text("../testData/HMDLsafe/HMDL.eaf",
-                "../testData/HMDLsafe/audioPhrases",
+                "../testData/Cargos.ogg",
                 grammaticalTermsFile=None,
                 tierGuideFile="../testData/HMDLsafe/tierGuide.yaml",
                 projectDirectory="../testData/HMDLsafe")
@@ -73,7 +72,7 @@ def test_MonkeyAndThunder(display):
     print("--- test_MonkeyAndThunder")
 
     text = Text("../testData/AYAMT/AYAMT.eaf",
-                "../testData/AYAMT/audioPhrases",
+                "../testData/cargos.ogg",
                 grammaticalTermsFile="../testData/AYAMT/grammaticalTerms.txt")
 
     text.getTable(1)
@@ -92,7 +91,7 @@ def test_praying(display):
     print("--- test_praying")
 
     text = Text("../testData/praying/praying.eaf",
-                "../testData/praying/audioPhrases",
+                "../testData/Cargos.ogg",
                 grammaticalTermsFile=None,
                 quiet=False)
 
@@ -113,7 +112,7 @@ def test_aktzini(display):
     print("--- test_aktzini")
 
     text = Text("../testData/aktzini/18-06-03Aktzini-GA.eaf",
-                "../testData/aktzini/audioPhrases",
+                "../testData/aktzini/18-06-03Aktzini-GA.wav",
                 grammaticalTermsFile=None,
                 quiet=False)
 

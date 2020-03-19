@@ -1240,52 +1240,52 @@ nd@y@14s@10
     <TIER ANNOTATOR="Hilaria Cruz" DEFAULT_LOCALE="en" LINGUISTIC_TYPE_REF="en" PARENT_REF="SZC-Chatino" PARTICIPANT="Simón Zurita Cruz" TIER_ID="English Translation-cp-cp">
         <ANNOTATION>
             <REF_ANNOTATION ANNOTATION_ID="a481" ANNOTATION_REF="a1">
-                <ANNOTATION_VALUE>‘c@rr@ct q@@t@s.’</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>‘correct quotes.’</ANNOTATION_VALUE>
             </REF_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <REF_ANNOTATION ANNOTATION_ID="a482" ANNOTATION_REF="a2">
-                <ANNOTATION_VALUE>‘P@nct@@t@@n @@ts@d@ q@@t@’.</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>‘Punctuation outside quotes’.</ANNOTATION_VALUE>
             </REF_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <REF_ANNOTATION ANNOTATION_ID="a483" ANNOTATION_REF="a3">
-                <ANNOTATION_VALUE>'str@@ght @p@str@ph@s'</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>'straight apostrophes'</ANNOTATION_VALUE>
             </REF_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <REF_ANNOTATION ANNOTATION_ID="a484" ANNOTATION_REF="a4">
-                <ANNOTATION_VALUE> ‘ @xtr@n@@@s wh@t@sp@c@ b@f@r@ @nd @ft@r q@@t@s ’ </ANNOTATION_VALUE>
+                <ANNOTATION_VALUE> ‘ extraneous whitsepce before and after quotes ’ </ANNOTATION_VALUE>
             </REF_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <REF_ANNOTATION ANNOTATION_ID="a485" ANNOTATION_REF="a5">
-                <ANNOTATION_VALUE>‘m@ss@ng f@n@l q@@t@</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>‘missing final quote</ANNOTATION_VALUE>
             </REF_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <REF_ANNOTATION ANNOTATION_ID="a486" ANNOTATION_REF="a6">
-                <ANNOTATION_VALUE>'@nc@rr@ct @n@t@@l, c@rr@ct f@n@l’</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>'incorrect inital, correct final’</ANNOTATION_VALUE>
             </REF_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <REF_ANNOTATION ANNOTATION_ID="a487" ANNOTATION_REF="a7">
-                <ANNOTATION_VALUE>‘[@] ch@ld, @ w@m@n @s w@ll.'</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>‘[a] child, a woman as well.'</ANNOTATION_VALUE>
             </REF_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <REF_ANNOTATION ANNOTATION_ID="a488" ANNOTATION_REF="a8">
-                <ANNOTATION_VALUE>‘@ l@n@ w@th "d@@bl@ q@@t@s"'</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>‘a line with "double quotes"'</ANNOTATION_VALUE>
             </REF_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <REF_ANNOTATION ANNOTATION_ID="a489" ANNOTATION_REF="a9">
-                <ANNOTATION_VALUE>@ l@n@ w@th n@ q@@t@s @t @ll</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>a line with no quotes at all</ANNOTATION_VALUE>
             </REF_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
             <REF_ANNOTATION ANNOTATION_ID="a490" ANNOTATION_REF="a9">
-                <ANNOTATION_VALUE>‘“@ l@n@ w@th n@ th@n sp@c@ b@tw@@n sq@@ @nd dq@@.”’</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>‘“a line with no thin space between squo and dquo.”’</ANNOTATION_VALUE>
             </REF_ANNOTATION>
         </ANNOTATION>
     </TIER>

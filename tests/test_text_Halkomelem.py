@@ -32,7 +32,7 @@ def test_AMCuervo(display):
 	ae.extract()
 	times = ae.startStopTable
 	text = Text(elanFile,
-				soundFile,
+				audioFilename,
 				grammaticalTermsFile=None,
 				tierGuideFile=tierGuideFile,
 				projectDirectory=projectDirectory)

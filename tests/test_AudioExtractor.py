@@ -12,17 +12,78 @@ def runTests():
     # test_determineStartAndEndTimes()
     # test_extract_HMDLsafe()
     # test_extract_AYAMT()
-    # test_extract_praying()
+    test_extract_praying()
     # test_extract_aktzini()
     # test_extract_featherSnake()
     # test_extract_aym_final()
-    test_extract_Ghost()
+    # test_extract_Ghost()
+    # test_tierGuide_specific_extraction()
+
+def clearAudioDirectory(targetDirectory):
+    fileList=os.listdir(targetDirectory)
+    for f in fileList:
+        os.remove(os.path.join(targetDirectory,f))
+
+def test_tierGuide_specific_extraction():
+    print("--- test tierGuide-specific extraction")
+    print("-- TEST 1: aktzini")
+    ea = AudioExtractor("../testData/aktzini/18-06-03Aktzini-GA.wav",
+                        "../testData/aktzini/18-06-03Aktzini-GA.eaf",
+                        "../testData/aktzini/audio",
+                        "../testData/aktzini/tierGuide.yaml")
+    ea.extract(quiet=True)
+    fileList = [f for f in os.listdir("../testData/aktzini/audio") if not f.startswith('.')]
+
+    try:
+        assert (len(fileList) == 16)
+    except AssertionError as e:
+        raise Exception(len(fileList)) from e
+
+    print("-- TEST 2: Jagpossum")
+    ea = AudioExtractor("../testData/Cargos.ogg",
+                        "../testTextPyData/Jagpossum/Jagpossum.eaf",
+                        "../testTextPyData/Jagpossum/audio",
+                        "../testTextPyData/Jagpossum/tierGuide.yaml")
+    ea.extract(True)
+    fileList = [f for f in os.listdir("../testTextPyData/Jagpossum/audio") if not f.startswith('.')]
+
+    try:
+        assert (len(fileList) == 136)
+    except AssertionError as e:
+        raise Exception(len(fileList)) from e
+
+    print("-- TEST 3: GhostWagon")
+    ea = AudioExtractor("../testTextPyData/GhostInWagon/GhostInWagon.ogg",
+                        "../testTextPyData/GhostInWagon/GhostInWagon.eaf",
+                        "../testTextPyData/GhostInWagon/audio",
+                        "../testTextPyData/GhostInWagon/tierGuide.yaml")
+    ea.extract(True)
+    fileList = [f for f in os.listdir("../testTextPyData/GhostInWagon/audio") if not f.startswith('.')]
+
+    try:
+        assert (len(fileList) == 55)
+    except AssertionError as e:
+        raise Exception(len(fileList)) from e
+
+    print("-- TEST 4: loco")
+    ea = AudioExtractor("../testData/Cargos.ogg",
+                        "../testData/loco/loco.eaf",
+                        "../testData/loco/audio",
+                        "../testData/loco/tierGuide.yaml")
+    ea.extract(True)
+    fileList = [f for f in os.listdir("../testData/loco/audio") if not f.startswith('.')]
+
+    try:
+        assert (len(fileList) == 344)
+    except AssertionError as e:
+        raise Exception(len(fileList)) from e
 
 
 def test_extract_Ghost():
     print("--- test_extract_Ghost")
     try:
         assert(os.path.exists("../testTextPyData/GhostInWagon/audio"))
+        clearAudioDirectory("../testTextPyData/GhostInWagon/audio")
     except AssertionError:
         os.mkdir("../testTextPyData/GhostInWagon/audio")
     ea = AudioExtractor("../testTextPyData/GhostInWagon/GhostInWagon.ogg",
@@ -31,7 +92,7 @@ def test_extract_Ghost():
     ea.extract(quiet=True)
     fileList = [f for f in os.listdir("../testTextPyData/GhostInWagon/audio") if not f.startswith('.')]
     try:
-        assert(len(fileList) == 215)
+        assert(len(fileList) == 55)
     except AssertionError as e:
         raise Exception(len(fileList)) from e
 
@@ -62,7 +123,7 @@ def test_determineStartAndEndTimes():
 def test_extract_HMDLsafe():
 
     print("--- test_extract_HMDLsafe")
-
+    clearAudioDirectory("../testData/HMDLsafe/audio")
     ea = AudioExtractor("../testData/Cargos.ogg",
                         "../testData/HMDLsafe/HMDL.eaf",
                         "../testData/HMDLsafe/audio")
@@ -76,7 +137,7 @@ def test_extract_HMDLsafe():
 def test_extract_aym_final():
 
     print("--- test_extract_aym_final")
-
+    clearAudioDirectory("../testTextPyData/aym/audio")
     ea = AudioExtractor("../testData/Cargos.ogg",
                         "../testTextPyData/aym/aym-final.eaf",
                         "../testTextPyData/aym/audio")
@@ -89,6 +150,7 @@ def test_extract_aym_final():
 
 def test_extract_AYAMT():
     print("--- test_extract_AYAMT")
+    clearAudioDirectory("../testData/AYAMT/audio")
     ea = AudioExtractor("../testData/Cargos.ogg",
                         "../testData/AYAMT/AYAMT.eaf",
                         "../testData/AYAMT/audio")
@@ -102,11 +164,12 @@ def test_extract_AYAMT():
 
 def test_extract_praying():
     print("--- test_extract_praying")
+    clearAudioDirectory("../testData/praying/audio")
     ea = AudioExtractor("../testData/Cargos.ogg",
                         "../testData/praying/praying.eaf",
                         "../testData/praying/audio")
+    ea.extract(quiet=False)
     fileList = [f for f in os.listdir("../testData/praying/audio") if not f.startswith('.')]
-    ea.extract(quiet=True)
     try:
         assert(len(fileList) == 9)
     except AssertionError as e:
@@ -114,6 +177,7 @@ def test_extract_praying():
 
 def test_extract_aktzini():
     print("--- test_extract_aktzini")
+    clearAudioDirectory("../testData/aktzini/audio")
     ea = AudioExtractor("../testData/aktzini/18-06-03Aktzini-GA.wav",
                         "../testData/aktzini/18-06-03Aktzini-GA.eaf",
                         "../testData/aktzini/audio")
@@ -126,6 +190,7 @@ def test_extract_aktzini():
 
 def test_extract_featherSnake():
     print("--- test_extract_featherSnake")
+    clearAudioDirectory("../testData/featherSnake/audio")
     ea = AudioExtractor("../testData/Cargos.ogg",
                         "../testData/featherSnake/featherSnake.eaf",
                         "../testData/featherSnake/audio")

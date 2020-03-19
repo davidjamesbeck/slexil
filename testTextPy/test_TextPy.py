@@ -17,38 +17,46 @@ pd.set_option('display.width', 1000)
 
 
 # ----------------------------------------------------------------------------------------------------
-def runTests(display=False):
-    test_AYAFW(display)
-    test_Merchant(display)
-    test_Jagpossum(display)
-    test_Sanchizo(display)
-    test_Caterpillar(display)
-    test_Lazybones(display)
-    test_Zelf(display)
-    test_Prayer(display)
-    test_Inferno(display)
-    test_aym(display)
-    test_Cuervo(display)
-    test_Cuervo_errors(display)
+def runTests(display=False,extract=False):
+    if os.path.exists("../testTextPyData/Cargos.wav"):
+        print("testing with .wav")
+        audioFilename = "../testTextPyData/Cargos.wav"
+    else:
+        print("testing with .ogg")
+        audioFilename = "../testData/Cargos.ogg"
+    test_AYAFW(display,audioFilename,extract)
+    test_Merchant(display,audioFilename,extract)
+    test_Jagpossum(display,audioFilename,extract)
+    test_Sanchizo(display,audioFilename,extract)
+    test_Caterpillar(display,audioFilename,extract)
+    test_Lazybones(display,audioFilename,extract)
+    test_Zelf(display,audioFilename,extract)
+    test_Prayer(display,audioFilename,extract)
+    test_Inferno(display,audioFilename,extract)
+    test_aym(display,audioFilename,extract)
+    test_Cuervo(display,audioFilename,extract)
+    test_Cuervo_errors(display,audioFilename,extract)
+    # test_GhostWagon(display,extract)
 
 # ----------------------------------------------------------------------------------------------------
-def test_GhostWagon(display):
+def test_GhostWagon(display,extract):
     '''tests .eaf file with empty and missing line or translation annotations'''
 
     print("--- test_GhostWagon")
 
     audioFilename = "../testTextPyData/GhostInWagon/GhostInWagon.ogg"
-    elanXmlFilename = "../testTextPyData/GhostInWagon/GhostInWagon.eaf"
+    elanXmlFilename = "../testTextPyData/GhostInWagon/GhostInWagon_original.eaf"
     targetDirectory = "../testTextPyData/GhostInWagon/audio"
     soundFile = os.path.join(targetDirectory, "GhostInWagon.ogg")
     projectDirectory = "../testTextPyData/GhostInWagon"
     tierGuideFile = "../testTextPyData/Cuervo/tierGuide.yaml"
     ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
-    ae.determineStartAndEndTimes()
+    if extract:
+        ae.extract()
     times = ae.startStopTable
 
     text = Text(elanXmlFilename,
-                soundFile,
+                audioFilename,
                 grammaticalTermsFile=None,
                 tierGuideFile=tierGuideFile,
                 projectDirectory=projectDirectory)
@@ -63,23 +71,24 @@ def test_GhostWagon(display):
 
 
 # ----------------------------------------------------------------------------------------------------
-def test_Cuervo_errors(display):
+def test_Cuervo_errors(display,audioFilename,extract):
     '''tests .eaf file with empty and missing line or translation annotations'''
 
     print("--- test_Cuervo_with_errors")
 
-    audioFilename = "../testData/Cargos.ogg"
+    # audioFilename = "../testData/Cargos.ogg"
     elanXmlFilename = "../testTextPyData/Cuervo/newcuervo_all_errors.eaf"
     targetDirectory = "../testTextPyData/Cuervo/audio"
     soundFile = os.path.join(targetDirectory, "Cargos.ogg")
     projectDirectory = "../testTextPyData/Cuervo"
     tierGuideFile = "../testTextPyData/Cuervo/tierGuide.yaml"
     ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
-    ae.determineStartAndEndTimes()
+    if extract:
+        ae.extract()
     times = ae.startStopTable
 
     text = Text(elanXmlFilename,
-                soundFile,
+                audioFilename,
                 grammaticalTermsFile=None,
                 tierGuideFile=tierGuideFile,
                 projectDirectory=projectDirectory)
@@ -94,20 +103,20 @@ def test_Cuervo_errors(display):
 
 
 # ----------------------------------------------------------------------------------------------------
-def test_Cuervo(display):
+def test_Cuervo(display,audioFilename,extract):
     print("--- test_Cuervo")
 
-    audioFilename = "../testData/Cargos.ogg"
+    # audioFilename = "../testData/Cargos.ogg"
     elanXmlFilename = "../testTextPyData/Cuervo/newcuervo.eaf"
     targetDirectory = "../testTextPyData/Cuervo/audio"
     soundFile = os.path.join(targetDirectory, "Cargos.ogg")
     projectDirectory = "../testTextPyData/Cuervo"
     tierGuideFile = "../testTextPyData/Cuervo/tierGuide.yaml"
     ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
-    ae.determineStartAndEndTimes()
-    times = ae.startStopTable
+    if extract:
+        ae.extract()
     text = Text(elanXmlFilename,
-                soundFile,
+                audioFilename,
                 grammaticalTermsFile=None,
                 tierGuideFile=tierGuideFile,
                 projectDirectory=projectDirectory)
@@ -121,21 +130,21 @@ def test_Cuervo(display):
         os.system("open %s" % filename)
 
 # ----------------------------------------------------------------------------------------------------
-def test_aym(display):
+def test_aym(display,audioFilename,extract):
     print("--- test_aym")
 
-    audioFilename = "../testData/Cargos.ogg"
+    # audioFilename = "../testData/Cargos.ogg"
     elanXmlFilename = "../testTextPyData/aym/aym-final.eaf"
-    targetDirectory = "../testTextPyData/aym/Audio"
+    targetDirectory = "../testTextPyData/aym/audio"
     soundFile = os.path.join(targetDirectory, "Cargos.ogg")
     projectDirectory = "../testTextPyData/aym"
     tierGuideFile = "../testTextPyData/aym/tierGuide.yaml"
     grammaticalTermsFile = "../testTextPyData/aym/List of abbreviations.txt"
     ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
     ae.determineStartAndEndTimes()
-    times = ae.startStopTable
+    ae.extract(True)
     text = Text(elanXmlFilename,
-                soundFile,
+                audioFilename,
                 grammaticalTermsFile=grammaticalTermsFile,
                 tierGuideFile=tierGuideFile,
                 projectDirectory=projectDirectory)  # ,
@@ -153,10 +162,10 @@ def test_aym(display):
 
 
 # ----------------------------------------------------------------------------------------------------
-def test_Inferno_numbering(display):
+def test_Inferno_numbering(display,audioFilename,extract):
     print("--- test_Inferno_numbering")
 
-    audioFilename = "inferno-threeLines.wav"
+    # audioFilename = "inferno-threeLines.wav"
     elanXmlFilename = "../explorations/playAudioInSequence/Inferno/inferno-threeLines.eaf"
     targetDirectory = "../explorations/playAudioInSequence/Inferno/Audio"
     soundFile = os.path.join(targetDirectory, audioFilename)
@@ -164,7 +173,7 @@ def test_Inferno_numbering(display):
     tierGuideFile = "../explorations/playAudioInSequence/Inferno/tierGuide.yaml"
     grammaticalTermsFile = "../explorations/playAudioInSequence/Inferno/abbreviations.txt"
     text = Text(elanXmlFilename,
-                soundFile,
+                audioFilename,
                 grammaticalTermsFile=grammaticalTermsFile,
                 tierGuideFile=tierGuideFile,
                 projectDirectory=projectDirectory)
@@ -193,10 +202,10 @@ def test_Inferno_numbering(display):
 
 
 # ----------------------------------------------------------------------------------------------------
-def test_aym_numbering(display):
+def test_aym_numbering(display,audioFilename,extract):
     print("--- test_aym_numbering")
 
-    audioFilename = "../testData/Cargos.ogg"
+    # audioFilename = "../testData/Cargos.ogg"
     elanXmlFilename = "../testTextPyData/aym/aym-final.eaf"
     targetDirectory = "../testTextPyData/aym/Audio"
     soundFile = os.path.join(targetDirectory, "Cargos.ogg")
@@ -204,7 +213,7 @@ def test_aym_numbering(display):
     tierGuideFile = "../testTextPyData/aym/tierGuide.yaml"
     grammaticalTermsFile = "../testTextPyData/aym/List of abbreviations.txt"
     text = Text(elanXmlFilename,
-                soundFile,
+                audioFilename,
                 grammaticalTermsFile=grammaticalTermsFile,
                 tierGuideFile=tierGuideFile,
                 projectDirectory=projectDirectory)
@@ -232,14 +241,14 @@ def test_aym_numbering(display):
 
 
 # ----------------------------------------------------------------------------------------------------
-def test_Inferno(display):
+def test_Inferno(display,audioFilename,extract):
     print("--- test_Inferno")
     try:
         assert(os.path.exists("../testTextPyData/Inferno/audio"))
     except AssertionError:
         os.mkdir("../testTextPyData/Inferno/audio")
 
-    audioFilename = "inferno-threeLines.wav"
+    # audioFilename = "../testTextPyData/Inferno/inferno-threeLines.wav"
     elanXmlFilename = "../testTextPyData/Inferno/inferno-threeLines.eaf"
     targetDirectory = "../testTextPyData/Inferno/audio"
     soundFile = os.path.join(targetDirectory, audioFilename)
@@ -247,16 +256,13 @@ def test_Inferno(display):
     tierGuideFile = "../testTextPyData/Inferno/tierGuide.yaml"
     grammaticalTermsFile = "../testTextPyData/Inferno/abbreviations.txt"
     ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
-    ae.determineStartAndEndTimes()
-    times = ae.startStopTable
+    if extract:
+        ae.extract()
     text = Text(elanXmlFilename,
-                soundFile,
+                audioFilename,
                 grammaticalTermsFile=grammaticalTermsFile,
                 tierGuideFile=tierGuideFile,
-                projectDirectory=projectDirectory)  # ,
-    # 				startStopTable=times)
-
-    # IjalLine.getTable(1)
+                projectDirectory=projectDirectory)
 
     htmlText = text.toHTML()
     if (display):
@@ -267,20 +273,20 @@ def test_Inferno(display):
         os.system("open %s" % filename)
 
 # ----------------------------------------------------------------------------------------------------
-def test_AYAFW(display):
+def test_AYAFW(display,audioFilename,extract):
     print("--- test_AYAFW")
-    audioFilename = "../testData/Cargos.ogg"
+    # audioFilename = "../testData/Cargos.ogg"
     elanXmlFilename = "../testTextPyData/AYAFW/AYAFW.eaf"
-    targetDirectory = "../testTextPyData/AYAFW/Audio"
+    targetDirectory = "../testTextPyData/AYAFW/audio"
     soundFile = os.path.join(targetDirectory, "Cargos.ogg")
     projectDirectory = "../testTextPyData/AYAFW"
     tierGuideFile = "../testTextPyData/AYAFW/tierGuide.yaml"
     grammaticalTermsFile = "../testTextPyData/AYAFW/abbreviations.txt"
     ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
-    ae.determineStartAndEndTimes()
-    times = ae.startStopTable
+    if extract:
+        ae.extract()
     text = Text(elanXmlFilename,
-                soundFile,
+                audioFilename,
                 grammaticalTermsFile=grammaticalTermsFile,
                 tierGuideFile=tierGuideFile,
                 projectDirectory=projectDirectory)  # ,
@@ -298,9 +304,9 @@ def test_AYAFW(display):
 
 
 # ----------------------------------------------------------------------------------------------------
-def test_Merchant(display):
+def test_Merchant(display,audioFilename,extract):
     print("--- test_Merchant")
-    audioFilename = "../testData/Cargos.ogg"
+    # audioFilename = "../testData/Cargos.ogg"
     elanXmlFilename = "../testTextPyData/JITZ/JITZ.eaf"
     targetDirectory = "../testTextPyData/JITZ/audio"
     soundFile = os.path.join(targetDirectory, "Cargos.ogg")
@@ -308,10 +314,10 @@ def test_Merchant(display):
     tierGuideFile = "../testTextPyData/JITZ/tierGuide.yaml"
     grammaticalTermsFile = "../testTextPyData/JITZ/grammaticalTerms.txt"
     ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
-    ae.determineStartAndEndTimes()
-    times = ae.startStopTable
+    if extract:
+        ae.extract()
     text = Text(elanXmlFilename,
-                soundFile,
+                audioFilename,
                 grammaticalTermsFile=grammaticalTermsFile,
                 tierGuideFile=tierGuideFile,
                 projectDirectory=projectDirectory)  # ,
@@ -322,7 +328,7 @@ def test_Merchant(display):
     try:
         htmlText = text.toHTML()
         if (display):
-            filename = "test_Merchant.html"
+            filename = "../testTextPyData/JITZ/test_Merchant.html"
             f = open(filename, "w")
             f.write(indent(htmlText))
             f.close()
@@ -338,9 +344,9 @@ def test_Merchant(display):
 
 
 # ----------------------------------------------------------------------------------------------------
-def test_Jagpossum(display):
+def test_Jagpossum(display,audioFilename,extract):
     print("--- test_Jagpossum")
-    audioFilename = "../testData/Cargos.ogg"
+    # audioFilename = "../testData/Cargos.ogg"
     elanXmlFilename = "../testTextPyData/Jagpossum/Jagpossum.eaf"
     targetDirectory = "../testTextPyData/Jagpossum/audio"
     soundFile = os.path.join(targetDirectory, "Cargos.ogg")
@@ -348,10 +354,10 @@ def test_Jagpossum(display):
     tierGuideFile = "../testTextPyData/Jagpossum/tierGuide.yaml"
     grammaticalTermsFile = "../testTextPyData/Jagpossum/abbreviations.txt"
     ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
-    ae.determineStartAndEndTimes()
-    times = ae.startStopTable
+    if extract:
+        ae.extract()
     text = Text(elanXmlFilename,
-                soundFile,
+                audioFilename,
                 grammaticalTermsFile=grammaticalTermsFile,
                 tierGuideFile=tierGuideFile,
                 projectDirectory=projectDirectory)
@@ -361,7 +367,7 @@ def test_Jagpossum(display):
     try:
         htmlText = text.toHTML()
         if (display):
-            filename = "test_Jagpossum.html"
+            filename = "../testTextPyData/Jagpossum/test_Jagpossum.html"
             f = open(filename, "w")
             f.write(indent(htmlText))
             f.close()
@@ -377,9 +383,9 @@ def test_Jagpossum(display):
 
 
 # ----------------------------------------------------------------------------------------------------
-def test_Sanchizo(display):
+def test_Sanchizo(display,audioFilename,extract):
     print("--- test_Sanchizo")
-    audioFilename = "../testData/Cargos.ogg"
+    # audioFilename = "../testData/Cargos.ogg"
     elanXmlFilename = "../testTextPyData/Sanchizo/Sanchizo.eaf"
     targetDirectory = "../testTextPyData/Sanchizo/audio"
     soundFile = os.path.join(targetDirectory, "Cargos.ogg")
@@ -387,10 +393,10 @@ def test_Sanchizo(display):
     tierGuideFile = "../testTextPyData/Sanchizo/tierGuide.yaml"
     grammaticalTermsFile = "../testTextPyData/Sanchizo/abbreviations.txt"
     ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
-    ae.determineStartAndEndTimes()
-    times = ae.startStopTable
+    if extract:
+        ae.extract()
     text = Text(elanXmlFilename,
-                soundFile,
+                audioFilename,
                 grammaticalTermsFile=grammaticalTermsFile,
                 tierGuideFile=tierGuideFile,
                 projectDirectory=projectDirectory)  # ,
@@ -401,7 +407,7 @@ def test_Sanchizo(display):
     try:
         htmlText = text.toHTML()
         if (display):
-            filename = "test_Sanchizo.html"
+            filename = "../testTextPyData/Sanchizo/test_Sanchizo.html"
             f = open(filename, "w")
             f.write(indent(htmlText))
             f.close()
@@ -417,9 +423,9 @@ def test_Sanchizo(display):
 
 
 # ----------------------------------------------------------------------------------------------------
-def test_Caterpillar(display):
+def test_Caterpillar(display,audioFilename,extract):
     print("--- test_Caterpillar")
-    audioFilename = "../testData/Cargos.ogg"
+    # audioFilename = "../testData/Cargos.ogg"
     elanXmlFilename = "../testTextPyData/Caterpillar/Caterpillar.eaf"
     targetDirectory = "../testTextPyData/Caterpillar/audio"
     soundFile = os.path.join(targetDirectory, "Cargos.ogg")
@@ -427,10 +433,10 @@ def test_Caterpillar(display):
     tierGuideFile = "../testTextPyData/Caterpillar/tierGuide.yaml"
     grammaticalTermsFile = "../testTextPyData/Caterpillar/abbreviations.txt"
     ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
-    ae.determineStartAndEndTimes()
-    times = ae.startStopTable
+    if extract:
+        ae.extract()
     text = Text(elanXmlFilename,
-                soundFile,
+                audioFilename,
                 grammaticalTermsFile=grammaticalTermsFile,
                 tierGuideFile=tierGuideFile,
                 projectDirectory=projectDirectory)  # ,
@@ -441,7 +447,7 @@ def test_Caterpillar(display):
     try:
         htmlText = text.toHTML()
         if (display):
-            filename = "test_Caterpillar.html"
+            filename = "../testTextPyData/Caterpillar/test_Caterpillar.html"
             f = open(filename, "w")
             f.write(indent(htmlText))
             f.close()
@@ -457,10 +463,10 @@ def test_Caterpillar(display):
 
 
 # ----------------------------------------------------------------------------------------------------
-def test_Lazybones(display):
+def test_Lazybones(display,audioFilename,extract):
     print("--- test_Lazybones")
 
-    audioFilename = "../testData/Cargos.ogg"
+    # audioFilename = "../testData/Cargos.ogg"
     elanXmlFilename = "../testTextPyData/Lazybones/Lazybones.eaf"
     targetDirectory = "../testTextPyData/Lazybones/audio"
     soundFile = os.path.join(targetDirectory, "Cargos.ogg")
@@ -468,10 +474,10 @@ def test_Lazybones(display):
     tierGuideFile = "../testTextPyData/Lazybones/tierGuide.yaml"
     grammaticalTermsFile = "../testTextPyData/Lazybones/abbreviations.txt"
     ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
-    ae.determineStartAndEndTimes()
-    times = ae.startStopTable
+    if extract:
+        ae.extract()
     text = Text(elanXmlFilename,
-                soundFile,
+                audioFilename,
                 grammaticalTermsFile=grammaticalTermsFile,
                 tierGuideFile=tierGuideFile,
                 projectDirectory=projectDirectory)  # ,
@@ -482,7 +488,7 @@ def test_Lazybones(display):
     try:
         htmlText = text.toHTML()
         if (display):
-            filename = "test_Lazybones.html"
+            filename = "../testTextPyData/Lazybones/test_Lazybones.html"
             f = open(filename, "w")
             f.write(indent(htmlText))
             f.close()
@@ -498,9 +504,9 @@ def test_Lazybones(display):
 
 
 # ----------------------------------------------------------------------------------------------------
-def test_Zelf(display):
+def test_Zelf(display,audioFilename,extract):
     print("--- test_Zelf")
-    audioFilename = "../testData/Cargos.ogg"
+    # audioFilename = "../testData/Cargos.ogg"
     elanXmlFilename = "../testTextPyData/Zelfmar/Zelfmar.eaf"
     targetDirectory = "../testTextPyData/Zelfmar/audio"
     soundFile = os.path.join(targetDirectory, "Cargos.ogg")
@@ -508,10 +514,10 @@ def test_Zelf(display):
     tierGuideFile = "../testTextPyData/Zelfmar/tierGuide.yaml"
     grammaticalTermsFile = "../testTextPyData/Zelfmar/abbreviations.txt"
     ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
-    ae.determineStartAndEndTimes()
-    times = ae.startStopTable
+    if extract:
+        ae.extract()
     text = Text(elanXmlFilename,
-                soundFile,
+                audioFilename,
                 grammaticalTermsFile=grammaticalTermsFile,
                 tierGuideFile=tierGuideFile,
                 projectDirectory=projectDirectory)  # ,
@@ -522,7 +528,7 @@ def test_Zelf(display):
     try:
         htmlText = text.toHTML()
         if (display):
-            filename = "test_Zelf.html"
+            filename = "../testTextPyData/Zelfmar/test_Zelf.html"
             f = open(filename, "w")
             f.write(indent(htmlText))
             f.close()
@@ -538,9 +544,9 @@ def test_Zelf(display):
 
 
 # ----------------------------------------------------------------------------------------------------
-def test_Prayer(display):
+def test_Prayer(display,audioFilename,extract):
     print("--- test_Prayer")
-    audioFilename = "../testData/Cargos.ogg"
+    # audioFilename = "../testData/Cargos.ogg"
     elanXmlFilename = "../testTextPyData/Prayer_superscript/praying.eaf"
     targetDirectory = "../testTextPyData/Prayer_superscript/audio"
     soundFile = os.path.join(targetDirectory, "Cargos.ogg")
@@ -548,10 +554,10 @@ def test_Prayer(display):
     tierGuideFile = "../testTextPyData/Prayer_superscript/tierGuide.yaml"
     grammaticalTermsFile = "../testTextPyData/Prayer_superscript/grammaticalTerms.txt"
     ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
-    ae.determineStartAndEndTimes()
-    times = ae.startStopTable
+    if extract:
+        ae.extract()
     text = Text(elanXmlFilename,
-                soundFile,
+                audioFilename,
                 grammaticalTermsFile=grammaticalTermsFile,
                 tierGuideFile=tierGuideFile,
                 projectDirectory=projectDirectory)  # ,
@@ -562,7 +568,7 @@ def test_Prayer(display):
     try:
         htmlText = text.toHTML()
         if (display):
-            filename = "test_Prayer.html"
+            filename = "../testTextPyData/Prayer_superscript/test_Prayer.html"
             f = open(filename, "w")
             f.write(indent(htmlText))
             f.close()

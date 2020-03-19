@@ -23,7 +23,7 @@ def createText():
 	times = ae.startStopTable
 
 	text = Text(elanXmlFilename,
-				soundFile,
+				audioFilename,
 				grammaticalTermsFile=grammaticalTermsFile,
 				tierGuideFile=tierGuideFile,
 				#startStopTable=times,
