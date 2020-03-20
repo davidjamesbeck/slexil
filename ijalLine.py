@@ -48,13 +48,15 @@ class IjalLine:
     soundFile = None
     grammaticalTerms = None
 
-    def __init__(self, doc, lineNumber, tierGuide, grammaticalTerms=[]):
+    def __init__(self, doc, lineNumber, tier, tierGuide, grammaticalTerms=[]):
         self.doc = doc
         self.lineNumber = lineNumber
         self.tierGuide = tierGuide
         self.rootID = lineNumber + 1
         self.grammaticalTerms = grammaticalTerms
-        self.rootElement = self.doc.findall("TIER/ANNOTATION/ALIGNABLE_ANNOTATION")[lineNumber]
+        print(tier)
+        self.rootElement = tier
+        # self.rootElement = self.doc.findall("TIER/ANNOTATION/ALIGNABLE_ANNOTATION")[lineNumber]
         self.allElements = findChildren(self.doc, self.rootElement)
         self.tblRaw = buildTable(doc, self.allElements)
         self.tierCount = self.tblRaw.shape[0]

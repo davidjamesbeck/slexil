@@ -14,7 +14,7 @@
         <String>italianSpeech</String>
     </pref>
     <pref key="SelectionEndTime">
-        <Long>2410</Long>
+        <Long>2880</Long>
     </pref>
     <pref key="LayoutManager.CurrentMode">
         <Int>1</Int>
@@ -71,7 +71,7 @@
         <Object class="java.awt.Point">1217,99</Object>
     </pref>
     <pref key="SelectionBeginTime">
-        <Long>2410</Long>
+        <Long>2310</Long>
     </pref>
     <prefGroup key="AAM-LR Phone level audio segmentation">
         <pref key="base_url">
@@ -83,10 +83,10 @@
     </prefGroup>
     <prefList key="MultiTierViewer.HiddenTiers"/>
     <pref key="TimeScaleBeginTime">
-        <Long>1260</Long>
+        <Long>200</Long>
     </pref>
     <pref key="MediaTime">
-        <Long>2410</Long>
+        <Long>2480</Long>
     </pref>
     <prefGroup key="TierColors">
         <pref key="italianSpeech">
@@ -98,6 +98,7 @@
         <String>morphemes</String>
         <String>morphemeGloss</String>
         <String>english</String>
+        <String>word-by-word</String>
     </prefList>
     <prefGroup key="TierHighlightColors"/>
     <pref key="LayoutManager.SplitPaneDividerLocation">

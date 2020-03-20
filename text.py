@@ -65,8 +65,15 @@ class Text:
 		self.quiet = quiet
 		self.xmlDoc = etree.parse(self.xmlFilename)
 		self.lineCount = len(self.xmlDoc.findall("TIER/ANNOTATION/ALIGNABLE_ANNOTATION"))
+		print(self.lineCount)
 		with open(tierGuideFile, 'r') as f:
 			self.tierGuide = yaml.safe_load(f)
+		speechTier = self.tierGuide["speech"]
+		self.speechTierList = self.xmlDoc.findall("TIER[@TIER_ID='%s']/ANNOTATION/ALIGNABLE_ANNOTATION"%speechTier)
+		self.speechTierCount = len(self.speechTierList)
+		print(self.speechTierCount)
+		# with open(tierGuideFile, 'r') as f:
+		# 	self.tierGuide = yaml.safe_load(f)
 		if os.path.isfile(os.path.join(projectDirectory,"ERRORS.log")):
 			os.remove(os.path.join(projectDirectory,"ERRORS.log"))
 		logging.basicConfig(filename=os.path.join(projectDirectory,"ERRORS.log"),format="%(levelname)s %(message)s")
@@ -182,7 +189,7 @@ class Text:
 		htmlDoc = Doc()
 		timeCodesForText = []
 		if(lineNumber == None):
-			lineNumbers = range(self.lineCount)
+			lineNumbers = range(self.speechTierCount)
 		else:
 			lineNumbers = [lineNumber]
 
@@ -194,11 +201,13 @@ class Text:
 				htmlDoc.asis(self.getCSS())
 				htmlDoc.asis("<!-- customizationHook -->")
 			with htmlDoc.tag('body'):
-				for i in lineNumbers:
+				for i,tier in enumerate(self.speechTierList):
+					print(i)
 					if(not self.quiet):
 						print("line %d/%d" % (i, self.lineCount))
-					line = IjalLine(self.xmlDoc, i, self.tierGuide, self.grammaticalTerms)
+					line = IjalLine(self.xmlDoc, i, tier, self.tierGuide, self.grammaticalTerms)
 					line.parse()
+					print(line.getTable())
 					start = line.getStartTime()
 					end = line.getEndTime()
 					timeCodesForLine = [start,end]

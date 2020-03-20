@@ -1,29 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ANNOTATION_DOCUMENT AUTHOR="Paul Shannon" DATE="2020-03-19T12:24:08-07:00" FORMAT="3.0" VERSION="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.mpi.nl/tools/elan/EAFv3.0.xsd">
+<ANNOTATION_DOCUMENT AUTHOR="Paul Shannon" DATE="2020-03-20T07:56:25-07:00" FORMAT="3.0" VERSION="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.mpi.nl/tools/elan/EAFv3.0.xsd">
     <HEADER MEDIA_FILE="" TIME_UNITS="milliseconds">
         <MEDIA_DESCRIPTOR MEDIA_URL="file:///Users/David/OpenSource/github/slexil/testData/test_alignable/inferno-threeLines.wav" MIME_TYPE="audio/x-wav" RELATIVE_MEDIA_URL="./inferno-threeLines.wav"/>
         <PROPERTY NAME="URN">urn:nl-mpi-tools-elan-eaf:2b00a4fa-3c8f-4d01-a341-8a75db199810</PROPERTY>
-        <PROPERTY NAME="lastUsedAnnotationId">340</PROPERTY>
+        <PROPERTY NAME="lastUsedAnnotationId">345</PROPERTY>
     </HEADER>
     <TIME_ORDER>
         <TIME_SLOT TIME_SLOT_ID="ts1" TIME_VALUE="0"/>
-        <TIME_SLOT TIME_SLOT_ID="ts2" TIME_VALUE="3093"/>
-        <TIME_SLOT TIME_SLOT_ID="ts3" TIME_VALUE="5624"/>
-        <TIME_SLOT TIME_SLOT_ID="ts4" TIME_VALUE="8033"/>
+        <TIME_SLOT TIME_SLOT_ID="ts2" TIME_VALUE="0"/>
+        <TIME_SLOT TIME_SLOT_ID="ts3" TIME_VALUE="260"/>
+        <TIME_SLOT TIME_SLOT_ID="ts4" TIME_VALUE="280"/>
+        <TIME_SLOT TIME_SLOT_ID="ts5" TIME_VALUE="580"/>
+        <TIME_SLOT TIME_SLOT_ID="ts6" TIME_VALUE="860"/>
+        <TIME_SLOT TIME_SLOT_ID="ts7" TIME_VALUE="1280"/>
+        <TIME_SLOT TIME_SLOT_ID="ts8" TIME_VALUE="1540"/>
+        <TIME_SLOT TIME_SLOT_ID="ts9" TIME_VALUE="2130"/>
+        <TIME_SLOT TIME_SLOT_ID="ts10" TIME_VALUE="2310"/>
+        <TIME_SLOT TIME_SLOT_ID="ts11" TIME_VALUE="2880"/>
+        <TIME_SLOT TIME_SLOT_ID="ts12" TIME_VALUE="3093"/>
+        <TIME_SLOT TIME_SLOT_ID="ts13" TIME_VALUE="5624"/>
+        <TIME_SLOT TIME_SLOT_ID="ts14" TIME_VALUE="8033"/>
     </TIME_ORDER>
-    <TIER DEFAULT_LOCALE="tr" LINGUISTIC_TYPE_REF="default-lt" TIER_ID="italianSpeech">
+    <TIER DEFAULT_LOCALE="en" LINGUISTIC_TYPE_REF="default-lt" TIER_ID="italianSpeech">
         <ANNOTATION>
-            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a1" TIME_SLOT_REF1="ts1" TIME_SLOT_REF2="ts2">
+            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a1" TIME_SLOT_REF1="ts1" TIME_SLOT_REF2="ts12">
                 <ANNOTATION_VALUE>Nel mezzo del cammin di nostra vita</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
-            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a2" TIME_SLOT_REF1="ts2" TIME_SLOT_REF2="ts3">
+            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a2" TIME_SLOT_REF1="ts12" TIME_SLOT_REF2="ts13">
                 <ANNOTATION_VALUE>mi ritrovai per una selva oscura</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
-            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a3" TIME_SLOT_REF1="ts3" TIME_SLOT_REF2="ts4">
+            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a3" TIME_SLOT_REF1="ts13" TIME_SLOT_REF2="ts14">
                 <ANNOTATION_VALUE>ché la diritta via era smarrita.</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
@@ -79,9 +89,38 @@
             </REF_ANNOTATION>
         </ANNOTATION>
     </TIER>
+    <TIER DEFAULT_LOCALE="en" LINGUISTIC_TYPE_REF="Words" PARENT_REF="italianSpeech" TIER_ID="word-by-word">
+        <ANNOTATION>
+            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a341" TIME_SLOT_REF1="ts2" TIME_SLOT_REF2="ts3">
+                <ANNOTATION_VALUE>en–el</ANNOTATION_VALUE>
+            </ALIGNABLE_ANNOTATION>
+        </ANNOTATION>
+        <ANNOTATION>
+            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a342" TIME_SLOT_REF1="ts4" TIME_SLOT_REF2="ts5">
+                <ANNOTATION_VALUE>mezzo	</ANNOTATION_VALUE>
+            </ALIGNABLE_ANNOTATION>
+        </ANNOTATION>
+        <ANNOTATION>
+            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a343" TIME_SLOT_REF1="ts6" TIME_SLOT_REF2="ts7">
+                <ANNOTATION_VALUE>cammin</ANNOTATION_VALUE>
+            </ALIGNABLE_ANNOTATION>
+        </ANNOTATION>
+        <ANNOTATION>
+            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a344" TIME_SLOT_REF1="ts8" TIME_SLOT_REF2="ts9">
+                <ANNOTATION_VALUE>nostra</ANNOTATION_VALUE>
+            </ALIGNABLE_ANNOTATION>
+        </ANNOTATION>
+        <ANNOTATION>
+            <ALIGNABLE_ANNOTATION ANNOTATION_ID="a345" TIME_SLOT_REF1="ts10" TIME_SLOT_REF2="ts11">
+                <ANNOTATION_VALUE>vita</ANNOTATION_VALUE>
+            </ALIGNABLE_ANNOTATION>
+        </ANNOTATION>
+    </TIER>
     <LINGUISTIC_TYPE GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="default-lt" TIME_ALIGNABLE="true"/>
     <LINGUISTIC_TYPE CONSTRAINTS="Symbolic_Association" GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="phonemic" TIME_ALIGNABLE="false"/>
     <LINGUISTIC_TYPE CONSTRAINTS="Symbolic_Association" GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="translation" TIME_ALIGNABLE="false"/>
+    <LINGUISTIC_TYPE CONSTRAINTS="Included_In" GRAPHIC_REFERENCES="false" LINGUISTIC_TYPE_ID="Words" TIME_ALIGNABLE="true"/>
+    <LOCALE COUNTRY_CODE="CA" LANGUAGE_CODE="en"/>
     <LOCALE LANGUAGE_CODE="tr" VARIANT="Standard"/>
     <CONSTRAINT DESCRIPTION="Time subdivision of parent annotation's time interval, no time gaps allowed within this interval" STEREOTYPE="Time_Subdivision"/>
     <CONSTRAINT DESCRIPTION="Symbolic subdivision of a parent annotation. Annotations refering to the same parent are ordered" STEREOTYPE="Symbolic_Subdivision"/>

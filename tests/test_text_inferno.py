@@ -24,9 +24,9 @@ def createText():
 	projectDirectory="../testData/inferno-threeLines"
 	tierGuideFile="../testData/inferno-threeLines/tierGuide.yaml"
 	grammaticalTermsFile="../testData/inferno-threeLines/grammaticalTerms.txt"
-	ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
+	ae = AudioExtractor("../testData/inferno-threeLines/inferno-threeLines.wav", elanXmlFilename, targetDirectory)
 	ae.determineStartAndEndTimes()
-
+	ae.extract()
 	text = Text(elanXmlFilename,
 				audioFilename,
 				grammaticalTermsFile=grammaticalTermsFile,
@@ -62,7 +62,7 @@ def test_constructor():
 	except AssertionError as e:
 		raise Exception(list(tbl['count']))
 
-def test_toHTML(display=False):
+def test_toHTML(display=True):
 
 	print("--- test_toHTML")
 
@@ -71,12 +71,14 @@ def test_toHTML(display=False):
 	text.getLineAsTable(1)
 
 	htmlText = text.toHTML()
-	filename = "daylight.html"
-	f = open(filename, "w")
-	f.write(indent(htmlText))
-	f.close()
-	if(display):
-	   os.system("open %s" % filename)
+	htmlText = text.toHTML()
+	display = True
+	if (display):
+		filename = "../testData/inferno-threeLines/inferno-threeLines.html"
+		f = open(filename, "w")
+		f.write(indent(htmlText))
+		f.close()
+		os.system("open %s" % filename)
 
 if __name__ == '__main__':
 	runTests()
