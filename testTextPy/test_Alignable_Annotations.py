@@ -12,7 +12,7 @@ from ijalLine import IjalLine as Line
 
 # ----------------------------------------------------------------------------------------------------
 pd.set_option('display.width', 1000)
-
+pd.set_option('display.max_columns', 10)
 
 # ----------------------------------------------------------------------------------------------------
 def runTests(display=False):
@@ -39,14 +39,14 @@ def test_inferno_plus_extraction():
     for f in fileList:
         target = os.path.join(targetDirectory,f)
         os.remove(target)
-    ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
-    ae.determineStartAndEndTimes()
-    ae.extract()
-    fileList = [f for f in os.listdir(targetDirectory) if not f.startswith('.')]
-    try:
-        assert(len(fileList) == 3)
-    except AssertionError as e:
-        print("Error: There are %d audiophrases rather than 3" %len(fileList))
+    # ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
+    # ae.determineStartAndEndTimes()
+    # ae.extract()
+    # fileList = [f for f in os.listdir(targetDirectory) if not f.startswith('.')]
+    # try:
+    #     assert(len(fileList) == 3)
+    # except AssertionError as e:
+    #     print("Error: There are %d audiophrases rather than 3" %len(fileList))
         # raise Exception(len(fileList)) from e
     text = Text(elanXmlFilename,
                 audioFilename,
@@ -54,8 +54,20 @@ def test_inferno_plus_extraction():
                 tierGuideFile=tierGuideFile,
                 projectDirectory=projectDirectory)
 
+    # ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
+    # ae.determineStartAndEndTimes()
+    # ae.extract()
+
     htmlText = text.toHTML()
-    display = True
+
+    fileList = [f for f in os.listdir(targetDirectory) if not f.startswith('.')]
+    try:
+        assert(len(fileList) == 3)
+    except AssertionError as e:
+        print("Error: There are %d audiophrases rather than 3" %len(fileList))
+        raise Exception(len(fileList)) from e
+
+    display = False
     if (display):
         filename = "../testData/test_alignable/inferno-threeLines_plus.html"
         f = open(filename, "w")

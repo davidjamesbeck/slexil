@@ -37,7 +37,7 @@ pd.set_option('display.width', 1000)
 import pdb
 from decimal import Decimal
 import logging
-#from audioExtractor import AudioExtractor
+from audioExtractor import AudioExtractor
 
 #----------------------------------------------------------------------------------------------------
 # -*- coding: utf-8 -*-
@@ -57,6 +57,7 @@ class Text:
 		self.xmlFilename = xmlFilename
 		self.soundFileName = soundFileName
 		self.audioPath = "audio"
+		self.audio = AudioExtractor(soundFileName,xmlFilename,os.path.join(projectDirectory,self.audioPath))
 		self.audioFileType = self.soundFileName[-3:]
 		self.grammaticalTermsFile = grammaticalTermsFile
 		self.tierGuideFile = tierGuideFile
@@ -64,14 +65,14 @@ class Text:
 		self.validInputs()
 		self.quiet = quiet
 		self.xmlDoc = etree.parse(self.xmlFilename)
-		self.lineCount = len(self.xmlDoc.findall("TIER/ANNOTATION/ALIGNABLE_ANNOTATION"))
-		print(self.lineCount)
+		# self.lineCount = len(self.xmlDoc.findall("TIER/ANNOTATION/ALIGNABLE_ANNOTATION"))
+		# print(self.lineCount)
 		with open(tierGuideFile, 'r') as f:
 			self.tierGuide = yaml.safe_load(f)
 		speechTier = self.tierGuide["speech"]
 		self.speechTierList = self.xmlDoc.findall("TIER[@TIER_ID='%s']/ANNOTATION/ALIGNABLE_ANNOTATION"%speechTier)
 		self.speechTierCount = len(self.speechTierList)
-		print(self.speechTierCount)
+		# print(self.speechTierCount)
 		# with open(tierGuideFile, 'r') as f:
 		# 	self.tierGuide = yaml.safe_load(f)
 		if os.path.isfile(os.path.join(projectDirectory,"ERRORS.log")):
@@ -185,7 +186,6 @@ class Text:
 		return playerDiv
 
 	def toHTML(self, lineNumber=None):
-
 		htmlDoc = Doc()
 		timeCodesForText = []
 		if(lineNumber == None):
@@ -202,7 +202,6 @@ class Text:
 				htmlDoc.asis("<!-- customizationHook -->")
 			with htmlDoc.tag('body'):
 				for i,tier in enumerate(self.speechTierList):
-					print(i)
 					if(not self.quiet):
 						print("line %d/%d" % (i, self.lineCount))
 					line = IjalLine(self.xmlDoc, i, tier, self.tierGuide, self.grammaticalTerms)
@@ -210,6 +209,8 @@ class Text:
 					print(line.getTable())
 					start = line.getStartTime()
 					end = line.getEndTime()
+					phraseID = line.getAnnotationID()
+					self.audio.makeLineAudio(phraseID, start, end, quiet=True)
 					timeCodesForLine = [start,end]
 					timeCodesForText.append(timeCodesForLine)
 					with htmlDoc.tag("div",  klass="line-wrapper", id=i+1):
