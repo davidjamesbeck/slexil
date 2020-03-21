@@ -20,7 +20,7 @@
         <String>AAM-LR Phone level audio segmentation</String>
     </pref>
     <pref key="FrameLocation">
-        <Object class="java.awt.Point">1109,343</Object>
+        <Object class="java.awt.Point">1213,441</Object>
     </pref>
     <pref key="LayoutManager.SelectedTabIndex">
         <Int>7</Int>
@@ -46,7 +46,7 @@
         <Long>-127</Long>
     </pref>
     <pref key="MediaTime">
-        <Long>15253</Long>
+        <Long>-1</Long>
     </pref>
     <pref key="SelectionEndTime">
         <Long>18343</Long>

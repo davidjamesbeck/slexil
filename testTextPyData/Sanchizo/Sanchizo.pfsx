@@ -36,14 +36,14 @@
             <String>http://lux17.mpi.nl/aamlr/</String>
         </pref>
         <pref key="source_audio">
-            <String>///C:/Users/Beault/Documents/!Books/!ZoqueTextsCollection/!!!SubmittedManuscript/AudioFiles/AudioSantaMaria/ZOH20140819H11t1a.wav</String>
+            <String>///Users/David/OpenSource/github/OldSlexilTestData/SanMiguelChimalapaZoque/SanMiguelChimalapaZoque.wav</String>
         </pref>
     </prefGroup>
     <pref key="MultiTierViewer.ActiveTierName">
         <String>ref</String>
     </pref>
     <pref key="TimeScaleBeginTime">
-        <Long>50060</Long>
+        <Long>0</Long>
     </pref>
     <pref key="MediaTime">
         <Long>0</Long>
@@ -65,7 +65,7 @@
         <String>intr</String>
     </prefList>
     <pref key="LayoutManager.SplitPaneDividerLocation">
-        <Int>2</Int>
+        <Int>70</Int>
     </pref>
     <pref key="LayoutManager.CurrentMode">
         <Int>1</Int>

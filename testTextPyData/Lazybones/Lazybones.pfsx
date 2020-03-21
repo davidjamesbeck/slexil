@@ -29,7 +29,7 @@
         <String>mpi.eudico.client.annotator.viewer.TimeLineViewer</String>
     </pref>
     <pref key="SelectionBeginTime">
-        <Long>0</Long>
+        <Long>1550</Long>
     </pref>
     <prefGroup key="AAM-LR Phone level audio segmentation">
         <pref key="base_url">
@@ -43,13 +43,13 @@
         <String>ref</String>
     </pref>
     <pref key="TimeScaleBeginTime">
-        <Long>160</Long>
+        <Long>60</Long>
     </pref>
     <pref key="MediaTime">
-        <Long>0</Long>
+        <Long>1550</Long>
     </pref>
     <pref key="SelectionEndTime">
-        <Long>0</Long>
+        <Long>1560</Long>
     </pref>
     <prefGroup key="TierColors">
         <pref key="ref">

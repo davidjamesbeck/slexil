@@ -36,14 +36,14 @@
             <String>http://lux17.mpi.nl/aamlr/</String>
         </pref>
         <pref key="source_audio">
-            <String>///Users/David/OpenSource/github/slexil/testTextPyData/Zelfmar/SantaMariaTheImp.wav</String>
+            <String>///Users/David/OpenSource/github/OldSlexilTestData/ZMarRevised/SantaMariaTheImp.wav</String>
         </pref>
     </prefGroup>
     <pref key="MultiTierViewer.ActiveTierName">
         <String>ref</String>
     </pref>
     <pref key="TimeScaleBeginTime">
-        <Long>31660</Long>
+        <Long>26460</Long>
     </pref>
     <pref key="MediaTime">
         <Long>0</Long>

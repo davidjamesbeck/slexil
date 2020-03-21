@@ -1,0 +1,48 @@
+DIRECTORY				SPEECH_TIER	# lines		extra time-aligned?
+
+testData/
+	a'ktzini/
+		18-06-03Aktzini-GA.eaf 	ref		77 lines	no extra
+	AYAMT/
+		AYMT.eaf		alignable	145 lines	no extra
+	featherSnake/
+		featherSnake.eaf	alignable	15 lines	no extra
+	HMDLsafe/
+		HMDL.eaf		alignable	4 lines		no extra
+	inferno-threelines/
+		inferno-threeLines.eaf	alignable	3 lines		no extra
+	Inundación/	
+		Inundacion.eaf		ref		112 lines	no extra
+	loco/
+		loco.eaf		alignable	323 lines(?)	extra
+	praying/
+		praying.eaf		alignable	9 lines		no extra
+	test-alignable/
+		inferno-threeLines_plus_one.eaf
+					alignable	3 lines		extra
+		aktzini_plus_one.eaf	ref		16 lines	no extra
+
+testTextPyData/
+	AYAFW/
+		AYAFW.eaf		alignable	77 lines	no extra
+	aym/
+		aym-final.eaf		alignable	145 lines	no extra
+	Caterpillar/
+		Caterpillar.eaf		alignable	112 lines	no extra
+	Cuervo/
+		newcuervo.eaf		alignable	207 lines	no extra
+	GhostInWagon/
+		GhostInWagon.eaf	alignable	55 lines	no extra
+		GhostInWagon_original.eaf
+					alignable	55 lines	extra
+	Jagpossum/
+		Jagpossum		ref		136 lines	no extra
+	JITZ/
+		JITZ.eaf		ref		69 lines	no extra
+	Lazybones/
+		Lazybones.eaf		ref		396 lines	no extra
+	Sanchizo/
+		Sanchizo.eaf		ref		102 lines	no extra
+	Zelfmar/
+		Zelfmar.eaf		ref		109 lines	no extra
+	

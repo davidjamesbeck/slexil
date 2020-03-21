@@ -29,27 +29,27 @@
         <String>mpi.eudico.client.annotator.viewer.TimeLineViewer</String>
     </pref>
     <pref key="SelectionBeginTime">
-        <Long>0</Long>
+        <Long>63640</Long>
     </pref>
     <prefGroup key="AAM-LR Phone level audio segmentation">
         <pref key="base_url">
             <String>http://lux17.mpi.nl/aamlr/</String>
         </pref>
         <pref key="source_audio">
-            <String>///Users/konradrybka/OneDrive/Office/Work in progress/TILA copy/IJAL ONLINE/KASI-09-11-09-A-nar1.WAV</String>
+            <String>///Users/David/OpenSource/github/OldSlexilTestData/Cuervo.wav</String>
         </pref>
     </prefGroup>
     <pref key="MultiTierViewer.ActiveTierName">
         <String>Orthographic represntation</String>
     </pref>
     <pref key="TimeScaleBeginTime">
-        <Long>62460</Long>
+        <Long>62560</Long>
     </pref>
     <pref key="MediaTime">
-        <Long>0</Long>
+        <Long>63640</Long>
     </pref>
     <pref key="SelectionEndTime">
-        <Long>0</Long>
+        <Long>63640</Long>
     </pref>
     <prefGroup key="TierColors">
         <pref key="Orthographic represntation">
@@ -64,7 +64,7 @@
         <String>gloss</String>
     </prefList>
     <pref key="LayoutManager.SplitPaneDividerLocation">
-        <Int>2</Int>
+        <Int>70</Int>
     </pref>
     <pref key="LayoutManager.CurrentMode">
         <Int>1</Int>
