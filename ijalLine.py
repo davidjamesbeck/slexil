@@ -32,6 +32,7 @@ import formatting
 from translationLine import *
 # from errors import *
 import logging
+from LineDataFrame import DataFrame as ldf
 
 
 # ------------------------------------------------------------------------------------------------------------------------
@@ -48,17 +49,20 @@ class IjalLine:
     soundFile = None
     grammaticalTerms = None
 
-    def __init__(self, doc, lineNumber, tier, tierGuide, grammaticalTerms=[]):
+    def __init__(self, doc, lineNumber, tierGuide, grammaticalTerms=[]):
         self.doc = doc
         self.lineNumber = lineNumber
         self.tierGuide = tierGuide
         self.rootID = lineNumber + 1
         self.grammaticalTerms = grammaticalTerms
-        print(tier)
-        self.rootElement = tier
+        # print(tier)
+        # self.rootElement = tier
         # self.rootElement = self.doc.findall("TIER/ANNOTATION/ALIGNABLE_ANNOTATION")[lineNumber]
+        self.speechTier = self.tierGuide["speech"]
+        self.rootElement = self.doc.findall("TIER[@TIER_ID='%s']" % self.speechTier)[lineNumber]
+        '''note: this will fail if non-line elements are not children of speechTier'''
         self.allElements = findChildren(self.doc, self.rootElement)
-        self.tblRaw = buildTable(doc, self.allElements)
+        self.tblRaw = ldf(doc, self.allElements,tierGuide)# buildTable(doc, self.allElements)
         self.tierCount = self.tblRaw.shape[0]
 
     def parse(self):

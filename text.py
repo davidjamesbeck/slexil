@@ -65,16 +65,13 @@ class Text:
 		self.validInputs()
 		self.quiet = quiet
 		self.xmlDoc = etree.parse(self.xmlFilename)
-		# self.lineCount = len(self.xmlDoc.findall("TIER/ANNOTATION/ALIGNABLE_ANNOTATION"))
-		# print(self.lineCount)
+		self.lineCount = len(self.xmlDoc.findall("TIER/ANNOTATION/ALIGNABLE_ANNOTATION"))
+		print(self.lineCount)
 		with open(tierGuideFile, 'r') as f:
 			self.tierGuide = yaml.safe_load(f)
 		speechTier = self.tierGuide["speech"]
-		self.speechTierList = self.xmlDoc.findall("TIER[@TIER_ID='%s']/ANNOTATION/ALIGNABLE_ANNOTATION"%speechTier)
-		self.speechTierCount = len(self.speechTierList)
-		# print(self.speechTierCount)
-		# with open(tierGuideFile, 'r') as f:
-		# 	self.tierGuide = yaml.safe_load(f)
+		# self.speechTierList = self.xmlDoc.findall("TIER[@TIER_ID='%s']/ANNOTATION/ALIGNABLE_ANNOTATION"%speechTier)
+		# self.speechTierCount = len(self.speechTierList)
 		if os.path.isfile(os.path.join(projectDirectory,"ERRORS.log")):
 			os.remove(os.path.join(projectDirectory,"ERRORS.log"))
 		logging.basicConfig(filename=os.path.join(projectDirectory,"ERRORS.log"),format="%(levelname)s %(message)s")
@@ -201,16 +198,16 @@ class Text:
 				htmlDoc.asis(self.getCSS())
 				htmlDoc.asis("<!-- customizationHook -->")
 			with htmlDoc.tag('body'):
-				for i,tier in enumerate(self.speechTierList):
+				for i in range(0,self.lineCount)#i,tier in enumerate(self.speechTierList):
 					if(not self.quiet):
 						print("line %d/%d" % (i, self.lineCount))
-					line = IjalLine(self.xmlDoc, i, tier, self.tierGuide, self.grammaticalTerms)
+					line = IjalLine(self.xmlDoc, i, self.tierGuide, self.grammaticalTerms)
 					line.parse()
 					print(line.getTable())
 					start = line.getStartTime()
 					end = line.getEndTime()
-					phraseID = line.getAnnotationID()
-					self.audio.makeLineAudio(phraseID, start, end, quiet=True)
+					# phraseID = line.getAnnotationID()
+					# self.audio.makeLineAudio(phraseID, start, end, quiet=True)
 					timeCodesForLine = [start,end]
 					timeCodesForText.append(timeCodesForLine)
 					with htmlDoc.tag("div",  klass="line-wrapper", id=i+1):
