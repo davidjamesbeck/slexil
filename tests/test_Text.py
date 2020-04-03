@@ -10,9 +10,9 @@ from audioExtractor import AudioExtractor
 pd.set_option('display.width', 1000)
 #----------------------------------------------------------------------------------------------------
 def runTests(display=False):
-    # test_HowDaylightWasStolen(display)
-    # test_MonkeyAndThunder(display)
-    # test_praying(display)
+    test_HowDaylightWasStolen(display)
+    test_MonkeyAndThunder(display)
+    test_praying(display)
     test_aktzini(display)
 
 #----------------------------------------------------------------------------------------------------

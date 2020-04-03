@@ -27,17 +27,20 @@ import pandas as pd
 from xml.etree import ElementTree as etree
 from soundfile import *
 import pdb
-
+import identifyLines
+from LineDataFrame import DataFrame as ldf
+from ijalLine import *
 
 class AudioExtractor:
     audioFilename = ''
     elanXmlFilename = ''
     targetDirectory = ''
 
-    def __init__(self, audioFilename, elanXmlFilename, targetDirectory):
+    def __init__(self, audioFilename, elanXmlFilename, targetDirectory, tierGuide=None):
         self.audioFilename = audioFilename
         self.elanXmlFilename = elanXmlFilename
         self.targetDirectory = targetDirectory
+        self.tierGuide = tierGuide
         filename, file_extension = os.path.splitext(audioFilename)
         self.fileType = file_extension
         self.mtx, self.rate = read(self.audioFilename)
@@ -53,11 +56,12 @@ class AudioExtractor:
         return (True)
 
     def determineStartAndEndTimes(self):
+        # print("entering determine start and end times")
         xmlDoc = etree.parse(self.elanXmlFilename)
         timeSlotElements = xmlDoc.findall("TIME_ORDER/TIME_SLOT")
-        audioTiers = xmlDoc.findall("TIER/ANNOTATION/ALIGNABLE_ANNOTATION")
         timeIDs = [x.attrib["TIME_SLOT_ID"] for x in timeSlotElements]
         times = [int(x.attrib["TIME_VALUE"]) for x in timeSlotElements]
+        audioTiers = xmlDoc.findall("TIER/ANNOTATION/ALIGNABLE_ANNOTATION")
         audioIDs = [x.attrib["ANNOTATION_ID"] for x in audioTiers]
         tsRef1 = [x.attrib["TIME_SLOT_REF1"] for x in audioTiers]
         tsRef2 = [x.attrib["TIME_SLOT_REF2"] for x in audioTiers]
@@ -75,9 +79,11 @@ class AudioExtractor:
         tbl = tbl[["lineID", "start", "end", "t1", "t2"]]
         #        tbl = tbl.sort('start')
         self.startStopTable = self.makeStartStopTable(tbl)
+        # print("+++\n",tbl,"\n+++")
         return (tbl)
 
     def extract(self, quiet=True):
+        # print("entering extract")
         # tbl = self.determineStartAndEndTimes()
         # mtx, rate = read(self.audioFilename)
         self.mtx.shape
@@ -98,20 +104,7 @@ class AudioExtractor:
                 print("--- %d) writing %d samples to %s" % (i, phrase.shape[0], sampleFilename))
             write(sampleFilename, phrase, self.rate)
 
-    # def makePhrase(self, lineno, quiet=True):
-    #     phraseID, start, end = self.tbl.iloc[lineno].tolist()[0:3]
-    #     startSeconds = start / 1000
-    #     endSeconds = end / 1000
-    #     startIndex = int(round(startSeconds * self.rate))
-    #     endIndex = int(round(endSeconds * self.rate))
-    #     phrase = self.mtx[startIndex:endIndex, ]
-    #     sampleFilename = "%s/%s%s" % (self.targetDirectory, phraseID, self.fileType)
-    #     if (not quiet):
-    #         print("--- %d) writing %d samples to %s" % (lineno+1, phrase.shape[0], sampleFilename))
-    #     write(sampleFilename, phrase, self.rate)
-
-    def makeLineAudio(self, phraseID, start, end, quiet=True):
-        print(phraseID, start, end)
+    def makeLineAudio(self, lineno, phraseID, start, end, quiet=True):
         startSeconds = start / 1000
         endSeconds = end / 1000
         startIndex = int(round(startSeconds * self.rate))
@@ -119,7 +112,8 @@ class AudioExtractor:
         phrase = self.mtx[startIndex:endIndex, ]
         sampleFilename = "%s/%s%s" % (self.targetDirectory, phraseID, self.fileType)
         if (not quiet):
-            print("--- %d) writing %d samples to %s" % (lineno+1, phrase.shape[0], sampleFilename))
+            print("Making line audio for line %d for annotation %s: %s, %s" % (lineno+1, phraseID, start, end))
+            print("\twriting %d samples to %s" % (phrase.shape[0], sampleFilename))
         write(sampleFilename, phrase, self.rate)
 
     def makeStartStopTable(self, tbl):

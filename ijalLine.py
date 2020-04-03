@@ -32,7 +32,8 @@ import formatting
 from translationLine import *
 # from errors import *
 import logging
-
+from LineDataFrame import DataFrame as ldf
+import identifyLines
 
 # ------------------------------------------------------------------------------------------------------------------------
 # -*- coding: utf-8 -*-
@@ -54,9 +55,12 @@ class IjalLine:
         self.tierGuide = tierGuide
         self.rootID = lineNumber + 1
         self.grammaticalTerms = grammaticalTerms
-        self.rootElement = self.doc.findall("TIER/ANNOTATION/ALIGNABLE_ANNOTATION")[lineNumber]
+        # self.rootElement = self.doc.findall("TIER/ANNOTATION/ALIGNABLE_ANNOTATION")[lineNumber]
+        self.speechTierList = identifyLines.getList(self.doc, self.tierGuide)
+        self.rootElement = self.speechTierList[lineNumber]
         self.allElements = findChildren(self.doc, self.rootElement)
-        self.tblRaw = buildTable(doc, self.allElements)
+        dataFrame = ldf(doc, self.allElements)
+        self.tblRaw = dataFrame.getTbl()
         self.tierCount = self.tblRaw.shape[0]
 
     def parse(self):

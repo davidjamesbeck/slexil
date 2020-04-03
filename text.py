@@ -37,7 +37,8 @@ pd.set_option('display.width', 1000)
 import pdb
 from decimal import Decimal
 import logging
-#from audioExtractor import AudioExtractor
+import identifyLines
+from audioExtractor import AudioExtractor
 
 #----------------------------------------------------------------------------------------------------
 # -*- coding: utf-8 -*-
@@ -64,13 +65,17 @@ class Text:
 		self.validInputs()
 		self.quiet = quiet
 		self.xmlDoc = etree.parse(self.xmlFilename)
-		self.lineCount = len(self.xmlDoc.findall("TIER/ANNOTATION/ALIGNABLE_ANNOTATION"))
 		with open(tierGuideFile, 'r') as f:
 			self.tierGuide = yaml.safe_load(f)
+		self.speechTier = self.tierGuide['speech']
+		self.speechTierList = identifyLines.getList(self.xmlDoc,self.tierGuide)
+		self.lineCount = len(self.speechTierList)
 		if os.path.isfile(os.path.join(projectDirectory,"ERRORS.log")):
 			os.remove(os.path.join(projectDirectory,"ERRORS.log"))
 		logging.basicConfig(filename=os.path.join(projectDirectory,"ERRORS.log"),format="%(levelname)s %(message)s")
 		logging.getLogger().setLevel(logging.WARNING)
+		targetDirectory = os.path.join(projectDirectory,"audio")
+		self.audio = AudioExtractor(soundFileName, xmlFilename, targetDirectory)
 
 	def getTierSummary(self):
 		tmpDoc = etree.parse(self.xmlFilename)
@@ -203,10 +208,12 @@ class Text:
 					end = line.getEndTime()
 					timeCodesForLine = [start,end]
 					timeCodesForText.append(timeCodesForLine)
+					id = line.getAnnotationID()
+					self.audio.makeLineAudio(i, id, start, end)
 					with htmlDoc.tag("div",  klass="line-wrapper", id=i+1):
 						tbl = line.getTable()
 						#lineID = tbl.ix[0]['ANNOTATION_ID']
-						lineID = tbl.iloc[0][tbl.columns.values.tolist().index('ANNOTATION_ID')]
+						# lineID = tbl.iloc[0][tbl.columns.values.tolist().index('ANNOTATION_ID')]
 						with htmlDoc.tag("div", klass="line-sidebar"):
 							line.htmlLeadIn(htmlDoc, self.audioPath, self.audioFileType)
 						line.toHTML(htmlDoc)

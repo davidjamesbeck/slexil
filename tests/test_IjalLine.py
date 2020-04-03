@@ -23,11 +23,146 @@ def runTests():
     test_AYAMT_toHTML(False)
     test_featherSnake_toHTML(False)
     test_aktzini_toHTML()
-    test_praying_toHTML(displayPage=False)
-    test_Jagpossum_TimeCodes()
+    test_Jagpossum_TimeCodes() #this file is weird, it appears to have no alignable annotation types
     test_inferno_TimeCodes()
     test_Ghost_TimeCodes()
-    test_aktzini_TimeCodes()
+    test_aktzini_TimeCodes() #this file is weird, it appears to have no alignable annotation types
+    test_praying_toHTML(displayPage=False)
+    test_inferno()
+    test_Jagpossum(displayPage=False)
+    test_infernoDeep()
+
+
+# ----------------------------------------------------------------------------------------------------
+def test_infernoDeep():
+    print("--- test_infernoDeep")
+
+    filename = "../testTextPyData/Inferno/infernoDeep.eaf"
+    xmlDoc = etree.parse(filename)
+    lineCount = len(xmlDoc.findall("TIER/ANNOTATION/ALIGNABLE_ANNOTATION"))  # 9
+    # print(lineCount)
+
+    for lineNumber in range(lineCount):
+        rootElement = xmlDoc.findall("TIER/ANNOTATION/ALIGNABLE_ANNOTATION")[lineNumber]
+        allElements = findChildren(xmlDoc, rootElement)
+        tmpTbl = buildTable(xmlDoc, allElements)
+        # print("---- line %d" % lineNumber)
+        # print(tmpTbl)
+
+    tierGuideFile = "../testTextPyData/Inferno/tierGuide.yaml"
+    with open(tierGuideFile, 'r') as f:
+        tierGuide = yaml.safe_load(f)
+
+    lines = []
+    grammaticalTerms = ["hab", "past"]
+    for i in range(lineCount):
+        line = IjalLine(xmlDoc, i, tierGuide, grammaticalTerms)
+
+# ----------------------------------------------------------------------------------------------------
+def test_inferno():
+    print("--- test_inferno")
+
+    filename = "../testTextPyData/Inferno/inferno-threeLines.eaf"
+    xmlDoc = etree.parse(filename)
+    lineCount = len(xmlDoc.findall("TIER/ANNOTATION/ALIGNABLE_ANNOTATION"))  # 9
+    # print(lineCount)
+
+    for lineNumber in range(lineCount):
+        rootElement = xmlDoc.findall("TIER/ANNOTATION/ALIGNABLE_ANNOTATION")[lineNumber]
+        allElements = findChildren(xmlDoc, rootElement)
+        tmpTbl = buildTable(xmlDoc, allElements)
+        # print("---- line %d" % lineNumber)
+        # print(tmpTbl)
+
+    tierGuideFile = "../testTextPyData/Inferno/tierGuide.yaml"
+    with open(tierGuideFile, 'r') as f:
+        tierGuide = yaml.safe_load(f)
+
+    lines = []
+    grammaticalTerms = ["hab", "past"]
+    for i in range(lineCount):
+        line = IjalLine(xmlDoc, i, tierGuide, grammaticalTerms)
+
+
+#----------------------------------------------------------------------------------------------------
+def test_Jagpossum(displayPage=False):
+
+    print("--- test_Jagpossum")
+
+    filename = "../testTextPyData/Jagpossum/Jagpossum.eaf"
+    xmlDoc = etree.parse(filename)
+    lineCount = len(xmlDoc.findall("TIER/ANNOTATION/ALIGNABLE_ANNOTATION"))  # 9
+    # print(lineCount)
+
+    for lineNumber in range(lineCount):
+       rootElement = xmlDoc.findall("TIER/ANNOTATION/ALIGNABLE_ANNOTATION")[lineNumber]
+       allElements = findChildren(xmlDoc, rootElement)
+       tmpTbl = buildTable(xmlDoc, allElements)
+       #print("---- line %d" % lineNumber)
+       #print(tmpTbl)
+
+    tierGuideFile = "../testTextPyData/Jagpossum/tierGuide.yaml"
+    with open(tierGuideFile, 'r') as f:
+       tierGuide = yaml.safe_load(f)
+
+    lines = []
+    grammaticalTerms = ["hab","past"]
+    for i in range(lineCount):
+        line = IjalLine(xmlDoc, i, tierGuide, grammaticalTerms)
+
+#----------------------------------------------------------------------------------------------------
+def test_praying_toHTML(displayPage=False):
+
+    print("--- test_praying_toHTML")
+
+    filename = "../testData/praying/praying.eaf"
+    xmlDoc = etree.parse(filename)
+    lineCount = len(xmlDoc.findall("TIER/ANNOTATION/ALIGNABLE_ANNOTATION"))  # 9
+    # print(lineCount)
+
+    for lineNumber in range(lineCount):
+       rootElement = xmlDoc.findall("TIER/ANNOTATION/ALIGNABLE_ANNOTATION")[lineNumber]
+       allElements = findChildren(xmlDoc, rootElement)
+       tmpTbl = buildTable(xmlDoc, allElements)
+       #print("---- line %d" % lineNumber)
+       #print(tmpTbl)
+
+    tierGuideFile = "../testData/praying/tierGuide.yaml"
+    with open(tierGuideFile, 'r') as f:
+       tierGuide = yaml.safe_load(f)
+
+    lines = []
+    grammaticalTerms = ["hab","past"]
+    for i in range(lineCount):
+        line = IjalLine(xmlDoc, i, tierGuide, grammaticalTerms)
+        if(line.tierCount < 4):
+            print("skipping line %d, tierCount %d" %(i, line.tierCount))
+        else:
+           line.parse()
+           lines.append(line)
+
+    #print("parsed %d/%d complete lines" % (len(lines), lineCount))
+
+    htmlDoc = Doc()
+
+    htmlDoc.asis('<!DOCTYPE html>')
+    with htmlDoc.tag('html', lang="en"):
+       with htmlDoc.tag('head'):
+           htmlDoc.asis('<meta charset="UTF-8">')
+           htmlDoc.asis('<link rel="stylesheet" href="ijal.css">')
+           htmlDoc.asis('<script src="ijalUtils.js"></script>')
+           with htmlDoc.tag('body'):
+               for line in lines:
+                  line.toHTML(htmlDoc)
+
+    htmlText = htmlDoc.getvalue()
+
+    if(displayPage):
+       filename = "tmp.html"
+       f = open(filename, "w")
+       f.write(indent(htmlText))
+       f.close()
+       os.system("open %s" % filename)
 
 # ----------------------------------------------------------------------------------------------------
 def test_aktzini_TimeCodes():
@@ -450,62 +585,6 @@ def test_featherSnake_toHTML(displayPage=False):
        f.write(indent(htmlText))
        f.close()
        os.system("open %s" % filename)
-
-
-#----------------------------------------------------------------------------------------------------
-def test_praying_toHTML(displayPage=False):
-
-    print("--- test_praying_toHTML")
-
-    filename = "../testData/praying/praying.eaf"
-    xmlDoc = etree.parse(filename)
-    lineCount = len(xmlDoc.findall("TIER/ANNOTATION/ALIGNABLE_ANNOTATION"))  # 9
-    # print(lineCount)
-
-    for lineNumber in range(lineCount):
-       rootElement = xmlDoc.findall("TIER/ANNOTATION/ALIGNABLE_ANNOTATION")[lineNumber]
-       allElements = findChildren(xmlDoc, rootElement)
-       tmpTbl = buildTable(xmlDoc, allElements)
-       #print("---- line %d" % lineNumber)
-       #print(tmpTbl)
-
-    tierGuideFile = "../testData/praying/tierGuide.yaml"
-    with open(tierGuideFile, 'r') as f:
-       tierGuide = yaml.safe_load(f)
-
-    lines = []
-    grammaticalTerms = ["hab","past"]
-    for i in range(lineCount):
-        line = IjalLine(xmlDoc, i, tierGuide, grammaticalTerms)
-        if(line.tierCount < 4):
-            print("skipping line %d, tierCount %d" %(i, line.tierCount))
-        else:
-           line.parse()
-           lines.append(line)
-
-    #print("parsed %d/%d complete lines" % (len(lines), lineCount))
-
-    htmlDoc = Doc()
-
-    htmlDoc.asis('<!DOCTYPE html>')
-    with htmlDoc.tag('html', lang="en"):
-       with htmlDoc.tag('head'):
-           htmlDoc.asis('<meta charset="UTF-8">')
-           htmlDoc.asis('<link rel="stylesheet" href="ijal.css">')
-           htmlDoc.asis('<script src="ijalUtils.js"></script>')
-           with htmlDoc.tag('body'):
-               for line in lines:
-                  line.toHTML(htmlDoc)
-
-    htmlText = htmlDoc.getvalue()
-
-    if(displayPage):
-       filename = "tmp.html"
-       f = open(filename, "w")
-       f.write(indent(htmlText))
-       f.close()
-       os.system("open %s" % filename)
-
 
 #----------------------------------------------------------------------------------------------------
 

@@ -48,9 +48,7 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a5" TIME_SLOT_REF1="ts9" TIME_SLOT_REF2="ts10">
-                <ANNOTATION_VALUE>N@4 kw@q2, n@4 kn@q1, n@4 nts@32, n@4 ndl@32, nk@42 st@n4, nk@42 yq@n20, nk@42 st@n4
-	r@nq4 nd@y@14s@0, @n20
-</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>N@4 kw@q2, n@4 kn@q1, n@4 nts@32, n@4 ndl@32, nk@42 st@n4, nk@42 yq@n20, nk@42 st@n4 r@nq4 nd@y@14s@0, @n20</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
@@ -70,9 +68,7 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a9" TIME_SLOT_REF1="ts17" TIME_SLOT_REF2="ts18">
-                <ANNOTATION_VALUE>Ntyq@n24 qy@2 ntyq@n24 kch@n1 nk@42 st@n4 nk@42 yq@n20 nk@42 st@n24@n32
-nd@y@14s@10
-</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>Ntyq@n24 qy@2 ntyq@n24 kch@n1 nk@42 st@n4 nk@42 yq@n20 nk@42 st@n24@n32 nd@y@14s@10</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
     </TIER>

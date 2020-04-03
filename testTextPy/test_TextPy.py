@@ -36,7 +36,7 @@ def runTests(display=False,extract=False):
     test_aym(display,audioFilename,extract)
     test_Cuervo(display,audioFilename,extract)
     test_Cuervo_errors(display,audioFilename,extract)
-    # test_GhostWagon(display,extract)
+    test_GhostWagon(display,extract)
 
 # ----------------------------------------------------------------------------------------------------
 def test_GhostWagon(display,extract):

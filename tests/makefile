@@ -1,4 +1,4 @@
-all: morphemeGloss ijalLine audioExtractor text_HDWS text_AYAMT text_featherSnake text_praying test_chatino5 test_chatino6 test_Text_6_line test_Text test_TranslationLine text_loco test_TextPy test_text_Halkomelem test_XML_schema test_aktzini
+all: morphemeGloss ijalLine audioExtractor text_HDWS text_AYAMT text_featherSnake text_praying test_chatino5 test_chatino6 test_Text_6_line test_Text test_TranslationLine text_loco test_TextPy test_text_Halkomelem test_XML_schema test_aktzini test_lineDataFrame
 
 
 morphemeGloss:
@@ -59,3 +59,7 @@ test_XML_schema:
 
 test_aktzini:
 	python3 test_text_aktzini.py
+
+test_lineDataFrame:
+	python3 ../testTextPy/test_Alignable_Annotations.py
+	python3 test_listTiers.py

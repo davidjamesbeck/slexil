@@ -1255,7 +1255,7 @@ nd@y@14s@10
         </ANNOTATION>
         <ANNOTATION>
             <REF_ANNOTATION ANNOTATION_ID="a484" ANNOTATION_REF="a4">
-                <ANNOTATION_VALUE> ‘ extraneous whitsepce before and after quotes ’ </ANNOTATION_VALUE>
+                <ANNOTATION_VALUE> ‘ extraneous whitespace before and after quotes ’ </ANNOTATION_VALUE>
             </REF_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
@@ -1265,7 +1265,7 @@ nd@y@14s@10
         </ANNOTATION>
         <ANNOTATION>
             <REF_ANNOTATION ANNOTATION_ID="a486" ANNOTATION_REF="a6">
-                <ANNOTATION_VALUE>'incorrect inital, correct final’</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>'incorrect initial, correct final’</ANNOTATION_VALUE>
             </REF_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>

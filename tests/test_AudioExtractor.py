@@ -8,16 +8,16 @@ from audioExtractor import *
 #----------------------------------------------------------------------------------------------------
 def runTests():
 
-    # test_constructor()
-    # test_determineStartAndEndTimes()
-    # test_extract_HMDLsafe()
-    # test_extract_AYAMT()
+    test_constructor()
+    test_determineStartAndEndTimes()
+    test_extract_HMDLsafe()
+    test_extract_AYAMT()
     test_extract_praying()
-    # test_extract_aktzini()
-    # test_extract_featherSnake()
-    # test_extract_aym_final()
-    # test_extract_Ghost()
-    # test_tierGuide_specific_extraction()
+    test_extract_aktzini()
+    test_extract_featherSnake()
+    test_extract_aym_final()
+    test_extract_Ghost()
+    # test_tierGuide_specific_extraction() #this test is not longer relevant (AE doesn't use the tierguide)
 
 def clearAudioDirectory(targetDirectory):
     fileList=os.listdir(targetDirectory)
@@ -27,6 +27,7 @@ def clearAudioDirectory(targetDirectory):
 def test_tierGuide_specific_extraction():
     print("--- test tierGuide-specific extraction")
     print("-- TEST 1: aktzini")
+    clearAudioDirectory("../testData/aktzini/audio")
     ea = AudioExtractor("../testData/aktzini/18-06-03Aktzini-GA.wav",
                         "../testData/aktzini/18-06-03Aktzini-GA.eaf",
                         "../testData/aktzini/audio",
@@ -40,6 +41,7 @@ def test_tierGuide_specific_extraction():
         raise Exception(len(fileList)) from e
 
     print("-- TEST 2: Jagpossum")
+    clearAudioDirectory("../testTextPyData/Jagpossum/audio")
     ea = AudioExtractor("../testData/Cargos.ogg",
                         "../testTextPyData/Jagpossum/Jagpossum.eaf",
                         "../testTextPyData/Jagpossum/audio",
@@ -53,6 +55,7 @@ def test_tierGuide_specific_extraction():
         raise Exception(len(fileList)) from e
 
     print("-- TEST 3: GhostWagon")
+    clearAudioDirectory("../testTextPyData/GhostInWagon/audio")
     ea = AudioExtractor("../testTextPyData/GhostInWagon/GhostInWagon.ogg",
                         "../testTextPyData/GhostInWagon/GhostInWagon.eaf",
                         "../testTextPyData/GhostInWagon/audio",
@@ -66,6 +69,7 @@ def test_tierGuide_specific_extraction():
         raise Exception(len(fileList)) from e
 
     print("-- TEST 4: loco")
+    clearAudioDirectory("../testData/loco/audio")
     ea = AudioExtractor("../testData/Cargos.ogg",
                         "../testData/loco/loco.eaf",
                         "../testData/loco/audio",

@@ -9,6 +9,7 @@ from ijalLine import *
 from audioExtractor import AudioExtractor
 from xml.etree import ElementTree as etree
 from ijalLine import IjalLine as Line
+import yaml
 
 # ----------------------------------------------------------------------------------------------------
 pd.set_option('display.width', 1000)
@@ -16,13 +17,13 @@ pd.set_option('display.max_columns', 10)
 
 # ----------------------------------------------------------------------------------------------------
 def runTests(display=False):
-    # test_Aktzini_plus_one(True)
-    # test_HMDL_TimeCodes()
-    # test_aktzini_TimeCodes()
-    # test_Ghost_TimeCodes()
-    # test_inferno_TimeCodes()
-    # test_Jagpossum_TimeCodes()
-    # test_inferno_plus_TimeCodes()
+    test_Aktzini_plus_one(False)
+    test_HMDL_TimeCodes()
+    test_aktzini_TimeCodes()
+    test_Ghost_TimeCodes()
+    test_inferno_TimeCodes()
+    test_Jagpossum_TimeCodes()
+    test_inferno_plus_TimeCodes()
     test_inferno_plus_extraction()
     
 # ----------------------------------------------------------------------------------------------------
@@ -35,28 +36,23 @@ def test_inferno_plus_extraction():
     projectDirectory = "../testData/test_alignable"
     tierGuideFile = "../testData/test_alignable/tierGuideInferno.yaml"
     grammaticalTermsFile = "../testData/test_alignable/grammaticalTerms.txt"
-    fileList = os.listdir(targetDirectory)
+    try:
+        fileList = os.listdir(targetDirectory)
+    except FileNotFoundError:
+        os.mkdir(targetDirectory)
+        fileList = []
+
     for f in fileList:
         target = os.path.join(targetDirectory,f)
         os.remove(target)
-    # ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
-    # ae.determineStartAndEndTimes()
-    # ae.extract()
-    # fileList = [f for f in os.listdir(targetDirectory) if not f.startswith('.')]
-    # try:
-    #     assert(len(fileList) == 3)
-    # except AssertionError as e:
-    #     print("Error: There are %d audiophrases rather than 3" %len(fileList))
-        # raise Exception(len(fileList)) from e
+    with open(tierGuideFile, 'r') as f:
+       tierGuide = yaml.safe_load(f)
+
     text = Text(elanXmlFilename,
                 audioFilename,
                 grammaticalTermsFile=grammaticalTermsFile,
                 tierGuideFile=tierGuideFile,
                 projectDirectory=projectDirectory)
-
-    # ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
-    # ae.determineStartAndEndTimes()
-    # ae.extract()
 
     htmlText = text.toHTML()
 
@@ -190,9 +186,20 @@ def test_Aktzini_plus_one(display):
     targetDirectory = "../testData/test_alignable/audio"
     projectDirectory = "../testData/test_alignable"
     tierGuideFile = "../testData/test_alignable/tierGuide.yaml"
-    ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
-    ae.determineStartAndEndTimes()
-    ae.extract()
+    try:
+        fileList = os.listdir(targetDirectory)
+    except FileNotFoundError:
+        os.mkdir(targetDirectory)
+        fileList = []
+
+    for f in fileList:
+        target = os.path.join(targetDirectory,f)
+        os.remove(target)
+    # with open(tierGuideFile, 'r') as f:
+    #    tierGuide = yaml.safe_load(f)
+    # ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
+    # # ae.determineStartAndEndTimes()
+    # ae.extract()
 
     text = Text(elanXmlFilename,
                 audioFilename,
@@ -201,6 +208,14 @@ def test_Aktzini_plus_one(display):
                 projectDirectory=projectDirectory)
 
     htmlText = text.toHTML()
+    fileList = [f for f in os.listdir(targetDirectory) if not f.startswith('.')]
+
+    try:
+        assert (len(fileList) == 16)
+        print("There are %d audiophrases for 16 lines" % len(fileList))
+    except AssertionError as e:
+        print("Error: There are %d audiophrases rather than 16" % len(fileList))
+        raise Exception(len(fileList)) from e
 
     if (display):
         filename = "../testData/test_alignable/Aktzini_plus_one.html"
