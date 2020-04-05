@@ -55,7 +55,6 @@ class IjalLine:
         self.tierGuide = tierGuide
         self.rootID = lineNumber + 1
         self.grammaticalTerms = grammaticalTerms
-        # self.rootElement = self.doc.findall("TIER/ANNOTATION/ALIGNABLE_ANNOTATION")[lineNumber]
         self.speechTierList = identifyLines.getList(self.doc, self.tierGuide)
         self.rootElement = self.speechTierList[lineNumber]
         self.allElements = findChildren(self.doc, self.rootElement)
@@ -64,9 +63,6 @@ class IjalLine:
         self.tierCount = self.tblRaw.shape[0]
 
     def parse(self):
-        # if not self.tierCount >= 2:
-        # 	print(self.lineNumber)
-        # 	raise EmptyTiersError(self.lineNumber)
         self.tbl = standardizeTable(self.tblRaw, self.tierGuide)
         # print(self.tbl)
         # print(self.lineNumber)
@@ -77,7 +73,7 @@ class IjalLine:
             self.speechRow = self.categories.index("speech")
         else:
             logging.warning("EAF error: Line %s has nothing in the transcription line." % (int(self.lineNumber) + 1))
-            self.speechRow = None #self.categories.index("translation")
+            self.speechRow = None
         if 'translation' in self.categories:
             self.translationRow = self.categories.index("translation")
         else:
@@ -243,14 +239,12 @@ class IjalLine:
             theDifference = len(morphemes) - len(glosses)
             for i in range(0, theDifference):
                 glosses.append("⚠️")
-        #             raise TooManyMorphsError(self.lineNumber,len(morphemes),len(glosses))
         elif (len(morphemes) < len(glosses)):
             logging.warning("EAF error: There are more glosses (%d) than morphs (%d) in line %s." % (
                 len(glosses), len(morphemes), int(self.lineNumber) + 1))
             theDifference = len(glosses) - len(morphemes)
             for i in range(0, theDifference):
                 morphemes.append("⚠️")
-        #             raise TooManyGlossesError(self.lineNumber,len(morphemes),len(glosses))
 
         self.morphemeSpacing = []
 
@@ -287,10 +281,8 @@ class IjalLine:
         audioTag = '<audio id="%s"><source src="%s/%s.%s"/></audio>' % (
             self.getAnnotationID(), audioDirectory, self.getAnnotationID(),audioFileType)
         htmlDoc.asis(audioTag)
-        #         imageURL = "https://www.americanlinguistics.org/wp-content/uploads/speaker.png"
         onError = "this.style.display=\'none\'"
         buttonTag = '<button onclick="playSample(\'%s\')">🔈</button>' % self.getAnnotationID()
-        # buttonTag = '<button onclick="playSample(\'%s\')"><img src="%s"/></button>' % (lineID, self.getSpeakerImage())
         htmlDoc.asis(buttonTag)
 
     # ----------------------------------------------------------------------------------------------------

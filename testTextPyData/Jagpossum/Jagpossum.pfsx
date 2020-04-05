@@ -36,14 +36,14 @@
             <String>http://lux17.mpi.nl/aamlr/</String>
         </pref>
         <pref key="source_audio">
-            <String>///Users/David/OpenSource/github/OldSlexilTestData/Ocotepec TheOpposumAndTheJaguar/5_OCO2_TheOpposumAndTheJaguar.wav</String>
+            <String>///Users/David/OpenSource/github/slexil/testTextPyData/Jagpossum/5_OCO2_TheOpposumAndTheJaguar.wav</String>
         </pref>
     </prefGroup>
     <pref key="MultiTierViewer.ActiveTierName">
         <String>ref</String>
     </pref>
     <pref key="TimeScaleBeginTime">
-        <Long>60</Long>
+        <Long>0</Long>
     </pref>
     <pref key="MediaTime">
         <Long>0</Long>
@@ -64,7 +64,7 @@
         <String>trns</String>
     </prefList>
     <pref key="LayoutManager.SplitPaneDividerLocation">
-        <Int>70</Int>
+        <Int>2</Int>
     </pref>
     <pref key="LayoutManager.CurrentMode">
         <Int>1</Int>

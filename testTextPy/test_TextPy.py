@@ -24,19 +24,52 @@ def runTests(display=True,extract=False):
     else:
         print("testing with .ogg")
         audioFilename = "../testData/Cargos.ogg"
-    # test_AYAFW(display,audioFilename,extract)
-    # test_Merchant(display,audioFilename,extract)
+    test_AYAFW(display,audioFilename,extract)
+    test_Merchant(display,audioFilename,extract)
     test_Jagpossum(display,audioFilename,extract)
-    # test_Sanchizo(display,audioFilename,extract)
-    # test_Caterpillar(display,audioFilename,extract)
-    # test_Lazybones(display,audioFilename,extract)
-    # test_Zelf(display,audioFilename,extract)
-    # test_Prayer(display,audioFilename,extract)
-    # test_Inferno(display,audioFilename,extract)
-    # test_aym(display,audioFilename,extract)
-    # test_Cuervo(display,audioFilename,extract)
-    # test_Cuervo_errors(display,audioFilename,extract)
-    # test_GhostWagon(display,extract)
+    test_Sanchizo(display,audioFilename,extract)
+    test_Caterpillar(display,audioFilename,extract)
+    test_Lazybones(display,audioFilename,extract)
+    test_Zelf(display,audioFilename,extract)
+    test_Prayer(display,audioFilename,extract)
+    test_Inferno(display,audioFilename,extract)
+    test_aym(display,audioFilename,extract)
+    test_Cuervo(display,audioFilename,extract)
+    test_Cuervo_errors(display,audioFilename,extract)
+    test_GhostWagon(display,extract)
+    test_aktzini(display,extract)
+
+# ----------------------------------------------------------------------------------------------------
+def test_aktzini(display,extract):
+    '''tests .eaf file with empty and missing line or translation annotations'''
+
+    print("--- test_aktzini")
+
+    audioFilename = "../testData/aktzini/18-06-03Aktzini-GA.wav"
+    elanXmlFilename = "../testData/aktzini/18-06-03Aktzini-GA.eaf"
+    targetDirectory = "../testData/aktzini/audio"
+    projectDirectory = "../testData/aktzini"
+    tierGuideFile = "../testData/aktzini/tierGuide.yaml"
+    grammaticalTermsFile = "../testData/aktzini/grammaticalTerms.txt"
+    # ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
+    # if extract:
+    #     ae.extract()
+    # times = ae.startStopTable
+
+    text = Text(elanXmlFilename,
+                audioFilename,
+                grammaticalTermsFile,
+                tierGuideFile=tierGuideFile,
+                projectDirectory=projectDirectory)
+
+    htmlText = text.toHTML()
+    if (display):
+        filename = "../testData/aktzini/Aktzini-GA.html"
+        f = open(filename, "w")
+        f.write(indent(htmlText))
+        f.close()
+        os.system("open %s" % filename)
+
 
 # ----------------------------------------------------------------------------------------------------
 def test_GhostWagon(display,extract):

@@ -26,7 +26,6 @@ def runTests():
     test_AYAMT_line_6() # morphemes and glosses are each packed into in a single tab-delimited tier element
     test_AYAMT_toHTML(False)
     test_featherSnake_toHTML(False)
-    test_aktzini_toHTML()
     test_Jagpossum_TimeCodes() #this file is weird, it appears to have no alignable annotation types
     test_inferno_TimeCodes()
     test_Ghost_TimeCodes()
@@ -35,6 +34,8 @@ def runTests():
     test_inferno()
     test_Jagpossum(displayPage=False)
     test_infernoDeep()
+    test_aktzini_toHTML()
+
 
 
 # ----------------------------------------------------------------------------------------------------
@@ -545,7 +546,11 @@ def test_aktzini_toHTML(displayPage=False):
     filename = "../testData/aktzini/18-06-03Aktzini-GA.eaf"
     xmlDoc = etree.parse(filename)
     lineCount = len(xmlDoc.findall("TIER/ANNOTATION/ALIGNABLE_ANNOTATION"))  # 16
+    tierGuideFile = "../testData/aktzini/tierGuide.yaml"
+    grammaticalTerms = "../testData/aktzini/grammaticalTerms.txt"
 
+    with open(tierGuideFile, 'r') as f:
+        tierGuide = yaml.safe_load(f)
     lineNumber = 0
     for lineNumber in range(lineCount):
         rootElement = xmlDoc.findall("TIER/ANNOTATION/ALIGNABLE_ANNOTATION")[lineNumber]
@@ -553,7 +558,9 @@ def test_aktzini_toHTML(displayPage=False):
         tmpTbl = buildTable(xmlDoc, allElements)
         print("---- line %d" % lineNumber)
         # print(tmpTbl)
-
+    for i in range(lineCount):
+        line = IjalLine(xmlDoc, i, tierGuide, grammaticalTerms)
+    print(line.tblRaw)
         # every line has exactly two tiers: "Line"  "L3Gloss"
         # skipping this text for now
 
