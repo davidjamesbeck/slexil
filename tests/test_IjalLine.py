@@ -560,9 +560,8 @@ def test_aktzini_toHTML(displayPage=False):
         # print(tmpTbl)
     for i in range(lineCount):
         line = IjalLine(xmlDoc, i, tierGuide, grammaticalTerms)
-    print(line.tblRaw)
+    # print(line.tblRaw)
         # every line has exactly two tiers: "Line"  "L3Gloss"
-        # skipping this text for now
 
 
 # ----------------------------------------------------------------------------------------------------

@@ -50,7 +50,7 @@ def test_tierGuide_specific_extraction():
     fileList = [f for f in os.listdir("../testTextPyData/Jagpossum/audio") if not f.startswith('.')]
 
     try:
-        assert (len(fileList) == 136)
+        assert (len(fileList) == 137)
     except AssertionError as e:
         raise Exception(len(fileList)) from e
 
@@ -82,7 +82,6 @@ def test_tierGuide_specific_extraction():
     except AssertionError as e:
         raise Exception(len(fileList)) from e
 
-
 def test_extract_Ghost():
     print("--- test_extract_Ghost")
     try:
@@ -96,10 +95,9 @@ def test_extract_Ghost():
     ea.extract(quiet=True)
     fileList = [f for f in os.listdir("../testTextPyData/GhostInWagon/audio") if not f.startswith('.')]
     try:
-        assert(len(fileList) == 55)
+        assert(len(fileList) == 56)
     except AssertionError as e:
         raise Exception(len(fileList)) from e
-
 
 def test_constructor():
 
@@ -134,7 +132,7 @@ def test_extract_HMDLsafe():
     ea.extract(quiet=True)
     fileList = [f for f in os.listdir("../testData/HMDLsafe/audio") if not f.startswith('.')]
     try:
-        assert(len(fileList) == 4)
+        assert(len(fileList) == 5)
     except AssertionError as e:
         raise Exception(fileList) from e
 
@@ -148,7 +146,7 @@ def test_extract_aym_final():
     ea.extract(quiet=True)
     fileList = [f for f in os.listdir("../testTextPyData/aym/audio") if not f.startswith('.')]
     try:
-        assert(len(fileList) == 145)
+        assert(len(fileList) == 146)
     except AssertionError as e:
         raise Exception(len(fileList)) from e
 
@@ -161,10 +159,9 @@ def test_extract_AYAMT():
     ea.extract(quiet=True)
     fileList = [f for f in os.listdir("../testData/AYAMT/audio") if not f.startswith('.')]
     try:
-        assert(len(fileList) == 41)
+        assert(len(fileList) == 42)
     except AssertionError as e:
         raise Exception(fileList) from e
-
 
 def test_extract_praying():
     print("--- test_extract_praying")
@@ -175,7 +172,7 @@ def test_extract_praying():
     ea.extract(quiet=False)
     fileList = [f for f in os.listdir("../testData/praying/audio") if not f.startswith('.')]
     try:
-        assert(len(fileList) == 9)
+        assert(len(fileList) == 10)
     except AssertionError as e:
         raise Exception(len(fileList)) from e
 
@@ -188,7 +185,7 @@ def test_extract_aktzini():
     ea.extract(quiet=True)
     fileList = [f for f in os.listdir("../testData/aktzini/audio") if not f.startswith('.')]
     try:
-        assert(len(fileList) == 16)
+        assert(len(fileList) == 17)
     except AssertionError as e:
         raise Exception(len(fileList)) from e
 
@@ -201,7 +198,7 @@ def test_extract_featherSnake():
     ea.extract(quiet=True)
     fileList = [f for f in os.listdir("../testData/featherSnake/audio") if not f.startswith('.')]
     try:
-        assert(len(fileList) == 15)
+        assert(len(fileList) == 16)
     except AssertionError as e:
         raise Exception(len(fileList)) from e
 

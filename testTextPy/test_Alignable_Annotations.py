@@ -25,7 +25,25 @@ def runTests(display=False):
     test_Jagpossum_TimeCodes()
     test_inferno_plus_TimeCodes()
     test_inferno_plus_extraction()
+    # test_Lazy_extraction()
     
+# ----------------------------------------------------------------------------------------------------
+def test_Lazy_extraction():
+    elanXmlFilename = "../testTextPyData/Lazybones/Lazybones.eaf"
+    targetDirectory = "../testTextPyData/Lazybones/audio"
+    projectDirectory = "../testTextPyData/Lazybones"
+    tierGuideFile = "../testTextPyData/Lazybones/tierGuide.yaml"
+    grammaticalTermsFile = "../testTextPyData/Lazybones/abbreviations.txt"
+    audioFilename ="/Users/David/OpenSource/github/OldSlexilTestData/TEX_Lazy/4_TEX_TheLazyWoman.wav"
+    ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
+    ae.extract()
+    text = Text(elanXmlFilename,
+                audioFilename,
+                grammaticalTermsFile=grammaticalTermsFile,
+                tierGuideFile=tierGuideFile,
+                projectDirectory=projectDirectory)
+
+
 # ----------------------------------------------------------------------------------------------------
 def test_inferno_plus_extraction():
     print("--- test_inferno_plus_extraction")
@@ -58,9 +76,9 @@ def test_inferno_plus_extraction():
 
     fileList = [f for f in os.listdir(targetDirectory) if not f.startswith('.')]
     try:
-        assert(len(fileList) == 3)
+        assert(len(fileList) == 4)
     except AssertionError as e:
-        print("Error: There are %d audiophrases rather than 3" %len(fileList))
+        print("Error: There are %d audiophrases rather than 4" %len(fileList))
         raise Exception(len(fileList)) from e
 
     display = False
@@ -195,11 +213,6 @@ def test_Aktzini_plus_one(display):
     for f in fileList:
         target = os.path.join(targetDirectory,f)
         os.remove(target)
-    # with open(tierGuideFile, 'r') as f:
-    #    tierGuide = yaml.safe_load(f)
-    # ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
-    # # ae.determineStartAndEndTimes()
-    # ae.extract()
 
     text = Text(elanXmlFilename,
                 audioFilename,
@@ -211,10 +224,10 @@ def test_Aktzini_plus_one(display):
     fileList = [f for f in os.listdir(targetDirectory) if not f.startswith('.')]
 
     try:
-        assert (len(fileList) == 16)
-        print("There are %d audiophrases for 16 lines" % len(fileList))
+        assert (len(fileList) == 17)
+        print("There are %d audiophrases for 16 lines and the full sound file" % len(fileList))
     except AssertionError as e:
-        print("Error: There are %d audiophrases rather than 16" % len(fileList))
+        print("Error: There are %d audiophrases rather than 17" % len(fileList))
         raise Exception(len(fileList)) from e
 
     if (display):

@@ -506,6 +506,7 @@ def test_Lazybones(display,audioFilename,extract):
     projectDirectory = "../testTextPyData/Lazybones"
     tierGuideFile = "../testTextPyData/Lazybones/tierGuide.yaml"
     grammaticalTermsFile = "../testTextPyData/Lazybones/abbreviations.txt"
+    # audioFilename ="/Users/David/OpenSource/github/OldSlexilTestData/TEX_Lazy/4_TEX_TheLazyWoman.wav"
     ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
     if extract:
         ae.extract()
@@ -513,10 +514,7 @@ def test_Lazybones(display,audioFilename,extract):
                 audioFilename,
                 grammaticalTermsFile=grammaticalTermsFile,
                 tierGuideFile=tierGuideFile,
-                projectDirectory=projectDirectory)  # ,
-    # 				startStopTable=times)
-
-    # IjalLine.getTable(1)
+                projectDirectory=projectDirectory)
 
     try:
         htmlText = text.toHTML()
