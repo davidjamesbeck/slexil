@@ -27,8 +27,7 @@ import pandas as pd
 from xml.etree import ElementTree as etree
 from soundfile import *
 import pdb
-import identifyLines
-from LineDataFrame import DataFrame as ldf
+import shutil
 from ijalLine import *
 
 class AudioExtractor:
@@ -45,6 +44,10 @@ class AudioExtractor:
         self.fileType = file_extension
         self.mtx, self.rate = read(self.audioFilename)
         self.tbl = self.determineStartAndEndTimes()
+        if not os.path.exists(targetDirectory):
+            os.makedirs(targetDirectory)
+        playbackFilename = os.path.join(targetDirectory)
+        shutil.copy(audioFilename,playbackFilename)
 
     def validInputs(self):
         try:

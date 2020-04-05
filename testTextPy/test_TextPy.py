@@ -17,26 +17,26 @@ pd.set_option('display.width', 1000)
 
 
 # ----------------------------------------------------------------------------------------------------
-def runTests(display=False,extract=False):
+def runTests(display=True,extract=False):
     if os.path.exists("../testTextPyData/Cargos.wav"):
         print("testing with .wav")
         audioFilename = "../testTextPyData/Cargos.wav"
     else:
         print("testing with .ogg")
         audioFilename = "../testData/Cargos.ogg"
-    test_AYAFW(display,audioFilename,extract)
-    test_Merchant(display,audioFilename,extract)
+    # test_AYAFW(display,audioFilename,extract)
+    # test_Merchant(display,audioFilename,extract)
     test_Jagpossum(display,audioFilename,extract)
-    test_Sanchizo(display,audioFilename,extract)
-    test_Caterpillar(display,audioFilename,extract)
-    test_Lazybones(display,audioFilename,extract)
-    test_Zelf(display,audioFilename,extract)
-    test_Prayer(display,audioFilename,extract)
-    test_Inferno(display,audioFilename,extract)
-    test_aym(display,audioFilename,extract)
-    test_Cuervo(display,audioFilename,extract)
-    test_Cuervo_errors(display,audioFilename,extract)
-    test_GhostWagon(display,extract)
+    # test_Sanchizo(display,audioFilename,extract)
+    # test_Caterpillar(display,audioFilename,extract)
+    # test_Lazybones(display,audioFilename,extract)
+    # test_Zelf(display,audioFilename,extract)
+    # test_Prayer(display,audioFilename,extract)
+    # test_Inferno(display,audioFilename,extract)
+    # test_aym(display,audioFilename,extract)
+    # test_Cuervo(display,audioFilename,extract)
+    # test_Cuervo_errors(display,audioFilename,extract)
+    # test_GhostWagon(display,extract)
 
 # ----------------------------------------------------------------------------------------------------
 def test_GhostWagon(display,extract):
@@ -353,14 +353,14 @@ def test_Jagpossum(display,audioFilename,extract):
     projectDirectory = "../testTextPyData/Jagpossum"
     tierGuideFile = "../testTextPyData/Jagpossum/tierGuide.yaml"
     grammaticalTermsFile = "../testTextPyData/Jagpossum/abbreviations.txt"
-    ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
-    if extract:
-        ae.extract()
+    # ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
+    # if extract:
+    #     ae.extract()
     text = Text(elanXmlFilename,
                 audioFilename,
-                grammaticalTermsFile=grammaticalTermsFile,
-                tierGuideFile=tierGuideFile,
-                projectDirectory=projectDirectory)
+                grammaticalTermsFile,
+                tierGuideFile,
+                projectDirectory)
 
     # IjalLine.getTable(1)
 

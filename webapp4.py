@@ -31,9 +31,10 @@ import dash_core_components as dcc
 import dash_html_components as html
 import flask
 import xmlschema
+import pdb
 from dash.dependencies import Input, Output, State
 from shutil import copy
-from audioExtractor import *
+# from audioExtractor import *
 from text import *
 from aboutTexts import AboutTexts
 
@@ -463,16 +464,16 @@ def on_eafUpload(contents, name, projectDirectory):
 
 
 # ----------------------------------------------------------------------------------------------------
-def extractSoundPhrases(soundFileName, eafFileName, projectDirectory, tierGuide):
-    print("=== extractSoundPhrases")
-    soundFile = os.path.basename(soundFileName)
-    eafFile = os.path.basename(eafFileName)
-    print("soundFileName: %s" % soundFileName)
-    print("eafFileName: %s" % eafFile)
-    soundFileFullPath = os.path.join(projectDirectory, soundFile)
-    phraseFileCount = extractPhrases(soundFileFullPath, eafFileName, projectDirectory, tierGuide)
-    print("=== enable next button in sequence (upload abbreviations)")
-    return "parsed into %d lines." % (phraseFileCount)
+# def extractSoundPhrases(soundFileName, eafFileName, projectDirectory, tierGuide):
+#     print("=== extractSoundPhrases")
+#     soundFile = os.path.basename(soundFileName)
+#     eafFile = os.path.basename(eafFileName)
+#     print("soundFileName: %s" % soundFileName)
+#     print("eafFileName: %s" % eafFile)
+#     soundFileFullPath = os.path.join(projectDirectory, soundFile)
+#     phraseFileCount = extractPhrases(soundFileFullPath, eafFileName, projectDirectory, tierGuide)
+#     print("=== enable next button in sequence (upload abbreviations)")
+#     return "parsed into %d lines." % (phraseFileCount)
 
 
 # ----------------------------------------------------------------------------------------------------
@@ -481,9 +482,8 @@ def extractSoundPhrases(soundFileName, eafFileName, projectDirectory, tierGuide)
                Output('sound_filename_hiddenStorage', 'children')],
               [Input('upload-sound-file', 'contents')],
               [State('upload-sound-file', 'filename'),
-               # State('eaf_filename_hiddenStorage', 'children'),
                State('projectDirectory_hiddenStorage', 'children')])
-def on_soundUpload(contents, name, projectDirectory): #removed eafilename argument
+def on_soundUpload(contents, name, projectDirectory):
     if name is None:
         return "This can take a minute or two for large files.", "timewarning", ""
     print("=== on_soundUpload")
@@ -595,11 +595,12 @@ def createWebPageCallback(n_clicks, soundFileName, eafFileName, projectDirectory
     print("eaf: %s" % eafFileName)
     tierGuide = os.path.join(projectDirectory, "tierGuide.yaml")
     # amendment
-    print("=== extracting audio")
-    extractionMessage = extractSoundPhrases(soundFileName, eafFileName, projectDirectory, tierGuide)
-    print("%s audio phrases in: %s/audio" %(extractionMessage, projectDirectory))
+    # print("=== extracting audio")
+    # extractionMessage = extractSoundPhrases(soundFileName, eafFileName, projectDirectory, tierGuide)
+    # print("%s audio phrases in: %s/audio" %(extractionMessage, projectDirectory))
     # print("audio phrases in: %s/audio" % projectDirectory)
     # end amendment
+    # pdb.set_trace()
     if (grammaticalTermsFile == ""):
         grammaticalTermsFile = None
     else:
@@ -858,20 +859,20 @@ def saveTierGuide(projectDirectory, speechTier, transcription2Tier, morphemeTier
 
 
 # ----------------------------------------------------------------------------------------------------
-def extractPhrases(soundFileFullPath, eafFileFullPath, projectDirectory, tierGuide):
-    print("=== entering extractPhrases")
-    print("soundFileFullPath: %s" % soundFileFullPath)
-    print("projectDirectory: %s" % projectDirectory)
-    audioDirectory = os.path.join(projectDirectory, "audio")
-
-    if not os.path.exists(audioDirectory):
-        os.makedirs(audioDirectory)
-    copy(soundFileFullPath, audioDirectory)
-    ea = AudioExtractor(soundFileFullPath, eafFileFullPath, audioDirectory)
-    assert (ea.validInputs)
-    ea.extract(quiet=True)
-    phraseFileCount = len(os.listdir(audioDirectory)) - 1
-    return (phraseFileCount)
+# def extractPhrases(soundFileFullPath, eafFileFullPath, projectDirectory, tierGuide):
+#     print("=== entering extractPhrases")
+#     print("soundFileFullPath: %s" % soundFileFullPath)
+#     print("projectDirectory: %s" % projectDirectory)
+#     audioDirectory = os.path.join(projectDirectory, "audio")
+#
+#     if not os.path.exists(audioDirectory):
+#         os.makedirs(audioDirectory)
+#     copy(soundFileFullPath, audioDirectory)
+#     ea = AudioExtractor(soundFileFullPath, eafFileFullPath, audioDirectory)
+#     assert (ea.validInputs)
+#     ea.extract(quiet=True)
+#     phraseFileCount = len(os.listdir(audioDirectory)) - 1
+#     return (phraseFileCount)
 
 
 # ----------------------------------------------------------------------------------------------------

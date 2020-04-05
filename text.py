@@ -183,15 +183,14 @@ class Text:
 		return playerDiv
 
 	def toHTML(self, lineNumber=None):
-
 		htmlDoc = Doc()
 		timeCodesForText = []
 		if(lineNumber == None):
 			lineNumbers = range(self.lineCount)
 		else:
 			lineNumbers = [lineNumber]
-
 		htmlDoc.asis('<!DOCTYPE html>')
+		# pdb.set_trace()
 		with htmlDoc.tag('html', lang="en"):
 			with htmlDoc.tag('head'):
 				htmlDoc.asis('<meta charset="UTF-8"/>')
