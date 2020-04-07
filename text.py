@@ -25,17 +25,17 @@ david.beck at ualberta.ca.
 # text.py: a class to represent a complete IJAL interlinear text, and to transform its
 # represention in ELAN xml (eaf) format, accompanied by audio, into html
 #----------------------------------------------------------------------------------------------------
-import re
-import sys
+# import re
+# import sys
 import os
-from yattag import *
+# from yattag import *
 import yaml
-import unittest
+# import unittest
 from ijalLine import *
-import importlib
+# import importlib
 pd.set_option('display.width', 1000)
 import pdb
-from decimal import Decimal
+# from decimal import Decimal
 import logging
 import identifyLines
 from audioExtractor import AudioExtractor

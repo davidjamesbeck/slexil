@@ -26,9 +26,9 @@ def test_HowDaylightWasStolen(display):
     projectDirectory="../testData/HMDLsafe"
     tierGuideFile="../testData/HMDLsafe/tierGuide.yaml"
     grammaticalTermsFile="../testData/HMDLsafe/grammaticalTerms.txt"
-    ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
-    ae.determineStartAndEndTimes()
-    times = ae.startStopTable
+    # ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
+    # ae.determineStartAndEndTimes()
+    # times = ae.startStopTable
     text = Text(elanXmlFilename,
                 audioFilename,
                 grammaticalTermsFile=grammaticalTermsFile,
@@ -56,9 +56,9 @@ def test_MonkeyAndThunder(display):
     projectDirectory="../testData/AYAMT"
     tierGuideFile="../testData/AYAMT/tierGuide.yaml"
     grammaticalTermsFile="../testData/AYAMT/grammaticalTerms.txt"
-    ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
-    ae.determineStartAndEndTimes()
-    times = ae.startStopTable
+    # ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
+    # ae.determineStartAndEndTimes()
+    # times = ae.startStopTable
     text = Text(elanXmlFilename,
                 audioFilename,
                 grammaticalTermsFile=grammaticalTermsFile,
@@ -87,9 +87,9 @@ def test_praying(display):
     projectDirectory="../testData/praying"
     tierGuideFile="../testData/praying/tierGuide.yaml"
     grammaticalTermsFile="../testData/praying/grammaticalTerms.txt"
-    ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
-    ae.determineStartAndEndTimes()
-    times = ae.startStopTable
+    # ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
+    # ae.determineStartAndEndTimes()
+    # times = ae.startStopTable
     text = Text(elanXmlFilename,
                 audioFilename,
                 grammaticalTermsFile=grammaticalTermsFile,

@@ -22,10 +22,8 @@ textArea = dcc.Textarea(id="soundFileUploadTextArea",
                         placeholder='sound file validation results go here',
                         value="",
                         className="textarea")
-progress = html.Div(id="progressBar", children=[""
 
-    ]
-)
+progress = html.Div(id="progressBar", children=[""])
 
 children = [html.Div(uploader),
             textArea,
@@ -51,45 +49,14 @@ def update_progress(n,contents,name):
     else:
         progress = min(0 % 110, 100)
     # only add text after 5% progress to ensure text isn't squashed too much
-    # projectDirectory = "/Users/David/OpenSource/github/slexil/Dash_Tests/static"
-    # filename = os.path.join(projectDirectory, name)
-    # if not filename[-4:] == ".wav" and not filename[-4:] == ".WAV":
-    #     sound_validationMessage = "Please select a WAVE (.wav) file."
-    #     # return "", sound_validationMessage
-    # else:
-    #     data = contents.encode("utf8").split(b";base64,")[1]
-    #     with open(filename, "wb") as fp:
-    #         fp.write(base64.decodebytes(data))
-    #         fileSize = os.path.getsize(filename)
-    #         errorMessage = ""
-    #         validSound = True
-    #         try:
-    #             mtx, rate = soundfile.read(filename)
-    #         except ValueError as e:
-    #             print("exeption in .wav file: %s" % e)
-    #             rate = -1
-    #             validSound = False
-    #             errorMessage = str(e)
-    #         print("sound file size: %d, rate: %d" % (fileSize, rate))
-    #         if validSound:
-    #             sound_validationMessage = "Sound file: %s (%d bytes)" % (name, fileSize)
-    #             newButtonState = 0
-    #             # return sound_validationMessage
-    #         else:
-    #             if "Unsupported bit depth: the wav file has 24-bit data" in errorMessage:
-    #                 sound_validationMessage = "File %s (%d byes) has 24-bit data, must be minimum 32-bit." % (
-    #                     name, fileSize)
-    #             else:
-    #                 sound_validationMessage = "Bad sound file: %s [File: %s (%d bytes)]" % (errorMessage, name, fileSize)
-    #             newButtonState = 1
-    #             # return sound_validationMessage
+
+
     return progress, f"{progress} %" if progress >= 5 else "", ""
 # ----------------------------------------------------------------------------------------------------
 @app.callback(
     Output('progressBar', 'children'),
      [Input('upload-sound-file', 'contents')],
-      [State('upload-sound-file', 'filename')]
-)
+      [State('upload-sound-file', 'filename')])
 def progressBarOn(contents,name):
     if name is None:
         return ""
@@ -99,44 +66,7 @@ def progressBarOn(contents,name):
         dbc.Progress(id="progress", striped=True)]
     return children
 # ----------------------------------------------------------------------------------------------------
-# @app.callback(Output('soundFileUploadTextArea', 'value'),
-#               [Input('upload-sound-file', 'contents')],
-#               [State('upload-sound-file', 'filename')])
-# def on_soundUpload(contents, name):
-#     if name is None:
-#         return ("")
-#     print("=== on_soundUpload")
-#     data = contents.encode("utf8").split(b";base64,")[1]
-#     projectDirectory = "/Users/David/OpenSource/github/slexil/Dash_Tests/static"
-#     filename = os.path.join(projectDirectory, name)
-#     if not filename[-4:] == ".wav" and not filename[-4:] == ".WAV":
-#         sound_validationMessage = "Please select a WAVE (.wav) file."
-#         return sound_validationMessage
-#     with open(filename, "wb") as fp:
-#         fp.write(base64.decodebytes(data))
-#         fileSize = os.path.getsize(filename)
-#         errorMessage = ""
-#         validSound = True
-#         try:
-#             mtx, rate = soundfile.read(filename)
-#         except ValueError as e:
-#             print("exeption in .wav file: %s" % e)
-#             rate = -1
-#             validSound = False
-#             errorMessage = str(e)
-#         print("sound file size: %d, rate: %d" % (fileSize, rate))
-#         if validSound:
-#             sound_validationMessage = "Sound file: %s (%d bytes)" % (name, fileSize)
-#             newButtonState = 0
-#             return sound_validationMessage
-#         else:
-#             if "Unsupported bit depth: the wav file has 24-bit data" in errorMessage:
-#                 sound_validationMessage = "File %s (%d byes) has 24-bit data, must be minimum 32-bit." % (
-#                     name, fileSize)
-#             else:
-#                 sound_validationMessage = "Bad sound file: %s [File: %s (%d bytes)]" % (errorMessage, name, fileSize)
-#             newButtonState = 1
-#             return sound_validationMessage
+
 
 @app.server.route('/static/<path:urlpath>')
 def serve_static(urlpath):

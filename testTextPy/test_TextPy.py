@@ -17,7 +17,7 @@ pd.set_option('display.width', 1000)
 
 
 # ----------------------------------------------------------------------------------------------------
-def runTests(display=True,extract=False):
+def runTests(display=False,extract=False):
     if os.path.exists("../testTextPyData/Cargos.wav"):
         print("testing with .wav")
         audioFilename = "../testTextPyData/Cargos.wav"
@@ -36,7 +36,7 @@ def runTests(display=True,extract=False):
     test_aym(display,audioFilename,extract)
     test_Cuervo(display,audioFilename,extract)
     test_Cuervo_errors(display,audioFilename,extract)
-    test_GhostWagon(display,extract)
+    # test_GhostWagon(display,extract) # this file bizarre, all tiers of type alignable, prob not worth handling
     test_aktzini(display,extract)
 
 # ----------------------------------------------------------------------------------------------------

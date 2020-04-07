@@ -326,7 +326,7 @@ class IjalLine:
                    htmlDoc.text(translation2)
                # add a div to hold annotations
             with htmlDoc.tag("div", klass="annotationDiv"):
-                pass;
+                pass#;
 
 
 # ------------------------------------------------------------------------------------------------------------------------

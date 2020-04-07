@@ -392,6 +392,7 @@ summary:focus {
 	text-align: center;
 	width: 575px;
 	height: 40px;
+	font-size: large;
 }
 
 .anchor {
@@ -399,6 +400,13 @@ summary:focus {
 	text-align: center;
 	font-size: small;
 	margin: 0 auto;
+}
+
+.progressbar {
+    height: 28px;
+    padding-top:15px;
+    padding-left: 35px;
+    width: 500px;
 }
 
 /* Style the tab */
