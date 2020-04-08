@@ -16,6 +16,7 @@ pyyaml
 dash_core_components
 dash_html_components
 dash-dangerously-set-inner-html
+dash_bootstrap_components
 yattag
 bs4
 soundfile
