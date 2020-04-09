@@ -153,6 +153,12 @@ def test_extract_aym_final():
 def test_extract_AYAMT():
     print("--- test_extract_AYAMT")
     clearAudioDirectory("../testData/AYAMT/audio")
+    try:
+        assert(os.path.exists("../testData/AYAMT/audio"))
+        clearAudioDirectory("../testData/AYAMT/audio")
+    except AssertionError:
+        os.mkdir("../testData/AYAMT/audio")
+
     ea = AudioExtractor("../testData/Cargos.ogg",
                         "../testData/AYAMT/AYAMT.eaf",
                         "../testData/AYAMT/audio")
@@ -165,7 +171,11 @@ def test_extract_AYAMT():
 
 def test_extract_praying():
     print("--- test_extract_praying")
-    clearAudioDirectory("../testData/praying/audio")
+    try:
+        assert(os.path.exists("../testData/praying/audio"))
+        clearAudioDirectory("../testData/praying/audio")
+    except AssertionError:
+        os.mkdir("../testData/praying/audio")
     ea = AudioExtractor("../testData/Cargos.ogg",
                         "../testData/praying/praying.eaf",
                         "../testData/praying/audio")
@@ -178,7 +188,11 @@ def test_extract_praying():
 
 def test_extract_aktzini():
     print("--- test_extract_aktzini")
-    clearAudioDirectory("../testData/aktzini/audio")
+    try:
+        assert(os.path.exists("../testData/aktzini/audio"))
+        clearAudioDirectory("../testData/aktzini/audio")
+    except AssertionError:
+        os.mkdir("../testData/aktzini/audio")
     ea = AudioExtractor("../testData/aktzini/18-06-03Aktzini-GA.wav",
                         "../testData/aktzini/18-06-03Aktzini-GA.eaf",
                         "../testData/aktzini/audio")
@@ -191,7 +205,11 @@ def test_extract_aktzini():
 
 def test_extract_featherSnake():
     print("--- test_extract_featherSnake")
-    clearAudioDirectory("../testData/featherSnake/audio")
+    try:
+        assert(os.path.exists("../testData/featherSnake/audio"))
+        clearAudioDirectory("../testData/featherSnake/audio")
+    except AssertionError:
+        os.mkdir("../testData/aktzini/audio")
     ea = AudioExtractor("../testData/Cargos.ogg",
                         "../testData/featherSnake/featherSnake.eaf",
                         "../testData/featherSnake/audio")
