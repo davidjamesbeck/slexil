@@ -161,9 +161,9 @@ def test_Ghost_TimeCodes():
 def test_inferno_TimeCodes():
     print("--- test_inferno_TimeCodes")
 
-    filename = "../testTextPyData/inferno/inferno-threeLines.eaf"
+    filename = "../testTextPyData/Inferno/inferno-threeLines.eaf"
     doc = etree.parse(filename)
-    tierGuideFile = "../testTextPyData/inferno/tierGuide.yaml"
+    tierGuideFile = "../testTextPyData/Inferno/tierGuide.yaml"
     with open(tierGuideFile, 'r') as f:
         tierGuide = yaml.safe_load(f)
 
