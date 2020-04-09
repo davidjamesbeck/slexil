@@ -95,7 +95,7 @@ def test_inferno_plus_TimeCodes():
 
     filename = "../testData/test_alignable/inferno-threeLines_plus_one.eaf"
     doc = etree.parse(filename)
-    tierGuideFile = "../testTextPyData/inferno/tierGuide.yaml"
+    tierGuideFile = "../testTextPyData/Inferno/tierGuide.yaml"
     with open(tierGuideFile, 'r') as f:
         tierGuide = yaml.safe_load(f)
 
