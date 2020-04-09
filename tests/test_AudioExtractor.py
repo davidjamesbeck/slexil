@@ -152,7 +152,6 @@ def test_extract_aym_final():
 
 def test_extract_AYAMT():
     print("--- test_extract_AYAMT")
-    clearAudioDirectory("../testData/AYAMT/audio")
     try:
         assert(os.path.exists("../testData/AYAMT/audio"))
         clearAudioDirectory("../testData/AYAMT/audio")
