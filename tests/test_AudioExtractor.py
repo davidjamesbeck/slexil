@@ -208,7 +208,7 @@ def test_extract_featherSnake():
         assert(os.path.exists("../testData/featherSnake/audio"))
         clearAudioDirectory("../testData/featherSnake/audio")
     except AssertionError:
-        os.mkdir("../testData/aktzini/audio")
+        os.mkdir("../testData/featherSnake/audio")
     ea = AudioExtractor("../testData/Cargos.ogg",
                         "../testData/featherSnake/featherSnake.eaf",
                         "../testData/featherSnake/audio")
