@@ -125,7 +125,11 @@ def test_determineStartAndEndTimes():
 def test_extract_HMDLsafe():
 
     print("--- test_extract_HMDLsafe")
-    clearAudioDirectory("../testData/HMDLsafe/audio")
+    try:
+        assert(os.path.exists("../testData/HMDLsafe/audio"))
+        clearAudioDirectory("../testData/HMDLsafe/audio")
+    except AssertionError:
+        os.mkdir("../testData/HMDLsafe/audio")
     ea = AudioExtractor("../testData/Cargos.ogg",
                         "../testData/HMDLsafe/HMDL.eaf",
                         "../testData/HMDLsafe/audio")
@@ -139,7 +143,11 @@ def test_extract_HMDLsafe():
 def test_extract_aym_final():
 
     print("--- test_extract_aym_final")
-    clearAudioDirectory("../testTextPyData/aym/audio")
+    try:
+        assert(os.path.exists("../testTextPyData/aym/audio"))
+        clearAudioDirectory("../testTextPyData/aym/audio")
+    except AssertionError:
+        os.mkdir("../testTextPyData/aym/audio")
     ea = AudioExtractor("../testData/Cargos.ogg",
                         "../testTextPyData/aym/aym-final.eaf",
                         "../testTextPyData/aym/audio")
