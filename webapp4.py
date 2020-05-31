@@ -394,6 +394,7 @@ def createTierMappingMenus(eafFilename):
 
 
 # ----------------------------------------------------------------------------------------------------
+progressBar = dbc.Progress("Working ...", id='progress', value=0, striped=True, animated=True, style={'display': 'inline'})
 app.layout = html.Div(
     children=[
         create_allDivs(),
@@ -411,7 +412,8 @@ app.layout = html.Div(
         html.P(id='translationTier_hiddenStorage', children="", style={'display': 'none'}),
         html.P(id='translation2Tier_hiddenStorage', children="", style={'display': 'none'}),
         html.P(id='createPageErrorMessages_hiddenStorage', children="", style={'display': 'none'}),
-        html.P(id='progressBarStatus_hiddenStorage', children="", style={'display': 'none'})
+        html.P(id='progressBarStatus_hiddenStorage', children="", style={'display': 'none'}),
+        html.P(id='progressBar_hiddenStorage', children=[progressBar], style={'display': 'none'})
     ],
     className="row",
     id='outerDiv'
@@ -568,21 +570,22 @@ def update_output(value):
 @app.callback(
     [Output('webPageCreationStatus', 'className'),
      Output('webPageCreationStatus', 'children'),
-     Output("progress", "value")],
-    [Input('createAndDisplayWebPageButton', 'n_clicks')]
+     Output('progress', 'value')],
+    [Input('createAndDisplayWebPageButton', 'n_clicks')],
+    [State('progressBar_hiddenStorage','children')]
 )
-def show_progressBar(n_clicks):
+def show_progressBar(n_clicks,progressBar):
     print("=== show progress bar callback")
     if n_clicks == None:
         return 'progresstimewarning','This can take a minute or two for large texts.',0
-    children = [dbc.Progress("Working ...",id="progress", value=25,striped=True, animated=True, style={'display': 'inline'})]
+    children = progressBar #[dbc.Progress("Working ...",id='progress', value=25,striped=True, animated=True, style={'display': 'inline'})]
     return 'progressbar', children, 50
 
 
 # ----------------------------------------------------------------------------------------------------
 @app.callback(
-    Output("progress","barClassName"),
-    [Input("progressBarStatus_hiddenStorage", "children")]
+    Output('progress','barClassName'),
+    [Input('progressBarStatus_hiddenStorage', 'children')]
 )
 def hide_progressBar(children):
     print("=== hide progress bar callback")
@@ -597,16 +600,16 @@ def hide_progressBar(children):
      Output('downloadAssembledTextButton', 'disabled'),
      Output('createPageErrorMessages_hiddenStorage', 'children'),
      Output('createWebPageStatus', 'className'),
-     Output("progressBarStatus_hiddenStorage", "children")],
+     Output('progressBarStatus_hiddenStorage', 'children')],
     [Input('progress', 'value')],
     [State('sound_filename_hiddenStorage', 'children'),
      State('eaf_filename_hiddenStorage', 'children'),
      State('projectDirectory_hiddenStorage', 'children'),
      State('grammaticalTerms_filename_hiddenStorage', 'children'),
      State('projectTitle_hiddenStorage', 'children')])
-def createWebPageCallback(n_clicks, soundFileName, eafFileName, projectDirectory,
+def createWebPageCallback(progressBarValue, soundFileName, eafFileName, projectDirectory,
                           grammaticalTermsFile, projectTitle):
-    if n_clicks is None:
+    if progressBarValue == 0:
         return ("", 1, "", "previewoff","")
     print("=== create web page callback")
     print("eaf: %s" % eafFileName)
