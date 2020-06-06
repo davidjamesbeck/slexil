@@ -43,6 +43,7 @@ def createText():
     return (text)
 
 def validate_EAF(filename):
+    print("validating eaf")
     print("--- testing %s" %filename)
     assert(os.path.isfile(filename))
     with open(filename, "r") as fp:
@@ -71,7 +72,12 @@ def validate_EAF(filename):
 
 def runTests(display=False):
     test_for_HTML_tags(display)
+    test_Berrysoup(display)
 
+def test_Berrysoup(display):
+    print("-- test Berrysoup")
+    filename = "../testData/Berrysoup/Berrysoup-test-Michelles_template.eaf"
+    validate_EAF(filename)
 
 def test_for_HTML_tags(display):
     print("--- test_for_HTML_tags")

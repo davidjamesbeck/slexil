@@ -23,7 +23,7 @@ david.beck at ualberta.ca.
 
 import base64
 from zipfile import ZipFile
-
+import time
 import soundfile as soundfile
 import dash
 import dash_core_components as dcc
@@ -31,6 +31,7 @@ import dash_html_components as html
 import dash_bootstrap_components as dbc
 import flask
 import xmlschema
+from xml.etree import ElementTree as etree
 import pdb
 from dash.dependencies import Input, Output, State
 from shutil import copy
@@ -444,27 +445,40 @@ def on_eafUpload(contents, name, projectDirectory):
     if name is None:
         return ("This can take a minute or two for large texts.", "timewarning", "", 1)
     print("on_eafUpload, name: %s" % name)
+    # print("len(contents) = %d" %len(contents))
+    # data = contents.encode("utf8")
+    # print("data is ", data)#.split(b";base64,")[1]
     data = contents.encode("utf8").split(b";base64,")[1]
+    # print("len(data) = %d" %len(data))
     filename = os.path.join(projectDirectory, name)
     if not filename[-4:] == '.eaf':
         eaf_validationMessage = '☠️ Please select a valid ELAN project (.eaf) file.'
         return eaf_validationMessage, "timewarning", '', 1
     with open(filename, "wb") as fp:
         fp.write(base64.decodebytes(data))
-        fileSize = os.path.getsize(filename)
-        print("eaf file size: %d" % fileSize)
-        schema = xmlschema.XMLSchema('http://www.mpi.nl/tools/elan/EAFv3.0.xsd')
+    print("Filename: %s" %filename)
+    assert(os.path.isfile(filename))
+    fileSize = os.path.getsize(filename)
+    print("eaf file size: %d" % fileSize)
+    schema = xmlschema.XMLSchema('http://www.mpi.nl/tools/elan/EAFv3.0.xsd')
+    try:
         validXML = schema.is_valid(filename)
-        eaf_validationMessage = "👍︎ File %s (%d bytes) is valid." % (name, fileSize)
-        print("=== enabling next sequence (Upload audio)")
-        if (not validXML):
-            try:
-                schema.validate(filename)
-            except xmlschema.XMLSchemaValidationError as e:
-                failureReason = e.reason
-                eaf_validationMessage = "☠️ XML parsing error: %s [File: %s]" % (failureReason, filename)
-                return eaf_validationMessage, "timewarning", '', 1
-        return eaf_validationMessage, "information", filename, 0
+    except etree.ParseError as e:
+        import xml.parsers.expat
+        error = xml.parsers.expat.errors.messages[e.code]
+        eaf_validationMessage = "☠️ XML parsing error: %s [File: %s]" % (error, name)
+        return eaf_validationMessage, "timewarning", '', 1
+    eaf_validationMessage = "👍︎ File %s (%d bytes) is valid." % (name, fileSize)
+    if (not validXML):
+        try:
+            schema.validate(filename)
+        except xmlschema.XMLSchemaValidationError as e:
+            failureReason = e.reason
+            eaf_validationMessage = "☠️ XML parsing error: %s [File: %s]" % (failureReason, name)
+            return eaf_validationMessage, "timewarning", '', 1
+        # eaf_validationMessage = "👍︎ File %s (%d bytes) is valid." % (name, fileSize)
+    print("=== enabling next sequence (Upload audio)")
+    return eaf_validationMessage, "information", filename, 0
 
 
 # ----------------------------------------------------------------------------------------------------
@@ -483,32 +497,32 @@ def on_soundUpload(contents, name, projectDirectory):
     print("=== opening file")
     with open(filename, "wb") as fp:
         fp.write(base64.decodebytes(data))
-        fileSize = os.path.getsize(filename)
-        errorMessage = ""
-        validSound = True
-        try:
-            mtx, rate = soundfile.read(filename)
-        except (ValueError, RuntimeError) as e:
-            print("exeption in .wav file: %s" % e)
-            rate = -1
-            validSound = False
-            errorMessage = str(e)
-        print("sound file size: %d, rate: %d" % (fileSize, rate))
-        if validSound:
-            sound_validationMessage = "👍︎ Sound file: %s (%d bytes), " % (name, fileSize)
-            # extractionMessage = extractSoundPhrases(name, eafilename, projectDirectory)
-            # sound_validationMessage += extractionMessage
-            return sound_validationMessage, "information", filename
+    fileSize = os.path.getsize(filename)
+    errorMessage = ""
+    validSound = True
+    try:
+        mtx, rate = soundfile.read(filename)
+    except (ValueError, RuntimeError) as e:
+        print("exeption in .wav file: %s" % e)
+        rate = -1
+        validSound = False
+        errorMessage = str(e)
+    print("sound file size: %d, rate: %d" % (fileSize, rate))
+    if validSound:
+        sound_validationMessage = "👍︎ Sound file: %s (%d bytes), " % (name, fileSize)
+        # extractionMessage = extractSoundPhrases(name, eafilename, projectDirectory)
+        # sound_validationMessage += extractionMessage
+        return sound_validationMessage, "information", filename
+    else:
+        if "Unsupported bit depth: the wav file has 24-bit data" in errorMessage:
+            sound_validationMessage = "☠️ File %s (%d byes) has 24-bit data, must be minimum 32-bit." % (
+                name, fileSize)
+        elif "File contains data in an unknown format" in errorMessage:
+            sound_validationMessage = "☠️ File %s unsupported format (see About SLEXIL)." % (
+                name)
         else:
-            if "Unsupported bit depth: the wav file has 24-bit data" in errorMessage:
-                sound_validationMessage = "☠️ File %s (%d byes) has 24-bit data, must be minimum 32-bit." % (
-                    name, fileSize)
-            elif "File contains data in an unknown format" in errorMessage:
-                sound_validationMessage = "☠️ File %s unsupported format (see About SLEXIL)." % (
-                    name)
-            else:
-                sound_validationMessage = "☠️ Bad sound file: %s [File: %s (%d bytes)]" % (errorMessage, name, fileSize)
-            return sound_validationMessage, "timewarning", filename
+            sound_validationMessage = "☠️ Bad sound file: %s [File: %s (%d bytes)]" % (errorMessage, name, fileSize)
+        return sound_validationMessage, "timewarning", filename
 
 
 # ----------------------------------------------------------------------------------------------------
@@ -937,10 +951,10 @@ def createZipFile(projectDir, projectTitle):
 
 # ----------------------------------------------------------------------------------------------------
 # enable these lines for running from bash and python
-# if __name__ == "__main__":
-#     app.run_server(host='0.0.0.0', port=60041)
+if __name__ == "__main__":
+    app.run_server(host='0.0.0.0', port=60041)
 
 # enable these lines if running with gunicorn
-if __name__ == "__main__":
-    server = app.server
-    app.run()
+# if __name__ == "__main__":
+#     server = app.server
+#     app.run()
