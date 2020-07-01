@@ -72,7 +72,7 @@ class AboutTexts:
         title = html.H3("ELAN files")
         text = dcc.Markdown('''SLEXIL works from the .eaf file of an ELAN project. Minimally, the .eaf file should have 
         two tiers, one for transcribed speech and the other a free translation. The file should be 
-        time-aligned to the speech tier&mdash;that is, time intervals should correspond to what 
+        time-aligned so that time intervals correspond, directly or indirectly, to what 
         will be presented as numbered lines in the text. SLEXIL supports two lines of interlinearization 
         consisting of paired annotations on separate tiers that exhaustively parse the line of text 
         being analyzed; mismatched or missing annotations on either of these two lines will generate 
@@ -100,8 +100,8 @@ class AboutTexts:
 
     def makeAbbr(self):
         title = html.H3("Abbreviations")
-        text1 = dcc.Markdown('''If your text is interlinearized, you need to provide a list of abbreviations in plain 
-        text (UTF-8) format. It must be formatted as follows:''')
+        text1 = dcc.Markdown('''If your text is interlinearized, you can provide a list of abbreviations in plain 
+        text (UTF-8) format; these will be displayed in small caps. The abbreviations file must be formatted as follows:''')
         text2 = html.Ol(children=[
             html.Li('''List each abbreviation on a separate line. Do not include definitions. Give 
         abbreviations in ALL CAPS if that is how they appear in the ELAN file;'''),
@@ -134,7 +134,7 @@ class AboutTexts:
     def makePreview(self):
         title = html.H3("Page preview")
         text = dcc.Markdown('''Prior to downloading the final product, the project can be viewed by following the
-                "open preview" link that appears after you click on the "Make page" button. This link will open the
+                "Open preview" link that appears after you click on the "Make page" button. This link will open the
                 HTML document created by SLEXIL in a new tab in your browser. Note, however, that the line by line playback 
                 icons and the audioplayer visible in the window may not be functional, depending on which browser and 
                 which platform you are using to run SLEXIL. On a Mac, Chrome allows both line by line and continuous 
