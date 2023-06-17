@@ -1,8 +1,8 @@
 import dash
 import flask
 from dash.dependencies import Input, Output, State
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc
+from dash import html
 
 #app = dash.Dash()
 server = flask.Flask(__name__)
