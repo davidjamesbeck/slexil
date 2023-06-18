@@ -80,7 +80,14 @@ def downloadZip(filename):
                            mimetype='application/zip',
                            as_attachment=True)
 
-
+@app.route('/texts/<filename>')
+def downloadFile(filename):
+    print("=== entering download for texts/%s" % filename)
+    fullPath = os.path.join("texts", filename)
+    return flask.send_file(fullPath,
+                           mimetype='audio/x-wav',
+                           as_attachment=True)
+	
 # ----------------------------------------------------------------------------------------------------
 @app.route('/PROJECTS/<path:urlpath>')
 def downloadProjectZipFile(urlpath):
