@@ -435,7 +435,7 @@ def createTierMappingMenus(eafFilename):
 
 
 # ----------------------------------------------------------------------------------------------------
-# progressBar = dbc.Progress("Working ...", id='progress', value=0, striped=True, animated=True, style={'display': 'inline'})
+progressBar = dbc.Progress("Working ...", id='progress', value=0, striped=True, animated=True, style={'display': 'inline'})
 dashApp.layout = html.Div(
     children=[
         create_allDivs(),
@@ -454,7 +454,7 @@ dashApp.layout = html.Div(
         html.P(id='translation2Tier_hiddenStorage', children="", style={'display': 'none'}),
         html.P(id='createPageErrorMessages_hiddenStorage', children="", style={'display': 'none'}),
         html.P(id='progressBarStatus_hiddenStorage', children="", style={'display': 'none'}),
-        html.P(id='progressBar_hiddenStorage', children=[], style={'display': 'none'})
+        html.P(id='progressBar_hiddenStorage', children=[progressBar], style={'display': 'none'})
     ],
     className="row",
     id='outerDiv'
@@ -622,24 +622,24 @@ def update_output(value):
 
 
 # ----------------------------------------------------------------------------------------------------
-# @dashApp.callback(
-#     [Output('webPageCreationStatus', 'className'),
-#      Output('webPageCreationStatus', 'children'),
-#      Output('progress', 'value')],
-#     [Input('createAndDisplayWebPageButton', 'n_clicks')],
-#     [State('progressBar_hiddenStorage','children')]
-# )
-# def show_progressBar(n_clicks,progressBar):
-#     print("=== show progress bar callback")
-#     if n_clicks == None:
-#         return 'progresstimewarning','This can take a minute or two for large texts.',0
-#     children = progressBar #[dbc.Progress("Working ...",id='progress', value=25,striped=True, animated=True, style={'display': 'inline'})]
-#     return 'progressbar', children, 50
+@dashApp.callback(
+    [Output('webPageCreationStatus', 'className'),
+     Output('webPageCreationStatus', 'children'),
+     Output('progress', 'value')],
+    [Input('createAndDisplayWebPageButton', 'n_clicks')],
+    [State('progressBar_hiddenStorage','children')]
+)
+def show_progressBar(n_clicks,progressBar):
+    print("=== show progress bar callback")
+    if n_clicks == None:
+        return 'progresstimewarning','This can take a minute or two for large texts.',0
+    children = progressBar #[dbc.Progress("Working ...",id='progress', value=25,striped=True, animated=True, style={'display': 'inline'})]
+    return 'progressbar', children, 50
 
 
 # ----------------------------------------------------------------------------------------------------
 # @dashApp.callback(
-#     Output('progress','barclassName'),
+#     Output('progress','barClassName'),
 #     [Input('progressBarStatus_hiddenStorage', 'children')]
 # )
 # def hide_progressBar(children):
@@ -648,25 +648,24 @@ def update_output(value):
 #         return "previewoff"
 #     else:
 #         return ""
-#
+# 
 # ----------------------------------------------------------------------------------------------------
 @dashApp.callback(
     [Output('previewLink', 'href'),
      Output('downloadAssembledTextButton', 'disabled'),
      Output('createPageErrorMessages_hiddenStorage', 'children'),
-     Output('createWebPageStatus', 'className')],
-    [Input('createAndDisplayWebPageButton', 'n_clicks')],
+     Output('createWebPageStatus', 'className'),
+     Output('progressBarStatus_hiddenStorage', 'children')],
+    [Input('progress', 'value')],
     [State('sound_filename_hiddenStorage', 'children'),
      State('eaf_filename_hiddenStorage', 'children'),
      State('projectDirectory_hiddenStorage', 'children'),
      State('grammaticalTerms_filename_hiddenStorage', 'children'),
      State('projectTitle_hiddenStorage', 'children')])
-def createWebPageCallback(n_clicks, soundFileName, eafFileName, projectDirectory,
+def createWebPageCallback(progressBarValue, soundFileName, eafFileName, projectDirectory,
                           grammaticalTermsFile, projectTitle):
-    print("=== entering createWebpageCallback")
-    print("n_clicks is ", n_clicks)
-    if n_clicks == None:
-        return ("", 1, "", "previewoff")
+    if progressBarValue == 0:
+        return ("", 1, "", "previewoff","")
     print("=== create web page callback")
     print("eaf: %s" % eafFileName)
     tierGuide = os.path.join(projectDirectory, "tierGuide.yaml")
@@ -697,7 +696,7 @@ def createWebPageCallback(n_clicks, soundFileName, eafFileName, projectDirectory
     print("=== activating hyperLink to %s" % webpageAt)
     # pdb.set_trace()
     print("=== leaving web page callback")
-    return (webpageAt, 0, errorMessage, "previewon")
+    return (webpageAt, 0, errorMessage, "previewon","done")
 
 
 # ----------------------------------------------------------------------------------------------------
@@ -707,7 +706,6 @@ def createWebPageCallback(n_clicks, soundFileName, eafFileName, projectDirectory
     [Input('createPageErrorMessages_hiddenStorage', 'children')]
 )
 def setCreatePageErrorMessages(errorMessage):
-    print("===entering setCreatePageErrorMessages callback")
     if len(errorMessage) == 0:
         className = 'warningOff'
     else:
@@ -942,11 +940,10 @@ def createWebPage(eafFileName, projectDirectory, grammaticalTermsFileName, tierG
     print("soundFile: %s" % soundFileName)
 
     text = Text(eafFileName,
+                soundFileName,
                 grammaticalTermsFileName,
                 tierGuideFileName,
-                projectDirectory,
-                soundFileName,
-                verbose=True)
+                projectDirectory)
     print("=== leaving createWebPage")
     # pdb.set_trace()
     return (text.toHTML())
@@ -959,9 +956,8 @@ def createZipFile(projectDir, projectTitle):
     os.chdir(projectDir)
     print(projectDir)
 
-    # audioDir = "audio"
-    # filesToSave = [os.path.join("audio", f) for f in os.listdir(audioDir)]  # if f.endswith('.wav')]
-    filesToSave = []
+    audioDir = "audio"
+    filesToSave = [os.path.join("audio", f) for f in os.listdir(audioDir)]  # if f.endswith('.wav')]
     filesToSave.insert(0, "%s.html" % projectTitle)
 
     # zipfile is named for project
@@ -969,17 +965,16 @@ def createZipFile(projectDir, projectTitle):
     zipFilenameFullPath = os.path.join(currentDirectoryOnEntry, projectDir, zipFilename)
     zipHandle = ZipFile(zipFilename, 'w')
 
-    # filesToSave includes ijal.css, slexil.js
-    # jquery file now accessible via internet, but may compromise offline use?
+    # filesToSave includes ijal.css, ijalUtils.js
     CSSfile = os.path.join(currentDirectoryOnEntry, "ijal.css")
-    scriptFile = os.path.join(currentDirectoryOnEntry, "slexil.js")
-    # jqueryFile = os.path.join(currentDirectoryOnEntry, "jquery-3.3.1.min.js")
+    scriptFile = os.path.join(currentDirectoryOnEntry, "ijalUtils.js")
+    jqueryFile = os.path.join(currentDirectoryOnEntry, "jquery-3.3.1.min.js")
     copy(CSSfile, os.getcwd())
     copy(scriptFile, os.getcwd())
-    # copy(jqueryFile, os.getcwd())
+    copy(jqueryFile, os.getcwd())
     filesToSave.append("ijal.css")
-    filesToSave.append("slexil.js")
-    # filesToSave.append("jquery-3.3.1.min.js")
+    filesToSave.append("ijalUtils.js")
+    filesToSave.append("jquery-3.3.1.min.js")
     if os.path.isfile("ERRORS.log"):
         print("=== adding errors log to .zip file")
         errorLog = ("ERRORS.log")
@@ -992,7 +987,6 @@ def createZipFile(projectDir, projectTitle):
 
     os.chdir(currentDirectoryOnEntry)
     print(zipFilenameFullPath)
-    print("=== leaving createZipFile")
     return (zipFilenameFullPath)
 
 

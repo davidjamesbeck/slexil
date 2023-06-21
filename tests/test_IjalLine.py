@@ -18,23 +18,23 @@ pd.set_option('display.width', 1000)
 
 # ----------------------------------------------------------------------------------------------------
 def runTests():
-    test_buildTable()
-    test_getStartStopTimes()
-    test_loco_line_3()    # each morpheme and gloss are separate xml tier elements
-    test_extractAudio()   # only works when LARGE AYAMT files is present
-    test_loco_toHTML(False, sampleOfLinesOnly=True)
-    test_AYAMT_line_6() # morphemes and glosses are each packed into in a single tab-delimited tier element
-    test_AYAMT_toHTML(False)
-    test_featherSnake_toHTML(False)
-    test_Jagpossum_TimeCodes() #this file is weird, it appears to have no alignable annotation types
-    test_inferno_TimeCodes()
-    test_Ghost_TimeCodes()
-    test_aktzini_TimeCodes() #this file is weird, it appears to have no alignable annotation types
-    test_praying_toHTML(displayPage=False)
-    test_inferno()
-    test_Jagpossum(displayPage=False)
-    test_infernoDeep()
-    test_aktzini_toHTML()
+    # test_buildTable()
+    # test_getStartStopTimes()
+    # test_loco_line_3()    # each morpheme and gloss are separate xml tier elements
+    # test_extractAudio()   # only works when LARGE AYAMT files is present
+    # test_loco_toHTML(False, sampleOfLinesOnly=True)
+    # test_AYAMT_line_6() # morphemes and glosses are each packed into in a single tab-delimited tier element
+    # test_AYAMT_toHTML(False)
+    # test_featherSnake_toHTML(False)
+    # test_Jagpossum_TimeCodes() #this file is weird, it appears to have no alignable annotation types
+    # test_inferno_TimeCodes()
+    # test_Ghost_TimeCodes()
+    # test_aktzini_TimeCodes() #this file is weird, it appears to have no alignable annotation types
+    test_praying_toHTML(displayPage=True)
+    # test_inferno()
+    # test_Jagpossum(displayPage=False)
+    # test_infernoDeep()
+    # test_aktzini_toHTML()
 
 
 

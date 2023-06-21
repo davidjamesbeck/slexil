@@ -49,7 +49,7 @@ class IjalLine:
     soundFile = None
     grammaticalTerms = None
 
-    def __init__(self, doc, lineNumber, tierGuide, grammaticalTerms=[], quiet=True):
+    def __init__(self, doc, lineNumber, tierGuide, grammaticalTerms=[]):
         self.doc = doc
         self.lineNumber = lineNumber
         self.tierGuide = tierGuide
@@ -61,7 +61,6 @@ class IjalLine:
         dataFrame = ldf(doc, self.allElements)
         self.tblRaw = dataFrame.getTbl()
         self.tierCount = self.tblRaw.shape[0]
-        self.quiet = quiet
 
     def parse(self):
         self.tbl = standardizeTable(self.tblRaw, self.tierGuide)
@@ -274,16 +273,16 @@ class IjalLine:
         return (self.morphemeSpacing)
 
     # ----------------------------------------------------------------------------------------------------
-    def htmlLeadIn(self, htmlDoc): # , audioDirectory, audioFileType):
+    def htmlLeadIn(self, htmlDoc, audioDirectory, audioFileType):
 
-        text = "%d) " % (self.lineNumber + 1)
+        text = "%d)" % (self.lineNumber + 1)
         htmlDoc.text(text)
         lineID = self.rootID
-        #audioTag = '<audio id="%s"><source src="%s/%s.%s"/></audio>' % (
-        #   self.getAnnotationID(), audioDirectory, self.getAnnotationID(),audioFileType)
-        #htmlDoc.asis(audioTag)
+        audioTag = '<audio id="%s"><source src="%s/%s.%s"/></audio>' % (
+            self.getAnnotationID(), audioDirectory, self.getAnnotationID(),audioFileType)
+        htmlDoc.asis(audioTag)
         onError = "this.style.display=\'none\'"
-        buttonTag = '<button onclick="playSample(%d, %d, %d)">🔈</button>' % (self.lineNumber+1, self.getStartTime(), self.getEndTime())
+        buttonTag = '<button onclick="playSample(\'%s\')">🔈</button>' % self.getAnnotationID()
         htmlDoc.asis(buttonTag)
 
     # ----------------------------------------------------------------------------------------------------

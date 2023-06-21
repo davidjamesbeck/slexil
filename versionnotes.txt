@@ -1,0 +1,68 @@
+OLD
+
+playback annotation:
+<button onclick="playSample('a3')">🔈</button>
+
+JS
+ <script src="ijalUtils.js"></script>
+    <script type="text/javascript">
+    window.annotations = [{
+        'id': '1',
+        'start': '0.0',
+        'end': '3093.0'
+    }, {
+        'id': '2',
+        'start': '3093.0',
+        'end': '5624.0'
+    }, {
+        'id': '3',
+        'start': '5624.0',
+        'end': '8033.0'
+    }]
+    </script>
+
+text.py init
+def __init__(self, xmlFilename, soundFileName, grammaticalTermsFile, tierGuideFile, projectDirectory, quiet=True)
+
+NEW
+
+playback annotation
+<button onclick="playSample('a1123', 444555, 449613)">🔈</button>
+
+JS
+ <script src="slexil.js"></script>
+    <script type="text/javascript">window.timeStamps=[{ 'id' : '1', 'start' : 116, 'end' : 1380},
+{ 'id' : '2', 'start' : 1400, 'end' : 2475},
+{ 'id' : '3', 'start' : 2665, 'end' : 5090},
+{ 'id' : '4', 'start' : 5090, 'end' : 7530},
+...
+{ 'id' : '170', 'start' : 514539, 'end' : 516293},]
+</script>
+
+text.py init
+def __init__(self,
+				 xmlFilename,
+				 grammaticalTermsFile,
+				 tierGuideFile,
+				 projectDirectory,
+				 verbose,
+				 fontSizeControls,
+				 startLine,
+				 endLine,
+				 kbFilename,
+				 linguisticsFilename):
+
+SO, LOST soundFileName, quiet
+ADDED verbose, fontSizeControls,startLine, endLine,kbFileName,linguisticsFileName
+Notes: 
+1) verbose seems to be a debugging setting (should add the outputs Paul has); 
+2) start/endLine seems to allow user to specify a line range
+3) self.audio is not created during init
+4) init calls extractMediaInfo() to create self.mediaURL and self.mediaMimeType
+5) new method getShowDown (call in toHTML line 325), getBootstrap (call line 323 toHTML)
+6) getJavaSCript improved
+7) getPlayer major changes
+
+
+def __init__(self, xmlFilename, grammaticalTermsFile, tierGuideFile, projectDirectory, audioFile, verbose):
+

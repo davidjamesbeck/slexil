@@ -598,17 +598,17 @@ def show_progressBar(n_clicks,progressBar):
     return 'progressbar', children, 50
 
 
-# ----------------------------------------------------------------------------------------------------
-@app.callback(
-    Output('progress','barClassName'),
-    [Input('progressBarStatus_hiddenStorage', 'children')]
-)
-def hide_progressBar(children):
-    print("=== hide progress bar callback")
-    if children == "done":
-        return "previewoff"
-    else:
-        return ""
+# # ----------------------------------------------------------------------------------------------------
+# @app.callback(
+#     Output('progress','barClassName'),
+#     [Input('progressBarStatus_hiddenStorage', 'children')]
+# )
+# def hide_progressBar(children):
+#     print("=== hide progress bar callback")
+#     if children == "done":
+#         return "previewoff"
+#     else:
+#         return ""
 
 # ----------------------------------------------------------------------------------------------------
 @app.callback(
@@ -900,11 +900,11 @@ def createWebPage(eafFileName, projectDirectory, grammaticalTermsFileName, tierG
     print("tierGuideFile: %s" % tierGuideFileName)
     print("soundFile: %s" % soundFileName)
 
-    text = Text(eafFileName,
-                soundFileName,
-                grammaticalTermsFileName,
-                tierGuideFileName,
-                projectDirectory)
+    text = Text(eafFileName, grammaticalTermsFileName, tierGuideFileName, projectDirectory, soundFileName, verbose=True)
+    '''soundFileName,
+    grammaticalTermsFileName,
+    tierGuideFileName,
+    projectDirectory)'''
     print("=== leaving createWebPage")
     # pdb.set_trace()
     return (text.toHTML())
@@ -917,25 +917,27 @@ def createZipFile(projectDir, projectTitle):
     os.chdir(projectDir)
     print(projectDir)
 
-    audioDir = "audio"
-    filesToSave = [os.path.join("audio", f) for f in os.listdir(audioDir)]  # if f.endswith('.wav')]
-    filesToSave.insert(0, "%s.html" % projectTitle)
+    # audioDir = "audio"
+    # filesToSave = [os.path.join("audio", f) for f in os.listdir(audioDir)]  # if f.endswith('.wav')]
 
     # zipfile is named for project
     zipFilename = "%s.zip" % projectTitle
     zipFilenameFullPath = os.path.join(currentDirectoryOnEntry, projectDir, zipFilename)
     zipHandle = ZipFile(zipFilename, 'w')
 
-    # filesToSave includes ijal.css, ijalUtils.js
+    # filesToSave includes ijal.css, slexil.js
+    # jquery file now accessible via internet, but may compromise offline use?
+    filesToSave = []
+    filesToSave.insert(0, "%s.html" % projectTitle)
     CSSfile = os.path.join(currentDirectoryOnEntry, "ijal.css")
-    scriptFile = os.path.join(currentDirectoryOnEntry, "ijalUtils.js")
-    jqueryFile = os.path.join(currentDirectoryOnEntry, "jquery-3.3.1.min.js")
+    scriptFile = os.path.join(currentDirectoryOnEntry, "slexil.js")
+    # jqueryFile = os.path.join(currentDirectoryOnEntry, "jquery-3.3.1.min.js")
     copy(CSSfile, os.getcwd())
     copy(scriptFile, os.getcwd())
-    copy(jqueryFile, os.getcwd())
+    # copy(jqueryFile, os.getcwd())
     filesToSave.append("ijal.css")
-    filesToSave.append("ijalUtils.js")
-    filesToSave.append("jquery-3.3.1.min.js")
+    filesToSave.append("slexil.js")
+    # filesToSave.append("jquery-3.3.1.min.js")
     if os.path.isfile("ERRORS.log"):
         print("=== adding errors log to .zip file")
         errorLog = ("ERRORS.log")
@@ -948,6 +950,7 @@ def createZipFile(projectDir, projectTitle):
 
     os.chdir(currentDirectoryOnEntry)
     print(zipFilenameFullPath)
+    print("=== leaving createZipFile")
     return (zipFilenameFullPath)
 
 

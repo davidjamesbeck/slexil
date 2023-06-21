@@ -5,7 +5,7 @@ from text import *
 import importlib
 import os
 import pdb
-from audioExtractor import AudioExtractor
+import HTMLHeadMaker
 #----------------------------------------------------------------------------------------------------
 pd.set_option('display.width', 1000)
 #----------------------------------------------------------------------------------------------------
@@ -19,20 +19,20 @@ def runTests(display=False):
 def createText():
 	audioFilename = "inferno-threeLines.wav"
 	elanXmlFilename="../testData/inferno-threeLines/inferno-threeLines.eaf"
-	targetDirectory = "../testData/inferno-threeLines/audio"
+	targetDirectory = "../testData/inferno-threeLines"
 	soundFile = os.path.join(targetDirectory,audioFilename)
 	projectDirectory="../testData/inferno-threeLines"
 	tierGuideFile="../testData/inferno-threeLines/tierGuide.yaml"
 	grammaticalTermsFile="../testData/inferno-threeLines/grammaticalTerms.txt"
-	ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
-	ae.determineStartAndEndTimes()
+	# ae = AudioExtractor(audioFilename, elanXmlFilename, targetDirectory)
+	# ae.determineStartAndEndTimes()
 
 	text = Text(elanXmlFilename,
-				audioFilename,
-				grammaticalTermsFile=grammaticalTermsFile,
-				tierGuideFile=tierGuideFile,
-				projectDirectory=projectDirectory,
-				quiet=True)
+				grammaticalTermsFile,
+				tierGuideFile,
+				projectDirectory,
+				soundFile,
+				verbose=True)
 
 	return(text)
 
@@ -65,13 +65,13 @@ def test_constructor():
 def test_toHTML(display=False):
 
 	print("--- test_toHTML")
-
+	projectDirectory = "../testData/inferno-threeLines"
 	text = createText()
 
 	text.getLineAsTable(1)
 
 	htmlText = text.toHTML()
-	filename = "daylight.html"
+	filename = "../testData/inferno-threeLines/daylight.html"
 	f = open(filename, "w")
 	f.write(indent(htmlText))
 	f.close()

@@ -30,10 +30,9 @@ def test_HowDaylightWasStolen(display):
     # ae.determineStartAndEndTimes()
     # times = ae.startStopTable
     text = Text(elanXmlFilename,
-                audioFilename,
                 grammaticalTermsFile=grammaticalTermsFile,
                 tierGuideFile=tierGuideFile,
-                projectDirectory=projectDirectory)
+                projectDirectory=projectDirectory,verbose=True)
 
 # 	text.getTable(1)
 
@@ -60,10 +59,9 @@ def test_MonkeyAndThunder(display):
     # ae.determineStartAndEndTimes()
     # times = ae.startStopTable
     text = Text(elanXmlFilename,
-                audioFilename,
                 grammaticalTermsFile=grammaticalTermsFile,
                 tierGuideFile=tierGuideFile,
-                projectDirectory=projectDirectory)
+                projectDirectory=projectDirectory,verbose=True)
 
 # 	text.getTable(1)
 
@@ -91,10 +89,9 @@ def test_praying(display):
     # ae.determineStartAndEndTimes()
     # times = ae.startStopTable
     text = Text(elanXmlFilename,
-                audioFilename,
                 grammaticalTermsFile=grammaticalTermsFile,
                 tierGuideFile=tierGuideFile,
-                projectDirectory=projectDirectory)
+                projectDirectory=projectDirectory,verbose=True)
 
 # 	text.getTable(0)
 
@@ -114,13 +111,11 @@ def test_aktzini(display):
     print("--- test_aktzini")
 
     text = Text("../testData/aktzini/18-06-03Aktzini-GA.eaf",
-                "../testData/aktzini/18-06-03Aktzini-GA.wav",
-				tierGuideFile='../testData/aktzini/tierGuide.yaml',
-                projectDirectory='../testData/aktzini',
-                grammaticalTermsFile=None,
-                quiet=False)
+                          grammaticalTermsFile="../testData/aktzini/grammaticalTerms.txt",
+                          tierGuideFile="../testData/aktzini/tierGuide.yaml",
+                          projectDirectory="../testData/aktzini", verbose=True)
 
-# 	text.getTable(1)
+    # 	text.getTable(1)
 
     htmlText = text.toHTML()
     if(display):
