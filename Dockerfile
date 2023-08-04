@@ -10,5 +10,4 @@ COPY ijal.css /app/
 COPY ijalUtils.js /app/
 COPY jquery-3.3.1.min.js /app/
 COPY assets/  /app/assets/
-EXPOSE 8080
 
