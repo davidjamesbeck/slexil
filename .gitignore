@@ -110,12 +110,12 @@ venv.bak/
 bin/
 
 *.pfsx
-explorations/generateEAF/pythonDemos/daylight1/
-explorations/uploadSound/*
-testData/*/audio
-testData/*/*.html
-testTextPyData/*/*.html
-testTextPyData/*/audio/*.*
-testTextPyData/GhostInWagon/audio/*.*
-testTextPyData/Cargos.wav
-testTextPyData/Jagpossum/5_OCO2_TheOpposumAndTheJaguar.wav
+#explorations/generateEAF/pythonDemos/daylight1/
+#explorations/uploadSound/*
+#testData/*/audio
+#testData/*/*.html
+#testTextPyData/*/*.html
+#testTextPyData/*/audio/*.*
+#testTextPyData/GhostInWagon/audio/*.*
+#testTextPyData/Cargos.wav
+#testTextPyData/Jagpossum/5_OCO2_TheOpposumAndTheJaguar.wav
